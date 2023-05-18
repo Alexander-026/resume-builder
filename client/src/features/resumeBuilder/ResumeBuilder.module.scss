@@ -1,0 +1,12 @@
+.resume {
+  min-height: 100vh;
+  width: 100%;
+  &Form,
+  &PDF {
+    padding: 1rem;
+  }
+  &Form {
+    border-right: 1px solid;
+    overflow-y: hidden;
+  }
+}
