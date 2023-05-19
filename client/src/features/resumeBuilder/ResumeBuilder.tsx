@@ -1,11 +1,23 @@
 import React, { useState } from "react"
 import classnames from "classnames"
 import ImgCrop from "antd-img-crop"
-import { Col, Input, Form, Row, Upload } from "antd"
+import { Col, Input, Form, Row, Upload, message } from "antd"
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface"
 import styles from "./ResumeBuilder.module.scss"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { resumeBuilder, resumeBuilderSlice } from "./resumeBuilderSlice"
+
+const beforeUpload = (file: RcFile) => {
+  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png"
+  if (!isJpgOrPng) {
+    message.error("You can only upload JPG/PNG file!")
+  }
+  const isLt2M = file.size / 1024 / 1024 < 2
+  if (!isLt2M) {
+    message.error("Image must smaller than 2MB!")
+  }
+  return isJpgOrPng && isLt2M
+}
 
 const ResumeBuilder = () => {
   const { form } = useAppSelector(resumeBuilder)
@@ -18,8 +30,10 @@ const ResumeBuilder = () => {
     fileList: newFileList,
   }) => {
     setFileList(newFileList)
-    const src = await onFileRead(newFileList[0])
-    dispatch(updateFormInput({ type: "src", value: src }))
+    if (newFileList[0]) {
+      const src = await onFileRead(newFileList[0])
+      dispatch(updateFormInput({ type: "src", value: src }))
+    }
   }
 
   const onFileRead = async (file: UploadFile): Promise<string> => {
@@ -76,7 +90,11 @@ const ResumeBuilder = () => {
                     listType="picture-card"
                     fileList={fileList}
                     onChange={onChange}
+                    beforeUpload={beforeUpload}
                     onPreview={onPreview}
+                    onRemove={() => {
+                      dispatch(updateFormInput({ type: "src", value: "" }))
+                    }}
                     accept=".png,.jpg,.jpeg"
                   >
                     {fileList.length < 1 && "+ Upload"}
