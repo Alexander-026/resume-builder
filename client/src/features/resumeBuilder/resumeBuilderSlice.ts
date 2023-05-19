@@ -7,7 +7,7 @@ export interface IKeyString {
 
 export interface IForm extends IKeyString {
   jobTitle: string
-  url: string
+  src: string
   firstName: string
   lastName: string
 }
@@ -19,7 +19,7 @@ export interface ResumeBuilderState {
 const initialState: ResumeBuilderState = {
   form: {
     jobTitle: "",
-    url: "",
+    src: "",
     firstName: "",
     lastName: "",
   },
