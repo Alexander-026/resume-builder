@@ -1,11 +1,21 @@
 import React, { useState } from "react"
 import classnames from "classnames"
 import ImgCrop from "antd-img-crop"
-import { Col, Input, Form, Row, Upload, message } from "antd"
+import {
+  Col,
+  Input,
+  Form,
+  Row,
+  Upload,
+  message,
+  ColorPicker,
+  Space,
+} from "antd"
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface"
 import styles from "./ResumeBuilder.module.scss"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { resumeBuilder, resumeBuilderSlice } from "./resumeBuilderSlice"
+import Pdf1 from "../../components/Pdf1"
 
 const beforeUpload = (file: RcFile) => {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png"
@@ -56,89 +66,208 @@ const ResumeBuilder = () => {
   }
 
   return (
-    <div>
-      <Row className={styles.resume} align={"stretch"}>
-        <Col className={classnames(styles.resumeForm)} span={12}>
-          <Form layout="vertical">
-            <Row justify={"center"} gutter={10}>
-              <Col span={8}>
-                <Form.Item label="Documen Name">
-                  <Input />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row justify={"center"} align={"middle"} gutter={10}>
-              <Col span={12}>
-                <Form.Item label="Wanted Job Title">
-                  <Input
-                    value={form.jobTitle}
+    <Row className={styles.resume} align={"stretch"}>
+      <Col className={classnames(styles.resumeForm)} span={12}>
+        <Form layout="vertical">
+          <Row justify={"center"} align={"middle"} gutter={10}>
+            <Col span={6}>
+              <ImgCrop rotationSlider>
+                <Upload
+                  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                  listType="picture-card"
+                  fileList={fileList}
+                  onChange={onChange}
+                  beforeUpload={beforeUpload}
+                  onPreview={onPreview}
+                  onRemove={() => {
+                    dispatch(updateFormInput({ type: "src", value: "" }))
+                  }}
+                  accept=".png,.jpg,.jpeg"
+                >
+                  {fileList.length < 1 && "+ Upload"}
+                </Upload>
+              </ImgCrop>
+            </Col>
+            <Col span={9}>
+              <Form.Item label="Left side">
+                <Space>
+                  <ColorPicker
+                    format="hex"
+                    value={form.bgLeftSection}
                     onChange={(e) =>
                       dispatch(
                         updateFormInput({
-                          type: "jobTitle",
-                          value: e.target.value,
+                          type: "bgLeftSection",
+                          value: `#${e.toHex()}`,
                         }),
                       )
                     }
                   />
-                </Form.Item>
-              </Col>
-              <Col flex={1} span={12}>
-                <ImgCrop rotationSlider>
-                  <Upload
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                    listType="picture-card"
-                    fileList={fileList}
-                    onChange={onChange}
-                    beforeUpload={beforeUpload}
-                    onPreview={onPreview}
-                    onRemove={() => {
-                      dispatch(updateFormInput({ type: "src", value: "" }))
-                    }}
-                    accept=".png,.jpg,.jpeg"
-                  >
-                    {fileList.length < 1 && "+ Upload"}
-                  </Upload>
-                </ImgCrop>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="First Name">
-                  <Input
-                    value={form.firstName}
+                  <Col>Background</Col>
+                  <ColorPicker
+                    format="hex"
+                    value={form.colorLeftSection}
                     onChange={(e) =>
                       dispatch(
                         updateFormInput({
-                          type: "firstName",
-                          value: e.target.value,
+                          type: "colorLeftSection",
+                          value: `#${e.toHex()}`,
                         }),
                       )
                     }
                   />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="Last Name">
-                  <Input
-                    value={form.lastName}
+                  <Col>Color</Col>
+                </Space>
+              </Form.Item>
+            </Col>
+            <Col span={9}>
+              <Form.Item label="Right side">
+                <Space>
+                  <ColorPicker
+                    format="hex"
+                    value={form.bgRightSection}
                     onChange={(e) =>
                       dispatch(
                         updateFormInput({
-                          type: "lastName",
-                          value: e.target.value,
+                          type: "bgRightSection",
+                          value: `#${e.toHex()}`,
                         }),
                       )
                     }
                   />
-                </Form.Item>
-              </Col>
-            </Row>
-          </Form>
-        </Col>
-        <Col className={classnames(styles.resumePDF)} span={12}>
-          one
-        </Col>
-      </Row>
-    </div>
+                  <Col>Background</Col>
+                  <ColorPicker
+                    format="hex"
+                    value={form.colorRightSection}
+                    onChange={(e) =>
+                      dispatch(
+                        updateFormInput({
+                          type: "colorRightSection",
+                          value: `#${e.toHex()}`,
+                        }),
+                      )
+                    }
+                  />
+                  <Col>Color</Col>
+                </Space>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item label="First Name">
+                <Input
+                  value={form.firstName}
+                  onChange={(e) =>
+                    dispatch(
+                      updateFormInput({
+                        type: "firstName",
+                        value: e.target.value,
+                      }),
+                    )
+                  }
+                />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item label="Last Name">
+                <Input
+                  value={form.lastName}
+                  onChange={(e) =>
+                    dispatch(
+                      updateFormInput({
+                        type: "lastName",
+                        value: e.target.value,
+                      }),
+                    )
+                  }
+                />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item label="Wanted Job Title">
+                <Input
+                  value={form.jobTitle}
+                  onChange={(e) =>
+                    dispatch(
+                      updateFormInput({
+                        type: "jobTitle",
+                        value: e.target.value,
+                      }),
+                    )
+                  }
+                />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item label="Location">
+                <Input
+                  value={form.location}
+                  onChange={(e) =>
+                    dispatch(
+                      updateFormInput({
+                        type: "location",
+                        value: e.target.value,
+                      }),
+                    )
+                  }
+                />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item label="City">
+                <Input
+                  value={form.city}
+                  onChange={(e) =>
+                    dispatch(
+                      updateFormInput({
+                        type: "city",
+                        value: e.target.value,
+                      }),
+                    )
+                  }
+                />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item label="Phone">
+                <Input
+                  value={form.phone}
+                  onChange={(e) =>
+                    dispatch(
+                      updateFormInput({
+                        type: "phone",
+                        value: e.target.value,
+                      }),
+                    )
+                  }
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item label="About Me">
+                <Input.TextArea
+                  maxLength={2000}
+                  showCount
+                  allowClear
+                  autoSize={{ minRows: 3, maxRows: 10 }}
+                  value={form.aboutMe}
+                  onChange={(e) =>
+                    dispatch(
+                      updateFormInput({
+                        type: "aboutMe",
+                        value: e.target.value,
+                      }),
+                    )
+                  }
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
+      </Col>
+      <Col span={12}>
+        <Pdf1 />
+      </Col>
+    </Row>
   )
 }
 
