@@ -7,6 +7,8 @@ import {
   editDataHandler,
   addItemHandler,
   removeItemHandler,
+  addSectionHanlder,
+  removeSectionHanlder,
 } from "./resumeBuilderReducers"
 import { createSlice } from "@reduxjs/toolkit"
 import { RootState } from "../../app/store"
@@ -24,6 +26,8 @@ export const resumeBuilderSlice = createSlice({
     editDataHandler,
     addItemHandler,
     removeItemHandler,
+    addSectionHanlder,
+    removeSectionHanlder,
   },
 })
 

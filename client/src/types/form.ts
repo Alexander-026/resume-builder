@@ -45,7 +45,9 @@ export interface IData extends Omit<IFormItem, "id">, IKeyString {
   section: Section
   label: string
   visibility: boolean
+  draggable: boolean
   showLevel?: boolean
+  removable?: boolean
   items?: IFormItem[]
 }
 
@@ -69,6 +71,12 @@ export interface IForm extends IKeyString {
   colorLeftSection: string
   src: string
   fixedData: IFixedData
-  editableData: IEditableData
   data: IData[]
+}
+
+export interface INewData extends IKeyString {
+  description: IData
+  skills: IData
+  links: IData
+  specification: IData
 }

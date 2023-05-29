@@ -10,8 +10,6 @@ type Pdf1HeaderProps = {
 }
 
 const Pdf1Specification: FC<Pdf1HeaderProps> = ({ form, dataItem }) => {
-  const { editableData } = form
-
   const global = globalStyles(form)
 
   const styles = StyleSheet.create({
@@ -56,10 +54,6 @@ const Pdf1Specification: FC<Pdf1HeaderProps> = ({ form, dataItem }) => {
       marginBottom: "4px",
     },
   })
-
-  if (!editableData.employmenthistory.visibility) {
-    return <></>
-  }
   return (
     <View style={global.heading}>
       <Text style={global.headingTitle}>{dataItem.label}</Text>

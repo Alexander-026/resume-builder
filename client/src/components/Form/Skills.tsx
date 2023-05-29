@@ -1,6 +1,5 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons"
-
 import {
   Button,
   Checkbox,
@@ -17,10 +16,8 @@ import {
   Tooltip,
   Typography,
 } from "antd"
-import { useState } from "react"
 import { resumeBuilderSlice } from "../../features/resumeBuilder/resumeBuilderSlice"
 import { useAppDispatch } from "../../app/hooks"
-import LabelItem from "./LabelItem"
 import { IData, IFormItem } from "../../types/form"
 const { Panel } = Collapse
 

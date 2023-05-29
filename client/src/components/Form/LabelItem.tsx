@@ -12,12 +12,13 @@ type LabelItemProps = {
 
 const LabelItem: FC<LabelItemProps> = ({ dataItem }) => {
   const [editable, setEditable] = useState<boolean>(false)
+  const [showEdit, setShowEdit] = useState<boolean>(false)
   const refInput = useRef<InputRef>(null)
   const dispatch = useAppDispatch()
 
   const setFocus = useCallback(() => {
     if (editable && refInput.current) {
-      refInput.current.focus()
+      refInput.current.select()
     }
   }, [editable])
 
@@ -36,7 +37,7 @@ const LabelItem: FC<LabelItemProps> = ({ dataItem }) => {
             ref={refInput}
             onClick={(e) => e.stopPropagation()}
             style={{
-              paddingLeft: 0,
+              padding: 0,
               fontSize: "20px",
               fontWeight: 600,
               border: "none",
@@ -45,40 +46,54 @@ const LabelItem: FC<LabelItemProps> = ({ dataItem }) => {
               boxShadow: "none",
               borderBottom: "1px solid #d9d9d9",
               background: "transparent",
+              lineHeight: 0,
             }}
             value={dataItem.label}
             onBlur={(e) => {
               e.stopPropagation()
               setEditable(false)
+              setShowEdit(false)
             }}
             onPressEnter={(e) => {
               e.preventDefault()
               setEditable(false)
+              setShowEdit(false)
             }}
             onChange={(e) =>
               dispatch(labelHandler({ id: dataItem.id, value: e.target.value }))
             }
           />
         ) : (
-          <Typography.Title level={4} style={{ marginBottom: 0 }}>
+          <Typography.Title
+            onMouseEnter={() => setShowEdit(true)}
+            onMouseLeave={() => setShowEdit(false)}
+            level={4}
+            style={{ marginBottom: 0 }}
+          >
             {dataItem.label}
-            <Tooltip
-              placement="top"
-              title={`Edit`}
-              trigger={["click", "hover"]}
-            >
-              <Button
-                disabled={!visibility}
-                style={{ marginLeft: "0.5rem", padding: 0 }}
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setEditable(true)
-                }}
-                type="ghost"
+            {showEdit && (
+              <Tooltip
+                placement="top"
+                title={`Edit`}
+                trigger={["click", "hover"]}
               >
-                <EditOutlined style={{ fontSize: "20px" }} />
-              </Button>
-            </Tooltip>
+                <Button
+                  size="small"
+                  disabled={!visibility}
+                  style={{
+                    marginLeft: "0.5rem",
+                    padding: 0,
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setEditable(true)
+                  }}
+                  type="ghost"
+                >
+                  <EditOutlined style={{ fontSize: "20px" }} />
+                </Button>
+              </Tooltip>
+            )}
           </Typography.Title>
         )}
       </Col>

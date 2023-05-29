@@ -84,144 +84,23 @@ export const initialState: ResumeBuilderState = {
         visitable: true,
       },
     },
-    editableData: {
-      aboutMe: {
-        id: "aboutMe-10",
-        label: "About me",
-        value:
-          "As a frontend developer with over 3 years of experience, I specialize in creating dynamic and responsive user interfaces using a variety of technologies. Throughout my career, I have connuously sought to expand my knowledge and skills in frontend development, staying up-to-date with the latest technologies and best pracces.",
-        editLabel: false,
-        visibility: true,
-        visitable: true,
-      },
-      skills: {
-        label: "Skills",
-        visibility: true,
-        showLevel: true,
-        items: [
-          {
-            id: "blababla",
-            value: "JavaScript",
-            level: "5",
-          },
-        ],
-      },
-      languages: {
-        label: "Languages",
-        visibility: true,
-        showLevel: true,
-        items: [
-          {
-            id: "blababla",
-            value: "English",
-            level: "5",
-          },
-        ],
-      },
-      links: {
-        label: "Links",
-        visibility: true,
-        items: [
-          {
-            id: "blababla",
-            value: "Linkedin",
-            link: "https://www.linkedin.com/notifications/?filter=all",
-          },
-        ],
-      },
-      employmenthistory: {
-        label: "Employment History",
-        visibility: true,
-        items: [
-          {
-            id: "Employment History",
-            value: "Middle Frontend-Developer React",
-            value2: "Lechner Soft",
-            value3: "Kharkiv",
-            startEnd: ["Oct-2021", "Mar-2023"],
-            description: `Responsibilities:
-            • Plan and implement features from the scratch: create feature implementation design, split into tasks, control process.
-            • Implemented new functional modules (components) for the existing pages and for the new implemented pages (from scratch) using React.
-            • Implemented REST API (from scratch).
-            • Wrote comprehensive tests for React components 
-            to ensure their functionality and performance.
-            • Participation in Code Review processes as a reviewer.
-            • Participation in Refactoring and Performance optimization parties.
-            • Created maintainable, cross browsers and reusing web pages using HTML/CSS features.
-            • Evaluated and became knowledgeable in new standards, technologies and trends in website development.
-            Used Skills: React, TypeScript, Scss Modules, Webpack, Redux-Toolkit, React-Hook-Form, React-Testing-Library, Jest, Ant-Design, Material UI.`,
-          },
-          {
-            id: "Employment History2",
-            value: "Junior-Middle Frontend-Developer React",
-            value2: "Kontakt Home",
-            value3: "Baku",
-            startEnd: ["Nov-2021", "Dec-2023"],
-            description: `Responsibilities:
-            • Plan and implement features from the scratch: create feature implementation design, split into tasks, control process.
-            • Implemented new functional modules (components) for the existing pages and for the new implemented pages (from scratch) using React.
-            • Implemented REST API (from scratch).
-            • Wrote comprehensive tests for React components 
-            to ensure their functionality and performance.
-            • Participation in Code Review processes as a reviewer.
-            • Participation in Refactoring and Performance optimization parties.
-            • Created maintainable, cross browsers and reusing web pages using HTML/CSS features.
-            • Evaluated and became knowledgeable in new standards, technologies and trends in website development.
-            Used Skills: React, TypeScript, Scss Modules, Webpack, Redux-Toolkit, React-Hook-Form, React-Testing-Library, Jest, Ant-Design, Material UI.`,
-          },
-          {
-            id: "Employment History3",
-            value: "Middle Frontend-Developer React",
-            value2: "Lechner Softt",
-            value3: "Kharkiv",
-            startEnd: ["Oct-2021", "Mar-2023"],
-            description: `Responsibilities:
-            • Plan and implement features from the scratch: create feature implementation design, split into tasks, control process.
-            • Implemented new functional modules (components) for the existing pages and for the new implemented pages (from scratch) using React.
-            • Implemented REST API (from scratch).
-            • Wrote comprehensive tests for React components 
-            to ensure their functionality and performance.
-            • Participation in Code Review processes as a reviewer.
-            • Participation in Refactoring and Performance optimization parties.
-            • Created maintainable, cross browsers and reusing web pages using HTML/CSS features.
-            • Evaluated and became knowledgeable in new standards, technologies and trends in website development.
-            Used Skills: React, TypeScript, Scss Modules, Webpack, Redux-Toolkit, React-Hook-Form, React-Testing-Library, Jest, Ant-Design, Material UI.`,
-          },
-        ],
-      },
-      education: {
-        label: "Education",
-        visibility: true,
-        items: [
-          {
-            id: "Education",
-            value: "NTUXPI",
-            value2: "Higher education",
-            value3: "Kharkiv",
-            startEnd: ["Sep-2013", "Jun-2017"],
-            description: `Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo ipsa reiciendis ullam optio! Est, aut. Reiciendis, quidem soluta. Ratione harum illum incidunt in voluptas animi architecto fugit, quaerat odio accusamus!
-            `,
-          },
-        ],
-      },
-    },
     data: [
       {
         id: "About Me",
         label: "About me",
         type: "Description",
         section: "Secondary",
+        draggable: true,
         value:
           "As a frontend developer with over 3 years of experience, I specialize in creating dynamic and responsive user interfaces using a variety of technologies. Throughout my career, I have connuously sought to expand my knowledge and skills in frontend development, staying up-to-date with the latest technologies and best pracces.",
-        editLabel: false,
         visibility: true,
-        visitable: true,
       },
       {
         id: "Skills",
         label: "Skills",
         type: "Skills",
         section: "Secondary",
+        draggable: true,
         visibility: true,
         showLevel: true,
         items: [
@@ -237,6 +116,7 @@ export const initialState: ResumeBuilderState = {
         label: "Languages",
         type: "Skills",
         section: "Secondary",
+        draggable: true,
         visibility: true,
         showLevel: true,
         items: [
@@ -252,6 +132,7 @@ export const initialState: ResumeBuilderState = {
         label: "Links",
         type: "Links",
         section: "Secondary",
+        draggable: true,
         visibility: true,
         items: [
           {
@@ -271,6 +152,7 @@ export const initialState: ResumeBuilderState = {
         label: "Employment History",
         type: "Specification",
         section: "Primary",
+        draggable: false,
         visibility: true,
         items: [
           {
@@ -316,6 +198,7 @@ export const initialState: ResumeBuilderState = {
         label: "Education",
         type: "Specification",
         section: "Primary",
+        draggable: false,
         visibility: true,
         items: [
           {

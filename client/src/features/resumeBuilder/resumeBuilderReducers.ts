@@ -1,7 +1,7 @@
 import { CaseReducer, PayloadAction } from "@reduxjs/toolkit"
 import { ResumeBuilderState } from "./builderInitState"
 import { v4 as uuid } from "uuid"
-import { IFormItem, TypeDate } from "../../types/form"
+import { IData, IFormItem, INewData, TypeDate } from "../../types/form"
 
 export const updateInputValue: CaseReducer<
   ResumeBuilderState,
@@ -157,5 +157,67 @@ export const removeItemHandler: CaseReducer<
       return item
     }
   })
+  state.form.data = newData
+}
+export const addSectionHanlder: CaseReducer<
+  ResumeBuilderState,
+  PayloadAction<string>
+> = (state, action) => {
+  const newData: INewData = {
+    description: {
+      id: uuid(),
+      label: "Not specified",
+      type: "Description",
+      section: "Primary",
+      draggable: true,
+      value: "",
+      visibility: true,
+      removable: true,
+    },
+    skills: {
+      id: uuid(),
+      label: "Not specified",
+      type: "Skills",
+      section: "Primary",
+      draggable: true,
+      visibility: true,
+      showLevel: true,
+      removable: true,
+      items: [],
+    },
+    links: {
+      id: uuid(),
+      label: "Not specified",
+      type: "Links",
+      section: "Primary",
+      draggable: true,
+      visibility: true,
+      removable: true,
+      items: [],
+    },
+    specification: {
+      id: uuid(),
+      label: "Not specified",
+      type: "Specification",
+      section: "Primary",
+      draggable: false,
+      visibility: true,
+      removable: true,
+      items: [],
+    },
+  }
+
+  const data: IData = newData[action.payload]
+
+  if (data) {
+    state.form.data.push(data)
+  }
+}
+export const removeSectionHanlder: CaseReducer<
+  ResumeBuilderState,
+  PayloadAction<string>
+> = (state, action) => {
+  const id = action.payload
+  const newData: IData[] = state.form.data.filter((item) => item.id !== id)
   state.form.data = newData
 }
