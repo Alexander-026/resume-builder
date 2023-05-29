@@ -19,6 +19,7 @@
     "@reduxjs/toolkit": "^1.8.1",
     "antd": "^5.5.0",
     "antd-img-crop": "^4.12.2",
+    "dayjs": "^1.11.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.1"
@@ -29,6 +30,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.2.5",
     "@types/antd": "^1.0.0",
+    "@types/moment": "^2.13.0",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@types/testing-library__jest-dom": "^5.14.5",

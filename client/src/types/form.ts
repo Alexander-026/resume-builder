@@ -2,16 +2,20 @@ export interface IKeyString {
   [key: string]: any
 }
 
-export interface IFormItem {
+export interface IFormItem extends IKeyString {
   id: string
-  value: string
+  value?: string
+  value2?: string
+  value3?: string
+  startEnd?: string[]
+  description?: string
   fieldSize?: number
   label?: string
   editLabel?: boolean
   visitable?: boolean
   visibility?: boolean
-  order?: number
   level?: string
+  link?: string
 }
 
 export interface IFixedData extends IKeyString {
@@ -25,17 +29,33 @@ export interface IFixedData extends IKeyString {
   address: IFormItem
   postalCode: IFormItem
 }
-export interface ISkills extends IKeyString {
+export interface IList extends IKeyString {
   label: string
   visibility: boolean
-  showLevel: boolean
+  showLevel?: boolean
   items: IFormItem[]
+}
+
+export type TypeDate = "Description" | "Skills" | "Links" | "Specification"
+export type Section = "Primary" | "Secondary"
+
+export interface IData extends Omit<IFormItem, "id">, IKeyString {
+  id: string
+  type: TypeDate
+  section: Section
+  label: string
+  visibility: boolean
+  showLevel?: boolean
+  items?: IFormItem[]
 }
 
 export interface IEditableData extends IKeyString {
   aboutMe: IFormItem
-  skills: ISkills
-  languages: ISkills
+  skills: IList
+  languages: IList
+  links: IList
+  employmenthistory: IList
+  education: IList
 }
 export interface ITheme extends IKeyString {
   bgLeftSection: string
@@ -47,9 +67,8 @@ export interface ITheme extends IKeyString {
 export interface IForm extends IKeyString {
   bgLeftSection: string
   colorLeftSection: string
-  bgRightSection: string
-  colorRightSection: string
   src: string
   fixedData: IFixedData
   editableData: IEditableData
+  data: IData[]
 }

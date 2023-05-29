@@ -1,7 +1,7 @@
 import { CaseReducer, PayloadAction } from "@reduxjs/toolkit"
 import { ResumeBuilderState } from "./builderInitState"
 import { v4 as uuid } from "uuid"
-import { IFormItem } from "../../types/form"
+import { IFormItem, TypeDate } from "../../types/form"
 
 export const updateInputValue: CaseReducer<
   ResumeBuilderState,
@@ -14,6 +14,7 @@ export const updateInputValue: CaseReducer<
     state.form[key] = value
   }
 }
+
 export const updateInputVisibility: CaseReducer<
   ResumeBuilderState,
   PayloadAction<{ value: boolean; key: string; innerKey: string }>
@@ -21,69 +22,140 @@ export const updateInputVisibility: CaseReducer<
   const { value, key, innerKey } = action.payload
   state.form[key][innerKey].visibility = value
 }
-export const editInputLabel: CaseReducer<
+
+export const labelHandler: CaseReducer<
   ResumeBuilderState,
-  PayloadAction<{ value: string; key: string }>
+  PayloadAction<{ id: string; value: string; innerId?: string }>
 > = (state, action) => {
-  const { value, key } = action.payload
-  state.form.editableData[key].label = value
+  const { id, value, innerId } = action.payload
+  const data = state.form.data
+  const item = data.find((item) => item.id === id)
+
+  if (innerId && item) {
+    const innerItem = item.items?.find((innerItem) => innerItem.id === innerId)
+    if (innerItem) {
+      innerItem.label = value
+      state.form.data = data
+    }
+  } else {
+    if (item) {
+      item.label = value
+      state.form.data = data
+    }
+  }
+}
+export const visibilityHandler: CaseReducer<
+  ResumeBuilderState,
+  PayloadAction<{ id: string; value: boolean }>
+> = (state, action) => {
+  const { id, value } = action.payload
+  const data = state.form.data
+  const item = data.find((item) => item.id === id)
+
+  if (item) {
+    item.visibility = value
+    state.form.data = data
+  }
+}
+export const visibilityLevelHandler: CaseReducer<
+  ResumeBuilderState,
+  PayloadAction<{ id: string; value: boolean }>
+> = (state, action) => {
+  const { id, value } = action.payload
+  const data = state.form.data
+  const item = data.find((item) => item.id === id)
+
+  if (item) {
+    item.showLevel = value
+    state.form.data = data
+  }
 }
 
-export const addItem: CaseReducer<ResumeBuilderState, PayloadAction<string>> = (
-  state,
-  action,
-) => {
-  state.form.editableData[action.payload].items.push({
+export const editDataHandler: CaseReducer<
+  ResumeBuilderState,
+  PayloadAction<{
+    id: string
+    key: string
+    value: string | string[]
+    childId?: string
+  }>
+> = (state, action) => {
+  const { id, key, value, childId } = action.payload
+  const data = state.form.data
+  const item = data.find((item) => item.id === id)
+
+  if (childId && item) {
+    const childItem = item.items?.find((childItem) => childItem.id === childId)
+    if (childItem) {
+      childItem[key] = value
+      state.form.data = data
+    }
+  } else {
+    if (item) {
+      item[key] = value
+      state.form.data = data
+    }
+  }
+}
+export const addItemHandler: CaseReducer<
+  ResumeBuilderState,
+  PayloadAction<{
+    id: string
+    type: TypeDate
+  }>
+> = (state, action) => {
+  const { id, type } = action.payload
+  const data = state.form.data
+  const children = data.find((item) => item.id === id)?.items
+  const newSkill: IFormItem = {
     id: uuid(),
     value: "Not specified",
     level: "5",
-  })
-}
-export const removeItem: CaseReducer<
-  ResumeBuilderState,
-  PayloadAction<{ id: string; key: string }>
-> = (state, action) => {
-  const { id, key } = action.payload
-  const items = state.form.editableData[key].items
-  state.form.editableData[key].items = items.filter(
-    (item: IFormItem) => item.id !== id,
-  )
-}
-export const toogleItemLevel: CaseReducer<
-  ResumeBuilderState,
-  PayloadAction<{ key: string; value: boolean }>
-> = (state, action) => {
-  const { key, value } = action.payload
-  state.form.editableData[key].showLevel = value
-}
-
-export const editItem: CaseReducer<
-  ResumeBuilderState,
-  PayloadAction<{
-    type: "value" | "level"
-    value: string
-    id: string
-    key: string
-  }>
-> = (state, action) => {
-  const { type, value, id, key } = action.payload
-  const data = state.form.editableData[key]
-  const items = data.items
-  const item = items.find((item: IFormItem) => item.id === id)
+  }
+  const newLink: IFormItem = {
+    id: uuid(),
+    value: "Not specified",
+    link: "",
+  }
+  const newSpecification: IFormItem = {
+    id: uuid(),
+    value: "",
+    value2: "",
+    value3: "",
+    description: "",
+    startEnd: ["", ""],
+  }
   switch (type) {
-    case "value":
-      if (item) {
-        item.value = value
-        data.items = items
-      }
+    case "Skills":
+      children?.push(newSkill)
       break
-    case "level":
-      if (item) {
-        item.level = value
-        data.items = items
-      }
+    case "Links":
+      children?.push(newLink)
+      break
+    case "Specification":
+      children?.push(newSpecification)
       break
     default:
       break
   }
+  state.form.data = data
+}
+export const removeItemHandler: CaseReducer<
+  ResumeBuilderState,
+  PayloadAction<{
+    id: string
+    childId: string
+  }>
+> = (state, action) => {
+  const { id, childId } = action.payload
+  const newData = state.form.data.map((item) => {
+    if (item.id === id) {
+      const newChildren = item.items?.filter((child) => child.id !== childId)
+      item.items = newChildren
+      return item
+    } else {
+      return item
+    }
+  })
+  state.form.data = newData
 }

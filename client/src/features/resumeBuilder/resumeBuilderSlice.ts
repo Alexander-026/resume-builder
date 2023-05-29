@@ -1,11 +1,12 @@
 import {
   updateInputValue,
   updateInputVisibility,
-  editInputLabel,
-  addItem,
-  removeItem,
-  toogleItemLevel,
-  editItem,
+  labelHandler,
+  visibilityHandler,
+  visibilityLevelHandler,
+  editDataHandler,
+  addItemHandler,
+  removeItemHandler,
 } from "./resumeBuilderReducers"
 import { createSlice } from "@reduxjs/toolkit"
 import { RootState } from "../../app/store"
@@ -17,11 +18,12 @@ export const resumeBuilderSlice = createSlice({
   reducers: {
     updateInputValue,
     updateInputVisibility,
-    editInputLabel,
-    addItem,
-    removeItem,
-    toogleItemLevel,
-    editItem,
+    labelHandler,
+    visibilityHandler,
+    visibilityLevelHandler,
+    editDataHandler,
+    addItemHandler,
+    removeItemHandler,
   },
 })
 

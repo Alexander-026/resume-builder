@@ -7,12 +7,12 @@ import {
   Space,
   Tooltip,
   Upload,
+  Collapse,
+  Button,
+  Typography,
+  Divider,
 } from "antd"
-import {
-  EditOutlined,
-  EyeInvisibleOutlined,
-  EyeOutlined,
-} from "@ant-design/icons"
+import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons"
 import ImgCrop from "antd-img-crop"
 import {
   resumeBuilder,
@@ -22,15 +22,19 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import type { UploadFile, UploadProps } from "antd/es/upload/interface"
 import { useState } from "react"
 import { beforeUpload, onFileRead, onPreview } from "../../utils/upload"
-import AbotMeFolder from "./AbotMeFolder"
-import ListFolder from "./ListFolder"
+import Description from "./Description"
+import Skills from "./Skills"
+import Specification from "./Specification"
+import { IData } from "../../types/form"
+import LabelItem from "./LabelItem"
+const { Panel } = Collapse
 
 const FormResume = () => {
   const { form } = useAppSelector(resumeBuilder)
-  const { fixedData, editableData } = form
+  const { fixedData, data } = form
   const dispatch = useAppDispatch()
 
-  const { updateInputValue, updateInputVisibility, editInputLabel } =
+  const { updateInputValue, updateInputVisibility, visibilityHandler } =
     resumeBuilderSlice.actions
   const [fileList, setFileList] = useState<UploadFile[]>([])
   const onChange: UploadProps["onChange"] = async ({
@@ -43,10 +47,26 @@ const FormResume = () => {
     }
   }
 
+  const renderSection = (dataItem: IData) => {
+    const { type } = dataItem
+    switch (type) {
+      case "Description":
+        return <Description key={dataItem.id} dataItem={dataItem} />
+      case "Skills":
+        return <Skills key={dataItem.id} dataItem={dataItem} />
+      case "Links":
+        return <Skills key={dataItem.id} dataItem={dataItem} />
+      case "Specification":
+        return <Specification key={dataItem.id} dataItem={dataItem} />
+      default:
+        return <></>
+    }
+  }
+
   return (
     <Form layout="vertical">
-      <Row justify={"center"} align={"middle"} gutter={10}>
-        <Col span={24}>
+      <Row justify={"start"} align={"top"} gutter={10}>
+        <Col style={{ height: "7rem" }} span={6}>
           <ImgCrop rotationSlider>
             <Upload
               action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -64,17 +84,17 @@ const FormResume = () => {
             </Upload>
           </ImgCrop>
         </Col>
-        {/* <Col span={9}>
-          <Form.Item label="Left side">
+        <Col span={18}>
+          <Form.Item label="Theme">
             <Space>
               <ColorPicker
                 format="hex"
                 value={form.bgLeftSection}
                 onChange={(e) =>
                   dispatch(
-                    updateFormInput({
-                      type: "bgLeftSection",
+                    updateInputValue({
                       value: `#${e.toHex()}`,
+                      key: "bgLeftSection",
                     }),
                   )
                 }
@@ -85,9 +105,9 @@ const FormResume = () => {
                 value={form.colorLeftSection}
                 onChange={(e) =>
                   dispatch(
-                    updateFormInput({
-                      type: "colorLeftSection",
+                    updateInputValue({
                       value: `#${e.toHex()}`,
+                      key: "colorLeftSection",
                     }),
                   )
                 }
@@ -96,38 +116,6 @@ const FormResume = () => {
             </Space>
           </Form.Item>
         </Col>
-        <Col span={9}>
-          <Form.Item label="Right side">
-            <Space>
-              <ColorPicker
-                format="hex"
-                value={form.bgRightSection}
-                onChange={(e) =>
-                  dispatch(
-                    updateFormInput({
-                      type: "bgRightSection",
-                      value: `#${e.toHex()}`,
-                    }),
-                  )
-                }
-              />
-              <Col>Background</Col>
-              <ColorPicker
-                format="hex"
-                value={form.colorRightSection}
-                onChange={(e) =>
-                  dispatch(
-                    updateFormInput({
-                      type: "colorRightSection",
-                      value: `#${e.toHex()}`,
-                    }),
-                  )
-                }
-              />
-              <Col>Color</Col>
-            </Space>
-          </Form.Item>
-        </Col> */}
         {Object.keys(fixedData).map((key) => (
           <Col span={fixedData[key].fieldSize} key={fixedData[key].id}>
             <Form.Item
@@ -194,10 +182,125 @@ const FormResume = () => {
           </Col>
         ))}
       </Row>
-      <Row justify={"center"} align={"middle"} gutter={[0, 20]}>
-        <AbotMeFolder />
-        <ListFolder dataName="skills" />
-        <ListFolder dataName="languages" />
+      <Row align={"top"} gutter={[0, 20]}>
+        <Col span={24}>
+          <Divider orientation="center">
+            <Typography.Title level={3}>Primary Side</Typography.Title>
+          </Divider>
+          <Collapse size="large" accordion expandIconPosition="end">
+            {data.map(
+              (item) =>
+                item.section === "Primary" && (
+                  <Panel
+                    header={<LabelItem dataItem={item} />}
+                    key={item.id}
+                    collapsible={item.visibility ? undefined : "disabled"}
+                    extra={
+                      <Tooltip
+                        placement="top"
+                        title={`${item.visibility ? "Hide" : "Show"} ${
+                          item.label
+                        }`}
+                        trigger={["click", "hover"]}
+                      >
+                        {item.visibility ? (
+                          <Button
+                            size="small"
+                            type="text"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              dispatch(
+                                visibilityHandler({
+                                  id: item.id,
+                                  value: !item.visibility,
+                                }),
+                              )
+                            }}
+                            icon={<EyeOutlined />}
+                          />
+                        ) : (
+                          <Button
+                            size="small"
+                            icon={<EyeInvisibleOutlined />}
+                            type="text"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              dispatch(
+                                visibilityHandler({
+                                  id: item.id,
+                                  value: !item.visibility,
+                                }),
+                              )
+                            }}
+                          />
+                        )}
+                      </Tooltip>
+                    }
+                  >
+                    {renderSection(item)}
+                  </Panel>
+                ),
+            )}
+          </Collapse>
+          <Divider orientation="center">
+            <Typography.Title level={4}>Secondary side</Typography.Title>
+          </Divider>
+          <Collapse size="large" accordion expandIconPosition="end">
+            {data.map(
+              (item) =>
+                item.section === "Secondary" && (
+                  <Panel
+                    header={<LabelItem dataItem={item} />}
+                    key={item.id}
+                    collapsible={item.visibility ? undefined : "disabled"}
+                    extra={
+                      <Tooltip
+                        placement="top"
+                        title={`${item.visibility ? "Hide" : "Show"} ${
+                          item.label
+                        }`}
+                        trigger={["click", "hover"]}
+                      >
+                        {item.visibility ? (
+                          <Button
+                            size="small"
+                            type="text"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              dispatch(
+                                visibilityHandler({
+                                  id: item.id,
+                                  value: !item.visibility,
+                                }),
+                              )
+                            }}
+                            icon={<EyeOutlined />}
+                          />
+                        ) : (
+                          <Button
+                            size="small"
+                            icon={<EyeInvisibleOutlined />}
+                            type="text"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              dispatch(
+                                visibilityHandler({
+                                  id: item.id,
+                                  value: !item.visibility,
+                                }),
+                              )
+                            }}
+                          />
+                        )}
+                      </Tooltip>
+                    }
+                  >
+                    {renderSection(item)}
+                  </Panel>
+                ),
+            )}
+          </Collapse>
+        </Col>
       </Row>
     </Form>
   )

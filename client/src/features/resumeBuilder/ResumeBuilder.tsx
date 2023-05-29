@@ -1,12 +1,12 @@
 import classnames from "classnames"
 import { Affix, Col, Row } from "antd"
 import styles from "./ResumeBuilder.module.scss"
-import Pdf1 from "../../components/Pdf1"
+import Pdf1 from "../../components/Pdfs/Pdf1/Pdf1"
 import FormResume from "../../components/Form/FormResume"
 
 const ResumeBuilder = () => {
   return (
-    <Row className={styles.resume} align={"stretch"}>
+    <Row className={styles.resume}>
       <Col className={classnames(styles.resumeForm)} span={12}>
         <FormResume />
       </Col>
