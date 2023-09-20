@@ -70,8 +70,10 @@ export interface IForm extends IKeyString {
   bgLeftSection: string
   colorLeftSection: string
   src: string
+  singlePage: boolean
   fixedData: IFixedData
   data: IData[]
+  templates: ITemplate[]
 }
 
 export interface INewData extends IKeyString {
@@ -79,4 +81,16 @@ export interface INewData extends IKeyString {
   skills: IData
   links: IData
   specification: IData
+}
+
+export interface ITemplateItem extends IKeyString {
+  id: string
+  name: string
+  src: string
+}
+
+export interface ITemplate extends IKeyString {
+  id: string
+  name: string
+  items: ITemplateItem[]
 }

@@ -16,24 +16,20 @@ const Pdf1 = () => {
 
   const styles = globalStyles(form)
 
-  const renderPdf1Section = (form: IForm, dataItem: IData) => {
-    const { type } = dataItem
+  const renderPdf1Section = (form: IForm, dataItem: IData, index: number) => {
+    const { type, id } = dataItem
     switch (type) {
       case "Description":
         return (
-          <Pdf1Description key={dataItem.id} form={form} dataItem={dataItem} />
+          <Pdf1Description key={id + index} form={form} dataItem={dataItem} />
         )
       case "Skills":
-        return <Pdf1List form={form} dataItem={dataItem} key={dataItem.id} />
+        return <Pdf1List form={form} dataItem={dataItem} key={id + index} />
       case "Links":
-        return <Pdf1List form={form} dataItem={dataItem} key={dataItem.id} />
+        return <Pdf1List form={form} dataItem={dataItem} key={id + index} />
       case "Specification":
         return (
-          <Pdf1Specification
-            key={dataItem.id}
-            form={form}
-            dataItem={dataItem}
-          />
+          <Pdf1Specification key={id + index} form={form} dataItem={dataItem} />
         )
       default:
         return <Fragment key={uuid()}></Fragment>
@@ -42,28 +38,26 @@ const Pdf1 = () => {
   return (
     <PDFViewer style={{ width: "100%", height: "100%" }}>
       <Document>
-        <Page size="A4" style={styles.page}>
+        <Page wrap={!form.singlePage} size="A4" style={styles.page}>
           <View style={styles.left}>
-            <View style={styles.dewider} />
             <Image style={styles.image} src={form.src || " "} />
             <View style={styles.dewider} />
             <View style={{ display: "flex", flexDirection: "column" }}>
               {data.map(
-                (dataItem) =>
+                (dataItem, index) =>
                   dataItem.section === "Secondary" &&
                   dataItem.visibility &&
-                  renderPdf1Section(form, dataItem),
+                  renderPdf1Section(form, dataItem, index + 1),
               )}
             </View>
           </View>
           <View style={styles.right}>
-            <View fixed style={styles.dewider} />
             <Pdf1Header form={form} />
             {data.map(
-              (dataItem) =>
+              (dataItem, index) =>
                 dataItem.section === "Primary" &&
                 dataItem.visibility &&
-                renderPdf1Section(form, dataItem),
+                renderPdf1Section(form, dataItem, index),
             )}
           </View>
         </Page>

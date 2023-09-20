@@ -12,6 +12,7 @@ const Pdf1List: FC<Pdf1ListPRops> = ({ form, dataItem }) => {
     items: {
       width: "100%",
       marginBottom: "20px",
+      paddingHorizontal: "20px",
     },
     itemsTitle: {
       fontWeight: "bold",

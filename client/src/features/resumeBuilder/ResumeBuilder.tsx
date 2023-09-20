@@ -13,7 +13,7 @@ const ResumeBuilder = () => {
       <Col className={classnames(styles.resumeResult)} span={12}>
         <Affix
           className={classnames(styles.resumeAffix)}
-          offsetTop={30}
+          offsetTop={40}
           offsetBottom={0}
         >
           <Pdf1 />

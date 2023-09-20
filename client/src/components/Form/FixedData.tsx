@@ -19,6 +19,7 @@ import {
 import ImgCrop from "antd-img-crop"
 import { beforeUpload, onFileRead, onPreview } from "../../utils/upload"
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons"
+import Settings from "./Settings"
 
 const FixedData = () => {
   const { form } = useAppSelector(resumeBuilder)
@@ -55,7 +56,7 @@ const FixedData = () => {
           </Upload>
         </ImgCrop>
       </Col>
-      <Col span={18}>
+      <Col span={15}>
         <Form.Item label="Theme">
           <Space>
             <ColorPicker
@@ -86,6 +87,9 @@ const FixedData = () => {
             <Col>Color</Col>
           </Space>
         </Form.Item>
+      </Col>
+      <Col span={3}>
+        <Settings />
       </Col>
       {Object.keys(fixedData).map((key) => (
         <Col span={fixedData[key].fieldSize} key={fixedData[key].id}>

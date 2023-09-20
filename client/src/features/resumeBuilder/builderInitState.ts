@@ -1,4 +1,3 @@
-import { icons } from "../../icons/icons"
 import { IForm } from "../../types/form"
 
 export interface ResumeBuilderState {
@@ -9,7 +8,8 @@ export const initialState: ResumeBuilderState = {
   form: {
     bgLeftSection: "#6f6b6b",
     colorLeftSection: "#ffffff",
-    src: icons.avatar,
+    src: "",
+    singlePage: false,
     fixedData: {
       firstName: {
         id: "fixedData-1",
@@ -210,6 +210,51 @@ export const initialState: ResumeBuilderState = {
             description: `Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo ipsa reiciendis ullam optio! Est, aut. Reiciendis, quidem soluta. Ratione harum illum incidunt in voluptas animi architecto fugit, quaerat odio accusamus!
             `,
           },
+        ],
+      },
+    ],
+    templates: [
+      {
+        id: "temp-cover-letter",
+        name: "Cover Letters",
+        items: [
+          {
+            id: "letter-1",
+            name: "Example-1",
+            src: "",
+          },
+          {
+            id: "letter-2",
+            name: "Example-2",
+            src: "",
+          },
+          {
+            id: "letter-3",
+            name: "Example-3",
+            src: "",
+          },
+          {
+            id: "letter-4",
+            name: "Example-4",
+            src: "",
+          },
+          {
+            id: "letter-5",
+            name: "Example-5",
+            src: "",
+          },
+        ],
+      },
+      {
+        id: "temp-cv",
+        name: "CV",
+        items: [
+          { id: "temp-cv-1", name: "Template-1", src: "./my-cv-1.png" },
+          { id: "temp-cv-2", name: "Template-2", src: "./my-cv-2.png" },
+          { id: "temp-cv-3", name: "Template-3", src: "./my-cv-3.png" },
+          { id: "temp-cv-4", name: "Template-4", src: "./my-cv-4.png" },
+          { id: "temp-cv-5", name: "Template-5", src: "./my-cv-5.png" },
+          { id: "temp-cv-6", name: "Template-6", src: "./my-cv-6.png" },
         ],
       },
     ],

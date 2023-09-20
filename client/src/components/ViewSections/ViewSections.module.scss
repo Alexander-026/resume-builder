@@ -1,0 +1,15 @@
+.view {
+  width: 500px;
+  padding: 0.5rem;
+  &Block {
+    border: 1px solid black;
+    // padding: 0.5rem 0;
+    &Item {
+      margin: 0.5rem 0;
+      padding-left: 0.5rem;
+      user-select: none;
+      cursor: grab;
+      border: 1px solid black;
+    }
+  }
+}

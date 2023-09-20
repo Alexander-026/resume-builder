@@ -6,7 +6,6 @@ import {
   StarOutlined,
 } from "@ant-design/icons"
 import { useState } from "react"
-import { TypeDate } from "../../types/form"
 import { useAppDispatch } from "../../app/hooks"
 import { resumeBuilderSlice } from "../../features/resumeBuilder/resumeBuilderSlice"
 

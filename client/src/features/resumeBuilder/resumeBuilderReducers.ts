@@ -1,7 +1,7 @@
 import { CaseReducer, PayloadAction } from "@reduxjs/toolkit"
 import { ResumeBuilderState } from "./builderInitState"
 import { v4 as uuid } from "uuid"
-import { IData, IFormItem, INewData, TypeDate } from "../../types/form"
+import { IData, IFormItem, INewData, Section, TypeDate } from "../../types/form"
 
 export const updateInputValue: CaseReducer<
   ResumeBuilderState,
@@ -220,4 +220,35 @@ export const removeSectionHanlder: CaseReducer<
   const id = action.payload
   const newData: IData[] = state.form.data.filter((item) => item.id !== id)
   state.form.data = newData
+}
+
+export const sortSection: CaseReducer<
+  ResumeBuilderState,
+  PayloadAction<{ firstIndex: number; secondIndex: number; section?: Section }>
+> = (state, action) => {
+  const { firstIndex, secondIndex, section } = action.payload
+  const newData = state.form.data
+  const draggableElement = newData[firstIndex]
+  const secondElement = newData[secondIndex]
+  if (section !== undefined) {
+    draggableElement.section = section
+    newData.splice(firstIndex, 1)
+
+    newData.splice(
+      draggableElement.section === "Primary" ? secondIndex - 1 : secondIndex,
+      0,
+      draggableElement,
+    )
+  } else {
+    newData[firstIndex] = secondElement
+    newData[secondIndex] = draggableElement
+  }
+  state.form.data = newData
+}
+
+export const pageSizeHandler: CaseReducer<
+  ResumeBuilderState,
+  PayloadAction<boolean>
+> = (state, action) => {
+  state.form.singlePage = action.payload
 }
