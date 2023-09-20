@@ -4,13 +4,13 @@ import { v4 as uuid } from "uuid"
 import { useAppSelector } from "../../../app/hooks"
 import { resumeBuilder } from "../../../features/resumeBuilder/resumeBuilderSlice"
 import { globalStyles } from "../globalSyles"
-import Pdf1Header from "./Pdf1Header"
-import Pdf1Specification from "./Pdf1Specification"
-import Pdf1List from "./Pdf1List"
+import Pdf1Header from "./Pdf1CVHeader"
+import Pdf1Specification from "./Pdf1CVSpecification"
+import Pdf1List from "./Pdf1CVList"
 import { IData, IForm } from "../../../types/form"
-import Pdf1Description from "./Pdf1Description"
+import Pdf1Description from "./Pdf1CVDescription"
 
-const Pdf1 = () => {
+const Pdf1CV = () => {
   const { form } = useAppSelector(resumeBuilder)
   const { data } = form
 
@@ -66,4 +66,4 @@ const Pdf1 = () => {
   )
 }
 
-export default Pdf1
+export default Pdf1CV

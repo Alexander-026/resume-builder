@@ -15,8 +15,14 @@
       height: 150px;
       width: 100px;
       margin: 0 auto;
-      border: 1px solid wheat;
+      border: 1px solid black;
       cursor: pointer;
+    }
+  }
+
+  &Item:global(.active) {
+    .carouselItemImg {
+      border: 1px solid green;
     }
   }
 }

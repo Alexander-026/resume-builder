@@ -1,3 +1,4 @@
+import { icons } from "../../icons/icons"
 import { IForm } from "../../types/form"
 
 export interface ResumeBuilderState {
@@ -8,7 +9,7 @@ export const initialState: ResumeBuilderState = {
   form: {
     bgLeftSection: "#6f6b6b",
     colorLeftSection: "#ffffff",
-    src: "",
+    src: icons.avatar,
     singlePage: false,
     fixedData: {
       firstName: {
@@ -199,7 +200,7 @@ export const initialState: ResumeBuilderState = {
         type: "Specification",
         section: "Primary",
         draggable: false,
-        visibility: true,
+        visibility: false,
         items: [
           {
             id: "Education",
@@ -220,28 +221,39 @@ export const initialState: ResumeBuilderState = {
         items: [
           {
             id: "letter-1",
-            name: "Example-1",
+            name: "Letter-1",
             src: "",
+            active: false,
           },
           {
             id: "letter-2",
-            name: "Example-2",
+            name: "Letter-2",
             src: "",
+            active: false,
           },
           {
             id: "letter-3",
-            name: "Example-3",
+            name: "Letter-3",
             src: "",
+            active: false,
           },
           {
             id: "letter-4",
-            name: "Example-4",
+            name: "Letter-4",
             src: "",
+            active: false,
           },
           {
             id: "letter-5",
-            name: "Example-5",
+            name: "Letter-5",
             src: "",
+            active: false,
+          },
+          {
+            id: "letter-6",
+            name: "Letter-6",
+            src: "",
+            active: false,
           },
         ],
       },
@@ -249,12 +261,42 @@ export const initialState: ResumeBuilderState = {
         id: "temp-cv",
         name: "CV",
         items: [
-          { id: "temp-cv-1", name: "Template-1", src: "./my-cv-1.png" },
-          { id: "temp-cv-2", name: "Template-2", src: "./my-cv-2.png" },
-          { id: "temp-cv-3", name: "Template-3", src: "./my-cv-3.png" },
-          { id: "temp-cv-4", name: "Template-4", src: "./my-cv-4.png" },
-          { id: "temp-cv-5", name: "Template-5", src: "./my-cv-5.png" },
-          { id: "temp-cv-6", name: "Template-6", src: "./my-cv-6.png" },
+          {
+            id: "temp-cv-1",
+            name: "CV-1",
+            src: "./my-cv-1.png",
+            active: true,
+          },
+          {
+            id: "temp-cv-2",
+            name: "CV-2",
+            src: "./my-cv-2.png",
+            active: false,
+          },
+          {
+            id: "temp-cv-3",
+            name: "CV-3",
+            src: "./my-cv-3.png",
+            active: false,
+          },
+          {
+            id: "temp-cv-4",
+            name: "CV-4",
+            src: "./my-cv-4.png",
+            active: false,
+          },
+          {
+            id: "temp-cv-5",
+            name: "CV-5",
+            src: "./my-cv-5.png",
+            active: false,
+          },
+          {
+            id: "temp-cv-6",
+            name: "CV-6",
+            src: "./my-cv-6.png",
+            active: false,
+          },
         ],
       },
     ],

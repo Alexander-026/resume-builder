@@ -7,7 +7,7 @@ type Pdf1DescriptionProps = {
   dataItem: IData
 }
 
-const Pdf1Description: FC<Pdf1DescriptionProps> = ({ form, dataItem }) => {
+const Pdf1CVDescription: FC<Pdf1DescriptionProps> = ({ form, dataItem }) => {
   const styles = StyleSheet.create({
     heading: {
       marginBottom: "26px",
@@ -37,4 +37,4 @@ const Pdf1Description: FC<Pdf1DescriptionProps> = ({ form, dataItem }) => {
   )
 }
 
-export default Pdf1Description
+export default Pdf1CVDescription

@@ -83,10 +83,24 @@ export interface INewData extends IKeyString {
   specification: IData
 }
 
+export type TemplateItemName =
+  | "Letter-1"
+  | "Letter-2"
+  | "Letter-3"
+  | "Letter-4"
+  | "Letter-5"
+  | "Letter-6"
+  | "CV-1"
+  | "CV-2"
+  | "CV-3"
+  | "CV-4"
+  | "CV-5"
+  | "CV-6"
 export interface ITemplateItem extends IKeyString {
   id: string
-  name: string
+  name: TemplateItemName
   src: string
+  active: boolean
 }
 
 export interface ITemplate extends IKeyString {

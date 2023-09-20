@@ -2,12 +2,12 @@ import React, { FC } from "react"
 import { IData, IForm } from "../../../types/form"
 import { View, Text, Link, StyleSheet } from "@react-pdf/renderer"
 
-type Pdf1ListPRops = {
+type Pdf1CVListPRops = {
   form: IForm
   dataItem: IData
 }
 
-const Pdf1List: FC<Pdf1ListPRops> = ({ form, dataItem }) => {
+const Pdf1CVList: FC<Pdf1CVListPRops> = ({ form, dataItem }) => {
   const styles = StyleSheet.create({
     items: {
       width: "100%",
@@ -129,4 +129,4 @@ const Pdf1List: FC<Pdf1ListPRops> = ({ form, dataItem }) => {
   )
 }
 
-export default Pdf1List
+export default Pdf1CVList

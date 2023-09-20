@@ -4,12 +4,12 @@ import { globalStyles } from "../globalSyles"
 import { View, Text, StyleSheet } from "@react-pdf/renderer"
 import dayjs from "dayjs"
 
-type Pdf1HeaderProps = {
+type Pdf1CVHeaderProps = {
   form: IForm
   dataItem: IData
 }
 
-const Pdf1Specification: FC<Pdf1HeaderProps> = ({ form, dataItem }) => {
+const Pdf1CVSpecification: FC<Pdf1CVHeaderProps> = ({ form, dataItem }) => {
   const global = globalStyles(form)
 
   const styles = StyleSheet.create({
@@ -88,4 +88,4 @@ const Pdf1Specification: FC<Pdf1HeaderProps> = ({ form, dataItem }) => {
   )
 }
 
-export default Pdf1Specification
+export default Pdf1CVSpecification

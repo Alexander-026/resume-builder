@@ -4,11 +4,11 @@ import { globalStyles } from "../globalSyles"
 import { IForm } from "../../../types/form"
 import { icons } from "../../../icons/icons"
 
-type Pdf1HeaderProps = {
+type Pdf1CVHeaderProps = {
   form: IForm
 }
 
-const Pdf1Header: FC<Pdf1HeaderProps> = ({ form }) => {
+const Pdf1CVHeader: FC<Pdf1CVHeaderProps> = ({ form }) => {
   const styles = globalStyles(form)
   const { fixedData } = form
   return (
@@ -38,4 +38,4 @@ const Pdf1Header: FC<Pdf1HeaderProps> = ({ form }) => {
   )
 }
 
-export default Pdf1Header
+export default Pdf1CVHeader

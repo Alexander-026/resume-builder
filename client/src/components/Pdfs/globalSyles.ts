@@ -20,17 +20,13 @@ export const globalStyles = (form: IForm) => {
       alignItems: "flex-start",
     },
     image: {
-      // width: "100%",
       height: "180px",
-      // borderRadius: "50%",
       backgroundColor: "gray",
-      // objectFit: "container",
       objectFit: "cover",
       objectPosition: "50% 50%",
     },
     right: {
       width: "70%",
-      paddingHorizontal: "20px",
       backgroundColor: form.bgRightSection,
       color: form.colorRightSection,
     },
@@ -41,6 +37,9 @@ export const globalStyles = (form: IForm) => {
       alignItems: "center",
       marginBottom: "20px",
       height: "180px",
+      backgroundColor: form.bgLeftSection,
+      paddingHorizontal: "20px",
+      color: form.colorLeftSection,
     },
     fullName: {
       fontSize: "26px",
@@ -66,6 +65,7 @@ export const globalStyles = (form: IForm) => {
     },
     heading: {
       marginBottom: "26px",
+      paddingHorizontal: "20px",
     },
     headingTitle: {
       fontSize: "12px",

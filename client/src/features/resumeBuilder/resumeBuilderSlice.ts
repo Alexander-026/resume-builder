@@ -11,6 +11,7 @@ import {
   removeSectionHanlder,
   sortSection,
   pageSizeHandler,
+  selectPdfExample,
 } from "./resumeBuilderReducers"
 import { createSlice } from "@reduxjs/toolkit"
 import { RootState } from "../../app/store"
@@ -32,6 +33,7 @@ export const resumeBuilderSlice = createSlice({
     removeSectionHanlder,
     sortSection,
     pageSizeHandler,
+    selectPdfExample,
   },
 })
 

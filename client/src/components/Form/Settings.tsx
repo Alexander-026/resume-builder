@@ -18,11 +18,12 @@ import {
 } from "../../features/resumeBuilder/resumeBuilderSlice"
 import styles from "./Settings.module.scss"
 import { useState } from "react"
+import classNames from "classnames"
 
 const Settings = () => {
   const { form } = useAppSelector(resumeBuilder)
   const dispatch = useAppDispatch()
-  const { pageSizeHandler } = resumeBuilderSlice.actions
+  const { pageSizeHandler, selectPdfExample } = resumeBuilderSlice.actions
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [isTemplatesOpen, setIsTemplatesOpen] = useState<boolean>(false)
 
@@ -45,9 +46,15 @@ const Settings = () => {
               <Typography.Title className={styles.title} level={5}>
                 {temp.name}
               </Typography.Title>
-              <Carousel autoplay className={styles.carousel}>
+              <Carousel className={styles.carousel}>
                 {temp.items.map((item) => (
-                  <div className={styles.carouselItem} key={item.id}>
+                  <div
+                    className={classNames(styles.carouselItem, {
+                      active: item.active,
+                    })}
+                    onClick={() => dispatch(selectPdfExample(item))}
+                    key={item.id}
+                  >
                     <Typography.Text className={styles.carouselItemTitle}>
                       {item.name}
                     </Typography.Text>

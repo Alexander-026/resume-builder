@@ -1,7 +1,14 @@
 import { CaseReducer, PayloadAction } from "@reduxjs/toolkit"
 import { ResumeBuilderState } from "./builderInitState"
 import { v4 as uuid } from "uuid"
-import { IData, IFormItem, INewData, Section, TypeDate } from "../../types/form"
+import {
+  IData,
+  IFormItem,
+  INewData,
+  ITemplateItem,
+  Section,
+  TypeDate,
+} from "../../types/form"
 
 export const updateInputValue: CaseReducer<
   ResumeBuilderState,
@@ -251,4 +258,23 @@ export const pageSizeHandler: CaseReducer<
   PayloadAction<boolean>
 > = (state, action) => {
   state.form.singlePage = action.payload
+}
+
+export const selectPdfExample: CaseReducer<
+  ResumeBuilderState,
+  PayloadAction<ITemplateItem>
+> = (state, action) => {
+  state.form.templates.map((temp) =>
+    temp.items.map((item) => {
+      if (item.id === action.payload.id) {
+        const activeItem = item
+        activeItem.active = true
+        return activeItem
+      } else {
+        const disableItem = item
+        disableItem.active = false
+        return disableItem
+      }
+    }),
+  )
 }
