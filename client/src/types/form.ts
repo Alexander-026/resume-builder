@@ -29,6 +29,7 @@ export interface IFixedData extends IKeyString {
   address: IFormItem
   postalCode: IFormItem
 }
+
 export interface IList extends IKeyString {
   label: string
   visibility: boolean
@@ -49,6 +50,35 @@ export interface IData extends Omit<IFormItem, "id">, IKeyString {
   showLevel?: boolean
   removable?: boolean
   items?: IFormItem[]
+}
+
+export type ItemType = "text" | "letter" | "date"
+
+export interface ILetterItemData extends IKeyString {
+  id: string
+  label: string
+  value: string
+  fieldSize: number
+  type: ItemType
+}
+
+export interface ILetterData extends IKeyString {
+  firstNameFrom: ILetterItemData
+  lastNameFrom: ILetterItemData
+  postalCodeFrom: ILetterItemData
+  addressFrom: ILetterItemData
+  cityFrom: ILetterItemData
+  phone: ILetterItemData
+  email: ILetterItemData
+  firstNameTo: ILetterItemData
+  lastNameTo: ILetterItemData
+  addressTo: ILetterItemData
+  cityTo: ILetterItemData
+  postalCodeTo: ILetterItemData
+  currentDate: ILetterItemData
+  title: ILetterItemData
+  subtitle: ILetterItemData
+  letter: ILetterItemData
 }
 
 export interface IEditableData extends IKeyString {
@@ -72,6 +102,7 @@ export interface IForm extends IKeyString {
   src: string
   singlePage: boolean
   fixedData: IFixedData
+  letterData: ILetterData
   data: IData[]
   templates: ITemplate[]
 }
@@ -96,11 +127,14 @@ export type TemplateItemName =
   | "CV-4"
   | "CV-5"
   | "CV-6"
+
+export type TemplateItemType = "CV" | "Letter"
 export interface ITemplateItem extends IKeyString {
   id: string
   name: TemplateItemName
   src: string
   active: boolean
+  type: TemplateItemType
 }
 
 export interface ITemplate extends IKeyString {

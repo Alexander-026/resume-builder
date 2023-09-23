@@ -74,7 +74,7 @@ const Settings = () => {
         <Popover
           trigger="click"
           open={isTemplatesOpen}
-          onOpenChange={() => setIsTemplatesOpen(true)}
+          onOpenChange={() => setIsTemplatesOpen(!isTemplatesOpen)}
           content={
             <>
               <Form.Item label={"Pdf view"}>

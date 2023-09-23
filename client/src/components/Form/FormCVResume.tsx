@@ -5,7 +5,7 @@ import AddSection from "./AddSection"
 import { AppstoreOutlined } from "@ant-design/icons"
 import ViewSections from "../ViewSections/ViewSections"
 
-const FormResume = () => {
+const FormCVResume = () => {
   return (
     <Form layout="vertical">
       <FixedData />
@@ -24,4 +24,4 @@ const FormResume = () => {
   )
 }
 
-export default FormResume
+export default FormCVResume

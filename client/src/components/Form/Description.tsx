@@ -2,7 +2,6 @@ import { FC } from "react"
 import { Col, Form, Input } from "antd"
 import { useAppDispatch } from "../../app/hooks"
 import { resumeBuilderSlice } from "../../features/resumeBuilder/resumeBuilderSlice"
-import LabelItem from "./LabelItem"
 import { IData } from "../../types/form"
 
 type DescriptionProps = {
