@@ -10,12 +10,12 @@ export const initialState: ResumeBuilderState = {
     bgLeftSection: "#6f6b6b",
     colorLeftSection: "#ffffff",
     src: icons.avatar,
-    singlePage: false,
+    singlePage: true,
     fixedData: {
       firstName: {
         id: "fixedData-1",
         label: "First Name",
-        value: "Alexander",
+        value: "Aleksandr",
         fieldSize: 8,
         visibility: true,
         visitable: false,
@@ -23,7 +23,7 @@ export const initialState: ResumeBuilderState = {
       lastName: {
         id: "fixedData-2",
         label: "Last Name",
-        value: "Bryndin",
+        value: "Brindin",
         fieldSize: 8,
         visibility: true,
         visitable: false,
@@ -39,7 +39,7 @@ export const initialState: ResumeBuilderState = {
       country: {
         id: "fixedData-4",
         label: "Country",
-        value: "Ukraine ",
+        value: "Germany",
         fieldSize: 6,
         visibility: true,
         visitable: false,
@@ -47,7 +47,7 @@ export const initialState: ResumeBuilderState = {
       city: {
         id: "fixedData-5",
         label: "City",
-        value: "Kharkiv",
+        value: "Neu-Ulm",
         fieldSize: 6,
         visibility: true,
         visitable: false,
@@ -55,7 +55,7 @@ export const initialState: ResumeBuilderState = {
       address: {
         id: "fixedData-8",
         label: "Address",
-        value: "avenue Yuvileinyi,building 26,Housing B",
+        value: "Ludwig Str. 4,",
         fieldSize: 12,
         visibility: true,
         visitable: false,
@@ -63,7 +63,7 @@ export const initialState: ResumeBuilderState = {
       postalCode: {
         id: "fixedData-9",
         label: "Postal Code",
-        value: "262626",
+        value: "89231",
         fieldSize: 6,
         visibility: true,
         visitable: false,
@@ -79,7 +79,7 @@ export const initialState: ResumeBuilderState = {
       phone: {
         id: "fixedData-7",
         label: "Phone",
-        value: "+00 000 000 00 00",
+        value: "+49 1717490736",
         fieldSize: 8,
         visibility: true,
         visitable: true,
@@ -209,7 +209,7 @@ export const initialState: ResumeBuilderState = {
         section: "Secondary",
         draggable: true,
         value:
-          "As a frontend developer with over 3 years of experience, I specialize in creating dynamic and responsive user interfaces using a variety of technologies. Throughout my career, I have connuously sought to expand my knowledge and skills in frontend development, staying up-to-date with the latest technologies and best pracces.",
+          "With over 3 years of experience as a frontend developer, I specialize in crafting dynamic and responsive user interfaces using various technologies. Continuously seeking to expand my skills, I stay abreast of the latest frontend technologies and best practices.",
         visibility: true,
       },
       {
@@ -219,12 +219,62 @@ export const initialState: ResumeBuilderState = {
         section: "Secondary",
         draggable: true,
         visibility: true,
-        showLevel: true,
+        showLevel: false,
         items: [
           {
-            id: "blababla",
+            id: "JavaScript",
             value: "JavaScript",
-            level: "4",
+            level: "5",
+          },
+          {
+            id: "TypeScript",
+            value: "TypeScript",
+            level: "5",
+          },
+          {
+            id: "Scss",
+            value: "Scss",
+            level: "5",
+          },
+          {
+            id: "React",
+            value: "React",
+            level: "5",
+          },
+          {
+            id: "Redux (RTK)",
+            value: "Redux (RTK)",
+            level: "5",
+          },
+          {
+            id: "GraphQL",
+            value: "GraphQL",
+            level: "5",
+          },
+          {
+            id: "MongoDB",
+            value: "MongoDB",
+            level: "5",
+          },
+          {
+            id: "Express",
+            value: "Express",
+            level: "5",
+          },
+          {
+            id: "Node JS",
+            value: "Node JS",
+            level: "5",
+          },
+          {
+            id: "MUI",
+            value: "MUI",
+            level: "5",
+          },
+          {
+            id: "Ant Design",
+            value: "Ant Design",
+            level: "5",
           },
         ],
       },
@@ -238,9 +288,24 @@ export const initialState: ResumeBuilderState = {
         showLevel: true,
         items: [
           {
-            id: "blababla",
+            id: "English",
             value: "English",
-            level: "4",
+            level: "3",
+          },
+          {
+            id: "Germany",
+            value: "Germany",
+            level: "2",
+          },
+          {
+            id: "Russian",
+            value: "Russian",
+            level: "5",
+          },
+          {
+            id: "Turkish",
+            value: "Turkish",
+            level: "5",
           },
         ],
       },
@@ -339,7 +404,7 @@ export const initialState: ResumeBuilderState = {
             id: "letter-1",
             name: "Letter-1",
             src: "",
-            active: true,
+            active: false,
             type: "Letter",
           },
           {
@@ -387,7 +452,7 @@ export const initialState: ResumeBuilderState = {
             id: "temp-cv-1",
             name: "CV-1",
             src: "./my-cv-1.png",
-            active: false,
+            active: true,
             type: "CV",
           },
           {

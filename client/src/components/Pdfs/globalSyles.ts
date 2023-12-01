@@ -59,9 +59,10 @@ export const globalStyles = (form: IForm) => {
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "center",
-      maxWidth: "150px",
+      justifyContent: "flex-start",
+      maxWidth: "170px",
       whiteSpace: "wrap",
+      gap: "5px",
     },
     heading: {
       marginBottom: "26px",

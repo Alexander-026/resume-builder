@@ -78,7 +78,6 @@ const Pdf1CVList: FC<Pdf1CVListPRops> = ({ form, dataItem }) => {
       fontSize: "10px",
       textAlign: "left",
       textTransform: "capitalize",
-      // border: "1px solid black",
     },
   })
   return (
@@ -101,10 +100,9 @@ const Pdf1CVList: FC<Pdf1CVListPRops> = ({ form, dataItem }) => {
               <Text style={styles.itemsText}>
                 {item.value || "Not specified"}
               </Text>
-              <View style={styles.itemsLevel}>
-                {dataItem.showLevel &&
-                  item.level &&
-                  Array(5)
+              {dataItem.showLevel && item.level && (
+                <View style={styles.itemsLevel}>
+                  {Array(5)
                     .fill(",")
                     .map((l, i) => (
                       <View
@@ -120,7 +118,8 @@ const Pdf1CVList: FC<Pdf1CVListPRops> = ({ form, dataItem }) => {
                         }}
                       />
                     ))}
-              </View>
+                </View>
+              )}
             </View>
           ),
         )}

@@ -19,19 +19,27 @@ const Pdf1CVHeader: FC<Pdf1CVHeaderProps> = ({ form }) => {
         <Text style={styles.jobTitle}>{fixedData.jobTitle.value}</Text>
       </View>
       <View>
-        <Text style={styles.location}>
-          <Image src={icons.location} /> {fixedData.country.value + " "}
-          {fixedData.city.value + " "}
-          {fixedData.address.value + " "}
-          {fixedData.postalCode.value + " "}
-        </Text>
-        <Text style={styles.location}>
-          <Image src={icons.gmail} /> {fixedData.email.value}
-        </Text>
-        {fixedData.phone.visibility && (
-          <Text style={styles.location}>
-            <Image src={icons.phone} /> {fixedData.phone.value}
+        <View style={styles.location}>
+          <Image style={{ width: "12px" }} src={icons.location} />
+          <Text>
+            {fixedData.country.value + " "}
+            {fixedData.city.value + " "}
+            {fixedData.address.value + " "}
           </Text>
+        </View>
+        <View style={styles.location}>
+          <Image style={{ width: "12px" }} src={icons.post} />
+          <Text>{fixedData.postalCode.value + " "}</Text>
+        </View>
+        <View style={styles.location}>
+          <Image style={{ width: "12px" }} src={icons.gmail} />
+          <Text> {fixedData.email.value}</Text>
+        </View>
+        {fixedData.phone.visibility && (
+          <View style={styles.location}>
+            <Image style={{ width: "12px" }} src={icons.phone} />
+            <Text>{fixedData.phone.value}</Text>
+          </View>
         )}
       </View>
     </View>
