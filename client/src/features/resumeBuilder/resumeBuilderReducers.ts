@@ -140,7 +140,7 @@ export const addItemHandler: CaseReducer<
       children?.push(newLink)
       break
     case "Specification":
-      children?.push(newSpecification)
+      children?.unshift(newSpecification)
       break
     default:
       break

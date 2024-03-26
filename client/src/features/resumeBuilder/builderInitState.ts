@@ -31,7 +31,7 @@ export const initialState: ResumeBuilderState = {
       jobTitle: {
         id: "fixedData-3",
         label: "Wanted Job Title",
-        value: "Frontend Developer",
+        value: "Web Developer",
         fieldSize: 8,
         visibility: true,
         visitable: false,
@@ -55,7 +55,7 @@ export const initialState: ResumeBuilderState = {
       address: {
         id: "fixedData-8",
         label: "Address",
-        value: "Ludwig Str. 4,",
+        value: "Ludwig Str. 56",
         fieldSize: 12,
         visibility: true,
         visitable: false,
@@ -209,7 +209,7 @@ export const initialState: ResumeBuilderState = {
         section: "Secondary",
         draggable: true,
         value:
-          "With over 3 years of experience as a frontend developer, I specialize in crafting dynamic and responsive user interfaces using various technologies. Continuously seeking to expand my skills, I stay abreast of the latest frontend technologies and best practices.",
+          "With over 3 years of experience as a web developer, I specialize in crafting dynamic and responsive user interfaces using various technologies. Continuously seeking to expand my skills, I stay abreast of the latest frontend technologies and best practices.",
         visibility: true,
       },
       {
@@ -295,7 +295,7 @@ export const initialState: ResumeBuilderState = {
           {
             id: "Germany",
             value: "Germany",
-            level: "2",
+            level: "3",
           },
           {
             id: "Russian",
@@ -330,6 +330,32 @@ export const initialState: ResumeBuilderState = {
         ],
       },
       {
+        id: "Education",
+        label: "Education",
+        type: "Specification",
+        section: "Primary",
+        draggable: false,
+        visibility: true,
+        items: [
+          {
+            id: "Germany",
+            value: "Sprachkurs",
+            value2: "VHS",
+            value3: "Ulm",
+            startEnd: ["Feb-2024"],
+            description: `Ich studiere und praktiziere täglich die deutsche Sprache.`,
+          },
+          {
+            id: "Flutter-Dart",
+            value: "Active learning",
+            value2: "Flutter-Dart",
+            value3: "Kharkiv",
+            startEnd: ["Mar-2023", "Jul-2023"],
+            description: `Learned the basics of Dart and Flutter`,
+          },
+        ],
+      },
+      {
         id: "employmenthistory",
         label: "Employment History",
         type: "Specification",
@@ -342,7 +368,7 @@ export const initialState: ResumeBuilderState = {
             value: "Middle Frontend-Developer React",
             value2: "Lechner Soft",
             value3: "Kharkiv",
-            startEnd: ["Oct-2021", "Mar-2023"],
+            startEnd: ["Nov-2021", "Mar-2023"],
             description: `Responsibilities:
             • Plan and implement features from the scratch: create feature implementation design, split into tasks, control process.
             • Implemented new functional modules (components) for the existing pages and for the new implemented pages (from scratch) using React.
@@ -360,37 +386,16 @@ export const initialState: ResumeBuilderState = {
             value: "Junior-Middle Frontend-Developer React",
             value2: "Kontakt Home",
             value3: "Baku",
-            startEnd: ["Nov-2021", "Dec-2023"],
+            startEnd: ["Jun-2019", "Oct-2021"],
             description: `Responsibilities:
-            • Plan and implement features from the scratch: create feature implementation design, split into tasks, control process.
-            • Implemented new functional modules (components) for the existing pages and for the new implemented pages (from scratch) using React.
-            • Implemented REST API (from scratch).
-            • Wrote comprehensive tests for React components 
-            to ensure their functionality and performance.
-            • Participation in Code Review processes as a reviewer.
-            • Participation in Refactoring and Performance optimization parties.
-            • Created maintainable, cross browsers and reusing web pages using HTML/CSS features.
-            • Evaluated and became knowledgeable in new standards, technologies and trends in website development.
-            Used Skills: React, TypeScript, Scss Modules, Webpack, Redux-Toolkit, React-Hook-Form, React-Testing-Library, Jest, Ant-Design, Material UI.`,
-          },
-        ],
-      },
-      {
-        id: "Education",
-        label: "Education",
-        type: "Specification",
-        section: "Primary",
-        draggable: false,
-        visibility: false,
-        items: [
-          {
-            id: "Education",
-            value: "NTUXPI",
-            value2: "Higher education",
-            value3: "Kharkiv",
-            startEnd: ["Sep-2013", "Jun-2017"],
-            description: `Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo ipsa reiciendis ullam optio! Est, aut. Reiciendis, quidem soluta. Ratione harum illum incidunt in voluptas animi architecto fugit, quaerat odio accusamus!
-            `,
+            • Implementation of new classes (components) for existing pages and for new pages (from scratch).
+            • Implemented REST API.
+            • Created maintainable, cross browsers and reusing webpages
+            using HTML5/CSS3 features.
+            • Participation in Code Review processes.
+            • Participation in Refactoring and Performance optimization
+            parties.
+            Used Skills: Html, Scss, TypeScript, Webpack, JQuery, Jest, Bootstrap.`,
           },
         ],
       },
