@@ -31,7 +31,7 @@ export const initialState: ResumeBuilderState = {
       jobTitle: {
         id: "fixedData-3",
         label: "Wanted Job Title",
-        value: "Web Developer",
+        value: "Frontend Developer",
         fieldSize: 8,
         visibility: true,
         visitable: false,
@@ -55,7 +55,8 @@ export const initialState: ResumeBuilderState = {
       address: {
         id: "fixedData-8",
         label: "Address",
-        value: "Ludwig Str. 56",
+        // value: "Ludwig Str. 56",
+        value: "",
         fieldSize: 12,
         visibility: true,
         visitable: false,
@@ -63,7 +64,8 @@ export const initialState: ResumeBuilderState = {
       postalCode: {
         id: "fixedData-9",
         label: "Postal Code",
-        value: "89231",
+        // value: "89231",
+        value: "",
         fieldSize: 6,
         visibility: true,
         visitable: false,
@@ -79,9 +81,10 @@ export const initialState: ResumeBuilderState = {
       phone: {
         id: "fixedData-7",
         label: "Phone",
-        value: "+49 1717490736",
+        // value: "+49 1717490736",
+        value: "",
         fieldSize: 8,
-        visibility: true,
+        visibility: false,
         visitable: true,
       },
     },
@@ -209,7 +212,7 @@ export const initialState: ResumeBuilderState = {
         section: "Secondary",
         draggable: true,
         value:
-          "With over 3 years of experience as a web developer, I specialize in crafting dynamic and responsive user interfaces using various technologies. Continuously seeking to expand my skills, I stay abreast of the latest frontend technologies and best practices.",
+          "With over 3 years of experience as a frontend developer, I specialize in crafting dynamic and responsive user interfaces using technologies like React, TypeScript, and Redux. I am committed to continuous learning and staying updated with the latest trends in frontend development",
         visibility: true,
       },
       {

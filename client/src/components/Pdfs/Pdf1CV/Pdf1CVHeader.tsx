@@ -27,10 +27,10 @@ const Pdf1CVHeader: FC<Pdf1CVHeaderProps> = ({ form }) => {
             {fixedData.address.value + " "}
           </Text>
         </View>
-        <View style={styles.location}>
+        {/* <View style={styles.location}>
           <Image style={{ width: "12px" }} src={icons.post} />
           <Text>{fixedData.postalCode.value + " "}</Text>
-        </View>
+        </View> */}
         <View style={styles.location}>
           <Image style={{ width: "12px" }} src={icons.gmail} />
           <Text> {fixedData.email.value}</Text>
