@@ -81,10 +81,9 @@ export const initialState: ResumeBuilderState = {
       phone: {
         id: "fixedData-7",
         label: "Phone",
-        // value: "+49 1717490736",
-        value: "",
+        value: "+49 1717490736",
         fieldSize: 8,
-        visibility: false,
+        visibility: true,
         visitable: true,
       },
     },
