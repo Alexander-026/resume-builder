@@ -212,7 +212,7 @@ export const initialState: ResumeBuilderState = {
         section: "Secondary",
         draggable: true,
         value:
-          "With over 3 years of experience as a frontend developer, I specialize in crafting dynamic and responsive user interfaces using technologies like React, TypeScript, and Redux. I am committed to continuous learning and staying updated with the latest trends in frontend development",
+          "With over 4 years of experience as a frontend developer, I specialize in crafting dynamic and responsive user interfaces using technologies like React, TypeScript, and Redux. I am committed to continuous learning and staying updated with the latest trends in frontend development",
         visibility: true,
       },
       {
@@ -332,32 +332,32 @@ export const initialState: ResumeBuilderState = {
           },
         ],
       },
-      {
-        id: "Education",
-        label: "Education",
-        type: "Specification",
-        section: "Primary",
-        draggable: false,
-        visibility: true,
-        items: [
-          {
-            id: "Germany",
-            value: "Sprachkurs",
-            value2: "VHS",
-            value3: "Ulm",
-            startEnd: ["Feb-2024"],
-            description: `Ich studiere und praktiziere täglich die deutsche Sprache.`,
-          },
-          {
-            id: "Flutter-Dart",
-            value: "Active learning",
-            value2: "Flutter-Dart",
-            value3: "Kharkiv",
-            startEnd: ["Mar-2023", "Jul-2023"],
-            description: `Learned the basics of Dart and Flutter`,
-          },
-        ],
-      },
+      // {
+      //   id: "Education",
+      //   label: "Education",
+      //   type: "Specification",
+      //   section: "Primary",
+      //   draggable: false,
+      //   visibility: true,
+      //   items: [
+      //     {
+      //       id: "Germany",
+      //       value: "Sprachkurs",
+      //       value2: "VHS",
+      //       value3: "Ulm",
+      //       startEnd: ["Feb-2024"],
+      //       description: `Ich studiere und praktiziere täglich die deutsche Sprache.`,
+      //     },
+      //     {
+      //       id: "Flutter-Dart",
+      //       value: "Active learning",
+      //       value2: "Flutter-Dart",
+      //       value3: "Kharkiv",
+      //       startEnd: ["Mar-2023", "Jul-2023"],
+      //       description: `Learned the basics of Dart and Flutter`,
+      //     },
+      //   ],
+      // },
       {
         id: "employmenthistory",
         label: "Employment History",
@@ -366,6 +366,19 @@ export const initialState: ResumeBuilderState = {
         draggable: false,
         visibility: true,
         items: [
+          {
+            id: "Employment History1",
+            value: "Middle Frontend-Developer React",
+            value2: "Level99",
+            value3: "Kharkiv",
+            startEnd: ["Apr-2023", "Sep-2023"],
+            description: `
+            Responsibilities:
+            • Integrated Redux (TRK).
+            • Improved form functionality.
+            • Added new features to tables, optimized search and sorting.
+            Skills used: React, Apollo Client, TypeScript, SCSS Modules, React Hook Form, Redux Toolkit, Material UI.`,
+          },
           {
             id: "Employment History",
             value: "Middle Frontend-Developer React",
