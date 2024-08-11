@@ -259,6 +259,11 @@ export const initialState: ResumeBuilderState = {
             level: "5",
           },
           {
+            id: "MySQL",
+            value: "MySQL",
+            level: "5",
+          },
+          {
             id: "Express",
             value: "Express",
             level: "5",
