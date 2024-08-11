@@ -31,7 +31,7 @@ export const initialState: ResumeBuilderState = {
       jobTitle: {
         id: "fixedData-3",
         label: "Wanted Job Title",
-        value: "Frontend Developer",
+        value: "Frontend-Entwickler",
         fieldSize: 8,
         visibility: true,
         visitable: false,
@@ -81,10 +81,10 @@ export const initialState: ResumeBuilderState = {
       phone: {
         id: "fixedData-7",
         label: "Phone",
-        // value: "+49 1717490736",
-        value: "",
+        value: "+49 1717490736",
+        // value: "",
         fieldSize: 8,
-        visibility: false,
+        visibility: true,
         visitable: true,
       },
     },
@@ -207,17 +207,17 @@ export const initialState: ResumeBuilderState = {
     data: [
       {
         id: "About Me",
-        label: "About me",
+        label: "Über mich",
         type: "Description",
         section: "Secondary",
         draggable: true,
         value:
-          "With over 3 years of experience as a frontend developer, I specialize in crafting dynamic and responsive user interfaces using technologies like React, TypeScript, and Redux. I am committed to continuous learning and staying updated with the latest trends in frontend development",
+          "Mit über 3 Jahren Erfahrung als Frontend-Entwickler spezialisiere ich mich auf die Erstellung dynamischer und responsiver Benutzeroberflächen unter Verwendung von Technologien wie React, TypeScript und Redux. Ich bin engagiert in kontinuierlichem Lernen und halte mich über die neuesten Trends in der Frontend-Entwicklung auf dem Laufenden.",
         visibility: true,
       },
       {
         id: "Skills",
-        label: "Skills",
+        label: "Fähigkeiten",
         type: "Skills",
         section: "Secondary",
         draggable: true,
@@ -260,6 +260,11 @@ export const initialState: ResumeBuilderState = {
             level: "5",
           },
           {
+            id: "MySQL",
+            value: "MySQL",
+            level: "5",
+          },
+          {
             id: "Express",
             value: "Express",
             level: "5",
@@ -283,7 +288,7 @@ export const initialState: ResumeBuilderState = {
       },
       {
         id: "Languages",
-        label: "Languages",
+        label: "SPRACHEN",
         type: "Skills",
         section: "Secondary",
         draggable: true,
@@ -292,22 +297,22 @@ export const initialState: ResumeBuilderState = {
         items: [
           {
             id: "English",
-            value: "English",
+            value: "Englisch",
             level: "3",
           },
           {
             id: "Germany",
-            value: "Germany",
+            value: "Deutsch",
             level: "3",
           },
           {
             id: "Russian",
-            value: "Russian",
+            value: "Russisch",
             level: "5",
           },
           {
             id: "Turkish",
-            value: "Turkish",
+            value: "Türkisch",
             level: "5",
           },
         ],
@@ -325,16 +330,16 @@ export const initialState: ResumeBuilderState = {
             value: "Linkedin",
             link: "https://www.linkedin.com/in/alexander-bryndin-1127a4203/",
           },
-          {
-            id: "gggg",
-            value: "Github",
-            link: "https://github.com/Alexander-026/",
-          },
+          // {
+          //   id: "gggg",
+          //   value: "Github",
+          //   link: "https://github.com/Alexander-026/",
+          // },
         ],
       },
       {
         id: "Education",
-        label: "Education",
+        label: "Bildung",
         type: "Specification",
         section: "Primary",
         draggable: false,
@@ -345,60 +350,71 @@ export const initialState: ResumeBuilderState = {
             value: "Sprachkurs",
             value2: "VHS",
             value3: "Ulm",
-            startEnd: ["Feb-2024"],
-            description: `Ich studiere und praktiziere täglich die deutsche Sprache.`,
+            startEnd: ["Feb-2024", "Jul-2024"],
+            description: `Abgeschlossener B1-Kurs`,
           },
-          {
-            id: "Flutter-Dart",
-            value: "Active learning",
-            value2: "Flutter-Dart",
-            value3: "Kharkiv",
-            startEnd: ["Mar-2023", "Jul-2023"],
-            description: `Learned the basics of Dart and Flutter`,
-          },
+          // {
+          //   id: "Flutter-Dart",
+          //   value: "Active learning",
+          //   value2: "Flutter-Dart",
+          //   value3: "Kharkiv",
+          //   startEnd: ["Mar-2023", "Jul-2023"],
+          //   description: `Learned the basics of Dart and Flutter`,
+          // },
         ],
       },
       {
         id: "employmenthistory",
-        label: "Employment History",
+        label: "Berufserfahrung",
         type: "Specification",
         section: "Primary",
         draggable: false,
         visibility: true,
         items: [
           {
+            id: "Employment History1",
+            value: "Mittelstufe Frontend-Entwickler React",
+            value2: "Level99",
+            value3: "Kharkiv",
+            startEnd: ["Apr-2023", "Sep-2023"],
+            description: `
+            Verantwortlichkeiten:
+            • Redux (TRK) integriert.
+            • Die Funktionalität von Formularen verbessert.
+            • Neue Funktionen in Tabellen hinzugefügt, die Suche und Sortierung optimiert.
+            Verwendete Fähigkeiten: React, Apollo-Client, TypeScript, Scss Modules, React-Hook-Form,  Redux-Toolkit,  Material UI.`,
+          },
+          {
             id: "Employment History",
-            value: "Middle Frontend-Developer React",
+            value: "Mittelstufe Frontend-Entwickler React",
             value2: "Lechner Soft",
             value3: "Kharkiv",
             startEnd: ["Nov-2021", "Mar-2023"],
-            description: `Responsibilities:
-            • Plan and implement features from the scratch: create feature implementation design, split into tasks, control process.
-            • Implemented new functional modules (components) for the existing pages and for the new implemented pages (from scratch) using React.
-            • Implemented REST API (from scratch).
-            • Wrote comprehensive tests for React components 
-            to ensure their functionality and performance.
-            • Participation in Code Review processes as a reviewer.
-            • Participation in Refactoring and Performance optimization parties.
-            • Created maintainable, cross browsers and reusing web pages using HTML/CSS features.
-            • Evaluated and became knowledgeable in new standards, technologies and trends in website development.
-            Used Skills: React, TypeScript, Scss Modules, Webpack, Redux-Toolkit, React-Hook-Form, React-Testing-Library, Jest, Ant-Design, Material UI.`,
+            description: `
+            Verantwortlichkeiten:
+            • Planen und implementieren von Features von Grund auf: Erstellung von Implementierungsdesigns für Features, Aufteilung in Aufgaben, Prozesskontrolle.
+            • Neue funktionale Module (Komponenten) für bestehende und neu implementierte Seiten von Grund auf unter Verwendung von React implementiert.
+            • REST-API von Grund auf implementiert.
+            • Umfangreiche Tests für React-Komponenten geschrieben, um deren Funktionalität und Leistung sicherzustellen.
+            • Teilnahme an Code-Review-Prozessen als Reviewer.
+            • Teilnahme an Refactoring- und Performance-Optimierungspartys.
+            • Erstellen von wartbaren, browserübergreifenden und wiederverwendbaren Webseiten unter Verwendung von HTML/CSS-Features.
+            • Evaluierung und Aneignung von Wissen über neue Standards, Technologien und Trends in der Website-Entwicklung.
+            Verwendete Fähigkeiten: React, TypeScript, Scss Modules, Webpack, Redux-Toolkit, React-Hook-Form, React-Testing-Library, Jest, Ant-Design, Material UI.`,
           },
           {
             id: "Employment History2",
-            value: "Junior-Middle Frontend-Developer React",
+            value: "Junior-Mittelstufe Frontend-Entwickler React",
             value2: "Kontakt Home",
             value3: "Baku",
             startEnd: ["Jun-2019", "Oct-2021"],
-            description: `Responsibilities:
-            • Implementation of new classes (components) for existing pages and for new pages (from scratch).
-            • Implemented REST API.
-            • Created maintainable, cross browsers and reusing webpages
-            using HTML5/CSS3 features.
-            • Participation in Code Review processes.
-            • Participation in Refactoring and Performance optimization
-            parties.
-            Used Skills: Html, Scss, TypeScript, Webpack, JQuery, Jest, Bootstrap.`,
+            description: `Verantwortlichkeiten:
+            • Implementierung neuer Klassen (Komponenten) für bestehende Seiten und für neue Seiten von Grund auf.
+            • Implementierung einer REST-API.
+            • Erstellung wartbarer, browserübergreifender und wiederverwendbarer Webseiten mit HTML5/CSS3-Features.
+            • Teilnahme an Code-Review-Prozessen.
+            • Teilnahme an Refactoring- und Performance-Optimierungsmaßnahmen.
+            Verwendete Fähigkeiten: HTML, SCSS, TypeScript, Webpack, jQuery, Jest, Bootstrap.`,
           },
         ],
       },
