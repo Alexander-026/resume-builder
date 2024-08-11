@@ -212,7 +212,7 @@ export const initialState: ResumeBuilderState = {
         section: "Secondary",
         draggable: true,
         value:
-          "Mit über 3 Jahren Erfahrung als Frontend-Entwickler spezialisiere ich mich auf die Erstellung dynamischer und responsiver Benutzeroberflächen unter Verwendung von Technologien wie React, TypeScript und Redux. Ich bin engagiert in kontinuierlichem Lernen und halte mich über die neuesten Trends in der Frontend-Entwicklung auf dem Laufenden.",
+          "Mit über 4 Jahren Erfahrung als Frontend-Entwickler spezialisiere ich mich auf die Erstellung dynamischer und responsiver Benutzeroberflächen unter Verwendung von Technologien wie React, TypeScript und Redux. Ich bin engagiert in kontinuierlichem Lernen und halte mich über die neuesten Trends in der Frontend-Entwicklung auf dem Laufenden.",
         visibility: true,
       },
       {
