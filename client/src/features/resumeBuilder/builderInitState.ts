@@ -39,7 +39,7 @@ export const initialState: ResumeBuilderState = {
       country: {
         id: "fixedData-4",
         label: "Country",
-        value: "Germany",
+        value: "Ukraine",
         fieldSize: 6,
         visibility: true,
         visitable: false,
@@ -47,7 +47,7 @@ export const initialState: ResumeBuilderState = {
       city: {
         id: "fixedData-5",
         label: "City",
-        value: "Neu-Ulm",
+        value: "Kharkiv",
         fieldSize: 6,
         visibility: true,
         visitable: false,
@@ -83,7 +83,7 @@ export const initialState: ResumeBuilderState = {
         label: "Phone",
         value: "+49 1717490736",
         fieldSize: 8,
-        visibility: true,
+        visibility: false,
         visitable: true,
       },
     },
@@ -249,6 +249,11 @@ export const initialState: ResumeBuilderState = {
             level: "5",
           },
           {
+            id: "MobX",
+            value: "MobX",
+            level: "5",
+          },
+          {
             id: "GraphQL",
             value: "GraphQL",
             level: "5",
@@ -375,13 +380,13 @@ export const initialState: ResumeBuilderState = {
             value: "Middle Frontend-Developer React",
             value2: "Level99",
             value3: "Kharkiv",
-            startEnd: ["Apr-2023", "Sep-2023"],
+            startEnd: ["Apr-2023", "Aug-2024"],
             description: `
             Responsibilities:
             • Integrated Redux (TRK).
             • Improved form functionality.
             • Added new features to tables, optimized search and sorting.
-            Skills used: React, Apollo Client, TypeScript, SCSS Modules, React Hook Form, Redux Toolkit, Material UI.`,
+            Skills used: React, Apollo Client, TypeScript, SCSS Modules, React Hook Form, Redux Toolkit, MobX, Material UI.`,
           },
           {
             id: "Employment History",
