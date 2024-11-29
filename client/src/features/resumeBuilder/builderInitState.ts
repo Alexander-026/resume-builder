@@ -337,32 +337,32 @@ export const initialState: ResumeBuilderState = {
           // },
         ],
       },
-      {
-        id: "Education",
-        label: "Bildung",
-        type: "Specification",
-        section: "Primary",
-        draggable: false,
-        visibility: true,
-        items: [
-          {
-            id: "Germany",
-            value: "Sprachkurs",
-            value2: "VHS",
-            value3: "Ulm",
-            startEnd: ["Feb-2024", "Jul-2024"],
-            description: `Abgeschlossener B1-Kurs`,
-          },
-          // {
-          //   id: "Flutter-Dart",
-          //   value: "Active learning",
-          //   value2: "Flutter-Dart",
-          //   value3: "Kharkiv",
-          //   startEnd: ["Mar-2023", "Jul-2023"],
-          //   description: `Learned the basics of Dart and Flutter`,
-          // },
-        ],
-      },
+      // {
+      //   id: "Education",
+      //   label: "Bildung",
+      //   type: "Specification",
+      //   section: "Primary",
+      //   draggable: false,
+      //   visibility: false,
+      //   items: [
+      //     {
+      //       id: "Germany",
+      //       value: "Sprachkurs",
+      //       value2: "VHS",
+      //       value3: "Ulm",
+      //       startEnd: ["Feb-2024", "Jul-2024"],
+      //       description: `Abgeschlossener B1-Kurs`,
+      //     },
+      //     {
+      //       id: "Flutter-Dart",
+      //       value: "Active learning",
+      //       value2: "Flutter-Dart",
+      //       value3: "Kharkiv",
+      //       startEnd: ["Mar-2023", "Jul-2023"],
+      //       description: `Learned the basics of Dart and Flutter`,
+      //     },
+      //   ],
+      // },
       {
         id: "employmenthistory",
         label: "Berufserfahrung",
@@ -376,13 +376,13 @@ export const initialState: ResumeBuilderState = {
             value: "Mittelstufe Frontend-Entwickler React",
             value2: "Level99",
             value3: "Kharkiv",
-            startEnd: ["Apr-2023", "Sep-2023"],
+            startEnd: ["Apr-2023", "Sep-2024"],
             description: `
             Verantwortlichkeiten:
             • Redux (TRK) integriert.
             • Die Funktionalität von Formularen verbessert.
             • Neue Funktionen in Tabellen hinzugefügt, die Suche und Sortierung optimiert.
-            Verwendete Fähigkeiten: React, Apollo-Client, TypeScript, Scss Modules, React-Hook-Form,  Redux-Toolkit,  Material UI.`,
+            Verwendete Fähigkeiten: React, Apollo-Client GraphQL, TypeScript, Scss Modules, React-Hook-Form,  Redux-Toolkit,  Material UI.`,
           },
           {
             id: "Employment History",
@@ -400,7 +400,7 @@ export const initialState: ResumeBuilderState = {
             • Teilnahme an Refactoring- und Performance-Optimierungspartys.
             • Erstellen von wartbaren, browserübergreifenden und wiederverwendbaren Webseiten unter Verwendung von HTML/CSS-Features.
             • Evaluierung und Aneignung von Wissen über neue Standards, Technologien und Trends in der Website-Entwicklung.
-            Verwendete Fähigkeiten: React, TypeScript, Scss Modules, Webpack, Redux-Toolkit, React-Hook-Form, React-Testing-Library, Jest, Ant-Design, Material UI.`,
+            Verwendete Fähigkeiten: React, TypeScript, Scss Modules, Webpack, Apollo-Client GraphQL, Redux-Toolkit, React-Hook-Form, React-Testing-Library, Jest, Ant-Design, Material UI.`,
           },
           {
             id: "Employment History2",
