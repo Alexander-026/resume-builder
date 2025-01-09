@@ -31,7 +31,7 @@ export const initialState: ResumeBuilderState = {
       jobTitle: {
         id: "fixedData-3",
         label: "Wanted Job Title",
-        value: "Frontend-Entwickler",
+        value: "Fullstack-Developer",
         fieldSize: 8,
         visibility: true,
         visitable: false,
@@ -212,7 +212,7 @@ export const initialState: ResumeBuilderState = {
         section: "Secondary",
         draggable: true,
         value:
-          "Mit über 4 Jahren Erfahrung als Frontend-Entwickler spezialisiere ich mich auf die Erstellung dynamischer und responsiver Benutzeroberflächen unter Verwendung von Technologien wie React, TypeScript und Redux. Ich bin engagiert in kontinuierlichem Lernen und halte mich über die neuesten Trends in der Frontend-Entwicklung auf dem Laufenden.",
+          "Mit über 4 Jahren Erfahrung als Fullstack-Entwickler spezialisiere ich mich auf die Erstellung dynamischer und responsiver Benutzeroberflächen sowie die Entwicklung robuster Backend-Lösungen. Ich arbeite mit Technologien wie React, Next.js, TypeScript, Node.js und PostgreSQL und lege großen Wert auf die Integration moderner Tools wie Redux, Zustand und Redis. Durch meine Expertise in Next.js beherrsche ich sowohl serverseitiges Rendering (SSR) als auch statische Generierung (SSG), um leistungsstarke und SEO-optimierte Anwendungen zu erstellen. Ich bin engagiert in kontinuierlichem Lernen und halte mich über die neuesten Trends sowohl in der Frontend- als auch Backend-Entwicklung auf dem Laufenden, um End-to-End-Lösungen zu liefern.",
         visibility: true,
       },
       {
@@ -225,23 +225,18 @@ export const initialState: ResumeBuilderState = {
         showLevel: false,
         items: [
           {
-            id: "JavaScript",
-            value: "JavaScript",
-            level: "5",
-          },
-          {
             id: "TypeScript",
             value: "TypeScript",
             level: "5",
           },
           {
-            id: "Scss",
-            value: "Scss",
+            id: "React",
+            value: "React",
             level: "5",
           },
           {
-            id: "React",
-            value: "React",
+            id: "Next.js",
+            value: "Next.js",
             level: "5",
           },
           {
@@ -265,6 +260,11 @@ export const initialState: ResumeBuilderState = {
             level: "5",
           },
           {
+            id: "Redis",
+            value: "Redis",
+            level: "5",
+          },
+          {
             id: "Express",
             value: "Express",
             level: "5",
@@ -272,16 +272,6 @@ export const initialState: ResumeBuilderState = {
           {
             id: "Node JS",
             value: "Node JS",
-            level: "5",
-          },
-          {
-            id: "MUI",
-            value: "MUI",
-            level: "5",
-          },
-          {
-            id: "Ant Design",
-            value: "Ant Design",
             level: "5",
           },
         ],
@@ -373,16 +363,23 @@ export const initialState: ResumeBuilderState = {
         items: [
           {
             id: "Employment History1",
-            value: "Mittelstufe Frontend-Entwickler React",
+            value: "Mittelstufe Frontend-Entwickler React Node.js",
             value2: "Level99",
             value3: "Kharkiv",
-            startEnd: ["Apr-2023", "Sep-2024"],
+            startEnd: ["Apr-2023"],
             description: `
             Verantwortlichkeiten:
-            • Redux (TRK) integriert.
+            • Zustand integriert.
             • Die Funktionalität von Formularen verbessert.
             • Neue Funktionen in Tabellen hinzugefügt, die Suche und Sortierung optimiert.
-            Verwendete Fähigkeiten: React, Apollo-Client GraphQL, TypeScript, Scss Modules, React-Hook-Form,  Redux-Toolkit,  Material UI.`,
+            • Einstellung von Routing und Modalfenstern.
+            • Optimierung der Benutzeroberfläche, um eine bessere Benutzererfahrung zu gewährleisten.
+            • Integration externer APIs zur Verbesserung der Funktionalität der Anwendung.
+            • Unit- und End-to-End-Tests geschrieben und optimiert zur Sicherstellung der Code-Qualität.
+            • Verbesserung der Ladezeit von Seiten durch die Implementierung von partiellem Pre-Rendering (Partial Pre-Rendering).
+            • Hinzufügen von Lade-Skeletten zur Verbesserung der Benutzererfahrung bei der Datenverarbeitung.
+            
+            Verwendete Fähigkeiten: Next.js, Tailwind CSS, TypeScript, PostgreSQL, Prisma, Redis, Zustand`,
           },
           {
             id: "Employment History",
