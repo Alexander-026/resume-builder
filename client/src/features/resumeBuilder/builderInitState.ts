@@ -39,7 +39,7 @@ export const initialState: ResumeBuilderState = {
       country: {
         id: "fixedData-4",
         label: "Country",
-        value: "Ukraine",
+        value: "Germany",
         fieldSize: 6,
         visibility: true,
         visitable: false,
@@ -47,7 +47,7 @@ export const initialState: ResumeBuilderState = {
       city: {
         id: "fixedData-5",
         label: "City",
-        value: "Kharkiv",
+        value: "Neu-Ulm",
         fieldSize: 6,
         visibility: true,
         visitable: false,
@@ -211,7 +211,7 @@ export const initialState: ResumeBuilderState = {
         section: "Secondary",
         draggable: true,
         value:
-          "With over 4 years of experience as a frontend developer, I specialize in crafting dynamic and responsive user interfaces using technologies like React, TypeScript, and Redux. I am committed to continuous learning and staying updated with the latest trends in frontend development",
+          "With over 4 years of experience as a frontend developer, I specialize in crafting dynamic and responsive user interfaces using technologies like React, TypeScript,  Redux Toolkit and MUI. I am committed to continuous learning and staying updated with the latest trends in frontend development.",
         visibility: true,
       },
       {
@@ -244,6 +244,11 @@ export const initialState: ResumeBuilderState = {
             level: "5",
           },
           {
+            id: "Next.js",
+            value: "Next.js",
+            level: "5",
+          },
+          {
             id: "Redux (RTK)",
             value: "Redux (RTK)",
             level: "5",
@@ -259,8 +264,18 @@ export const initialState: ResumeBuilderState = {
             level: "5",
           },
           {
+            id: "Prisma",
+            value: "GraphQL",
+            level: "5",
+          },
+          {
             id: "MongoDB",
             value: "MongoDB",
+            level: "5",
+          },
+          {
+            id: "AWS",
+            value: "AWS",
             level: "5",
           },
           {
@@ -380,13 +395,14 @@ export const initialState: ResumeBuilderState = {
             value: "Middle Frontend-Developer React",
             value2: "Level99",
             value3: "Kharkiv",
-            startEnd: ["Apr-2023", "Aug-2024"],
+            startEnd: ["Apr-2023"],
             description: `
             Responsibilities:
-            • Integrated Redux (TRK).
-            • Improved form functionality.
-            • Added new features to tables, optimized search and sorting.
-            Skills used: React, Apollo Client, TypeScript, SCSS Modules, React Hook Form, Redux Toolkit, MobX, Material UI.`,
+            • Integration of Redux (RTK).
+            • Integration of Material UI.
+            • Enhanced form functionality using React Hook Form.
+            • Added new features to tables, including optimized search and sorting.
+            Skills utilized: React, Apollo Client, TypeScript, SCSS Modules, React Hook Form, Redux Toolkit, Material UI.`,
           },
           {
             id: "Employment History",
@@ -404,7 +420,7 @@ export const initialState: ResumeBuilderState = {
             • Participation in Refactoring and Performance optimization parties.
             • Created maintainable, cross browsers and reusing web pages using HTML/CSS features.
             • Evaluated and became knowledgeable in new standards, technologies and trends in website development.
-            Used Skills: React, TypeScript, Scss Modules, Webpack, Redux-Toolkit, React-Hook-Form, React-Testing-Library, Jest, Ant-Design, Material UI.`,
+            Skills utilized: React, TypeScript, Scss Modules, Webpack, Redux-Toolkit, React-Hook-Form, React-Testing-Library, Jest, Ant-Design, Material UI.`,
           },
           {
             id: "Employment History2",
@@ -420,7 +436,7 @@ export const initialState: ResumeBuilderState = {
             • Participation in Code Review processes.
             • Participation in Refactoring and Performance optimization
             parties.
-            Used Skills: Html, Scss, TypeScript, Webpack, JQuery, Jest, Bootstrap.`,
+            Skills utilized: Html, Scss, TypeScript, Webpack, JQuery, Jest, Bootstrap.`,
           },
         ],
       },
