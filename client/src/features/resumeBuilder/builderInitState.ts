@@ -211,7 +211,7 @@ export const initialState: ResumeBuilderState = {
         section: "Secondary",
         draggable: true,
         value:
-          "With over 4 years of experience as a frontend developer, I specialize in crafting dynamic and responsive user interfaces using technologies like React, TypeScript,  Redux Toolkit and MUI. I am committed to continuous learning and staying updated with the latest trends in frontend development.",
+          "With over 4 years of experience as a Fullstack Developer, I specialize in creating dynamic and responsive user interfaces as well as developing robust backend solutions. I work with technologies such as React, Next.js, TypeScript, Node.js, and PostgreSQL, placing a strong emphasis on integrating modern tools like Redux, Zustand, and Redis. Thanks to my expertise in Next.js, I am proficient in both server-side rendering (SSR) and static site generation (SSG) to build high-performance and SEO-optimized applications. I am dedicated to continuous learning and stay up-to-date with the latest trends in both frontend and backend development to deliver end-to-end solutions.",
         visibility: true,
       },
       {
