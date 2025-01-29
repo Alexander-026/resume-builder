@@ -31,7 +31,7 @@ export const initialState: ResumeBuilderState = {
       jobTitle: {
         id: "fixedData-3",
         label: "Wanted Job Title",
-        value: "Frontend Developer",
+        value: "Full-Stack Developer",
         fieldSize: 8,
         visibility: true,
         visitable: false,
@@ -224,18 +224,8 @@ export const initialState: ResumeBuilderState = {
         showLevel: false,
         items: [
           {
-            id: "JavaScript",
-            value: "JavaScript",
-            level: "5",
-          },
-          {
             id: "TypeScript",
             value: "TypeScript",
-            level: "5",
-          },
-          {
-            id: "Scss",
-            value: "Scss",
             level: "5",
           },
           {
@@ -259,6 +249,11 @@ export const initialState: ResumeBuilderState = {
             level: "5",
           },
           {
+            id: "Zustand",
+            value: "Zustand",
+            level: "5",
+          },
+          {
             id: "GraphQL",
             value: "GraphQL",
             level: "5",
@@ -266,6 +261,11 @@ export const initialState: ResumeBuilderState = {
           {
             id: "Prisma",
             value: "GraphQL",
+            level: "5",
+          },
+          {
+            id: "Redis",
+            value: "Redis",
             level: "5",
           },
           {
@@ -291,16 +291,6 @@ export const initialState: ResumeBuilderState = {
           {
             id: "Node JS",
             value: "Node JS",
-            level: "5",
-          },
-          {
-            id: "MUI",
-            value: "MUI",
-            level: "5",
-          },
-          {
-            id: "Ant Design",
-            value: "Ant Design",
             level: "5",
           },
         ],
@@ -392,17 +382,23 @@ export const initialState: ResumeBuilderState = {
         items: [
           {
             id: "Employment History1",
-            value: "Middle Frontend-Developer React",
+            value: "Middle Frontend-Developer React Node.js",
             value2: "Level99",
             value3: "Kharkiv",
             startEnd: ["Apr-2023"],
             description: `
-            Responsibilities:
-            • Integration of Redux (RTK).
-            • Integration of Material UI.
-            • Enhanced form functionality using React Hook Form.
-            • Added new features to tables, including optimized search and sorting.
-            Skills utilized: React, Apollo Client, TypeScript, SCSS Modules, React Hook Form, Redux Toolkit, Material UI.`,
+           Responsibilities:  
+          • Integrated Zustand for state management.  
+          • Improved form functionality.  
+          • Added new features to tables, optimized search and sorting.  
+          • Configured routing and modal windows.  
+          • Optimized the user interface to ensure a better user experience.  
+          • Integrated external APIs to enhance application functionality.  
+          • Wrote and optimized unit and end-to-end tests to ensure code quality.  
+          • Improved page load times by implementing partial pre-rendering.  
+          • Added loading skeletons to enhance user experience during data processing.  
+
+          Skills Used: Next.js, Tailwind CSS, TypeScript, PostgreSQL, Prisma, Redis, Zustand`,
           },
           {
             id: "Employment History",
