@@ -31,7 +31,7 @@ export const initialState: ResumeBuilderState = {
       jobTitle: {
         id: "fixedData-3",
         label: "Wanted Job Title",
-        value: "Fullstack-Developer",
+        value: "Frontend-Entwickler",
         fieldSize: 8,
         visibility: true,
         visitable: false,
@@ -211,8 +211,13 @@ export const initialState: ResumeBuilderState = {
         type: "Description",
         section: "Secondary",
         draggable: true,
-        value:
-          "Mit über 4 Jahren Erfahrung als Fullstack-Entwickler spezialisiere ich mich auf die Erstellung dynamischer und responsiver Benutzeroberflächen sowie die Entwicklung robuster Backend-Lösungen. Ich arbeite mit Technologien wie React, Next.js, TypeScript, Node.js und PostgreSQL und lege großen Wert auf die Integration moderner Tools wie Redux, Zustand und Redis. Durch meine Expertise in Next.js beherrsche ich sowohl serverseitiges Rendering (SSR) als auch statische Generierung (SSG), um leistungsstarke und SEO-optimierte Anwendungen zu erstellen. Ich bin engagiert in kontinuierlichem Lernen und halte mich über die neuesten Trends sowohl in der Frontend- als auch Backend-Entwicklung auf dem Laufenden, um End-to-End-Lösungen zu liefern.",
+        value: `Mit über 4 Jahren Erfahrung als Frontend-Entwickler spezialisiere ich mich auf die Entwicklung skalierbarer und leistungsstarker Webanwendungen. Meine Expertise liegt in der Erstellung dynamischer, responsiver Benutzeroberflächen sowie der Optimierung der Frontend-Performance. Zudem verfüge ich über Erfahrung in der Backend-Entwicklung, wodurch ich Full-Stack-Lösungen realisieren kann.
+
+Ich arbeite mit React, Next.js, TypeScript, Node.js und PostgreSQL und lege besonderen Wert auf sauberen, wartbaren und effizienten Code. Zur Verwaltung des Applikationszustands nutze ich Tools wie Redux und Zustand, um einen reibungslosen Datenfluss und eine hohe Skalierbarkeit der Anwendung zu gewährleisten. Darüber hinaus habe ich Erfahrung in der Optimierung der Datenverarbeitung und Caching-Mechanismen mit Redis zur Leistungssteigerung.
+
+Dank meiner fundierten Kenntnisse in Next.js setze ich serverseitiges Rendering (SSR) und statische Seitengenerierung (SSG) gezielt ein, um die Performance und Suchmaschinenoptimierung (SEO) zu verbessern. Meine Erfahrung umfasst die Arbeit mit RESTful- und GraphQL-APIs, die Beschleunigung von Anwendungen sowie die Implementierung bewährter Methoden der modernen Webentwicklung.
+
+Ich lege großen Wert auf kontinuierliches Lernen und halte mich stets über die neuesten Entwicklungen im Frontend- und Backend-Bereich auf dem Laufenden, um robuste, skalierbare und benutzerfreundliche Lösungen bereitzustellen.`,
         visibility: true,
       },
       {
@@ -369,17 +374,25 @@ export const initialState: ResumeBuilderState = {
             startEnd: ["Apr-2023"],
             description: `
             Verantwortlichkeiten:
-            • Zustand integriert.
-            • Die Funktionalität von Formularen verbessert.
-            • Neue Funktionen in Tabellen hinzugefügt, die Suche und Sortierung optimiert.
-            • Einstellung von Routing und Modalfenstern.
-            • Optimierung der Benutzeroberfläche, um eine bessere Benutzererfahrung zu gewährleisten.
-            • Integration externer APIs zur Verbesserung der Funktionalität der Anwendung.
-            • Unit- und End-to-End-Tests geschrieben und optimiert zur Sicherstellung der Code-Qualität.
-            • Verbesserung der Ladezeit von Seiten durch die Implementierung von partiellem Pre-Rendering (Partial Pre-Rendering).
-            • Hinzufügen von Lade-Skeletten zur Verbesserung der Benutzererfahrung bei der Datenverarbeitung.
-            
-            Verwendete Fähigkeiten: Next.js, Tailwind CSS, TypeScript, PostgreSQL, Prisma, Redis, Zustand`,
+• Integrierte Zustand und MobX für ein effizientes State-Management, wodurch die Anwendungsreaktionsfähigkeit und Wartbarkeit verbessert wurden.
+• Verbesserte die Formularfunktionalität, insbesondere die Validierung und Verarbeitung von Benutzereingaben.
+• Erweiterte Tabellenfunktionen, einschließlich optimierter Suche, Filterung und Sortierung.
+• Konfigurierte Routing und Modalfenster für eine nahtlose Benutzererfahrung.
+• Optimierte die Benutzeroberfläche, um die Benutzerfreundlichkeit und Barrierefreiheit zu verbessern.
+• Integrierte externe APIs zur Erweiterung der Anwendungsfunktionen.
+• Entwickelte und optimierte Unit- und End-to-End-Tests, um eine hohe Codequalität sicherzustellen.
+• Reduzierte die Ladezeiten von Seiten durch Implementierung von partiellem Pre-Rendering und Code-Splitting.
+• Fügte Lade-Skelette hinzu, um eine flüssigere Benutzererfahrung während der Datenverarbeitung zu gewährleisten.
+
+Erfolge:
+• Refaktorierte das State-Management mit Zustand und MobX, wodurch unnötige Re-Renderings reduziert und die Performance verbessert wurden.
+• Optimierte Tabellenfunktionen, was die Such- und Sortiergeschwindigkeit erheblich steigerte.
+• Verbesserte Testabdeckung und Stabilität, wodurch die Anzahl der Fehler nach Releases reduziert wurde.
+• Erhöhte die Reaktionsfähigkeit der Benutzeroberfläche, was die allgemeine Benutzererfahrung verbesserte.
+• Optimierte API-Anfragen und Caching-Strategien, wodurch die Ladezeiten von Daten reduziert wurden.
+• Erfolgreich Redis integriert, um das Caching und die Performance zu verbessern.
+
+Eingesetzte Technologien: Next.js, Tailwind CSS, TypeScript, PostgreSQL, Prisma, Redis, Zustand, MobX`,
           },
           {
             id: "Employment History",
@@ -388,16 +401,25 @@ export const initialState: ResumeBuilderState = {
             value3: "Kharkiv",
             startEnd: ["Nov-2021", "Mar-2023"],
             description: `
-            Verantwortlichkeiten:
-            • Planen und implementieren von Features von Grund auf: Erstellung von Implementierungsdesigns für Features, Aufteilung in Aufgaben, Prozesskontrolle.
-            • Neue funktionale Module (Komponenten) für bestehende und neu implementierte Seiten von Grund auf unter Verwendung von React implementiert.
-            • REST-API von Grund auf implementiert.
-            • Umfangreiche Tests für React-Komponenten geschrieben, um deren Funktionalität und Leistung sicherzustellen.
-            • Teilnahme an Code-Review-Prozessen als Reviewer.
-            • Teilnahme an Refactoring- und Performance-Optimierungspartys.
-            • Erstellen von wartbaren, browserübergreifenden und wiederverwendbaren Webseiten unter Verwendung von HTML/CSS-Features.
-            • Evaluierung und Aneignung von Wissen über neue Standards, Technologien und Trends in der Website-Entwicklung.
-            Verwendete Fähigkeiten: React, TypeScript, Scss Modules, Webpack, Apollo-Client GraphQL, Redux-Toolkit, React-Hook-Form, React-Testing-Library, Jest, Ant-Design, Material UI.`,
+           Verantwortlichkeiten:
+• Geplante und implementierte Funktionen von Grund auf: Konzipierte die Feature-Implementierung, teilte Aufgaben auf und überwachte den Entwicklungsprozess.
+• Entwickelte neue funktionale Module (Komponenten) für bestehende und neu implementierte Seiten mit React.
+• Entwarf und integrierte REST-API-Endpunkte von Grund auf.
+• Schrieb umfassende Tests für React-Komponenten, um deren Funktionalität und Performance sicherzustellen.
+• Führte Code-Reviews als Reviewer durch, um hohe Qualitätsstandards zu gewährleisten.
+• Beteiligte mich an Refactoring- und Performance-Optimierungsinitiativen.
+• Erstellte wartbare, cross-browser-kompatible und wiederverwendbare Webseiten unter Verwendung von HTML/CSS-Technologien.
+• Recherchierte und übernahm neue Standards, Technologien und Trends in der Frontend-Entwicklung.
+
+Erfolge:
+• Leitete die Entwicklung eines kritischen Projektfeatures, das die Benutzererfahrung erheblich verbesserte und Kundenbeschwerden reduzierte.
+• Refaktorierte Legacy-Code, wodurch die Wartbarkeit der Anwendung verbessert und technische Schulden reduziert wurden.
+• Optimierte die Performance durch effizienteres Rendering von Komponenten und die Reduzierung unnötiger Re-Renderings.
+• Implementierte Best Practices im Testing, verbesserte die Testabdeckung und reduzierte Fehler nach der Veröffentlichung.
+• Entwickelte wiederverwendbare UI-Komponenten, wodurch die Feature-Entwicklung beschleunigt und das Design konsistenter wurde.
+• Erfolgreich neue Tools und Technologien (React-Hook-Form, React-Testing-Library) eingeführt und integriert, um die Entwicklungseffizienz zu steigern.
+
+Eingesetzte Technologien: React, TypeScript, SCSS Modules, Webpack, Redux-Toolkit, React-Hook-Form, React-Testing-Library, Jest, Ant Design, Material UI.`,
           },
           {
             id: "Employment History2",
@@ -406,12 +428,23 @@ export const initialState: ResumeBuilderState = {
             value3: "Baku",
             startEnd: ["Jun-2019", "Oct-2021"],
             description: `Verantwortlichkeiten:
-            • Implementierung neuer Klassen (Komponenten) für bestehende Seiten und für neue Seiten von Grund auf.
-            • Implementierung einer REST-API.
-            • Erstellung wartbarer, browserübergreifender und wiederverwendbarer Webseiten mit HTML5/CSS3-Features.
-            • Teilnahme an Code-Review-Prozessen.
-            • Teilnahme an Refactoring- und Performance-Optimierungsmaßnahmen.
-            Verwendete Fähigkeiten: HTML, SCSS, TypeScript, Webpack, jQuery, Jest, Bootstrap.`,
+• Entwickelte und wartete wiederverwendbare React-Komponenten sowohl für bestehende als auch für neue Seiten von Grund auf.
+• Integrierte REST-API-Endpunkte und optimierte Datenabrufstrategien mit Redux.
+• Sicherstellte Cross-Browser-Kompatibilität und Barrierefreiheits-Compliance in Webanwendungen.
+• Refaktorierte Legacy-Code zur Verbesserung der Wartbarkeit, Performance und Skalierbarkeit.
+• Führte Code-Reviews durch und nahm daran teil, um hohe Codequalität und Best Practices zu gewährleisten.
+• Arbeitete eng mit Designern, Backend-Entwicklern und QA-Ingenieuren zusammen, um die UI/UX zu verbessern und Benutzerworkflows zu optimieren.
+• Implementierte Unit- und Integrationstests mit Jest, um die Stabilität der Anwendung zu erhöhen.
+
+Erfolge:
+• Optimierte das Rendering von React-Komponenten, was zu schnelleren Ladezeiten und verbesserter Performance führte.
+• Refaktorierte das State-Management durch die Ablösung veralteter Redux-Muster, wodurch unnötige Re-Renderings reduziert wurden.
+• Leitete die Entwicklung einer wiederverwendbaren UI-Komponentenbibliothek, die die Feature-Entwicklung beschleunigte.
+• Verbesserte die Testabdeckung, wodurch Produktionsfehler reduziert und die Zuverlässigkeit der Anwendung erhöht wurden.
+• Steigerte die Benutzerfreundlichkeit durch verbesserte UI-Konsistenz und Barrierefreiheit, was zu weniger Nutzerbeschwerden führte.
+• Erfolgreich ein Projekt von JavaScript auf TypeScript migriert, wodurch die Typensicherheit und Wartbarkeit verbessert wurden.
+
+Eingesetzte Technologien: React, TypeScript, React-Router-Dom, Redux, Jest, Material-UI, SCSS Modules.`,
           },
         ],
       },
