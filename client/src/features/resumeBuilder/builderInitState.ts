@@ -393,26 +393,26 @@ export const initialState: ResumeBuilderState = {
             value3: "Remote",
             startEnd: ["Apr-2023"],
             description: `
-            Responsibilities:  
-            • Integrated Zustand for efficient state management and improved application responsiveness.  
-            • Enhanced form functionality, improving validation and user input handling.  
-            • Added new features to tables, including optimized search, filtering, and sorting.  
-            • Configured routing and modal windows for a seamless user experience.  
-            • Optimized the user interface to ensure better usability and accessibility.  
-            • Integrated external APIs to extend application capabilities.  
-            • Wrote and optimized unit and end-to-end tests to maintain high code quality.  
-            • Improved page load times by implementing partial pre-rendering and code-splitting.  
-            • Added loading skeletons to provide a smoother user experience during data processing.  
-          
-            Achievements:  
-            • Refactored state management using Zustand, reducing unnecessary re-renders and improving performance.  
-            • Implemented table optimizations, significantly improving search and sorting speed.  
-            • Improved test coverage and stability, reducing post-release bugs.  
-            • Enhanced UI responsiveness, leading to a better overall user experience.  
-            • Optimized API requests and caching strategies, reducing data fetching time.  
-            • Successfully integrated Redis for improved data caching and performance.  
-          
-            Skills Used: Next.js, Tailwind CSS, TypeScript, PostgreSQL, Prisma, Redis, Zustand`,
+            Responsibilities:
+• Integrated Zustand and MobX for efficient state management, improving application responsiveness and maintainability.
+• Enhanced form functionality, improving validation and user input handling.
+• Added new features to tables, including optimized search, filtering, and sorting.
+• Configured routing and modal windows for a seamless user experience.
+• Optimized the user interface to ensure better usability and accessibility.
+• Integrated external APIs to extend application capabilities.
+• Wrote and optimized unit and end-to-end tests to maintain high code quality.
+• Improved page load times by implementing partial pre-rendering and code-splitting.
+• Added loading skeletons to provide a smoother user experience during data processing.
+
+Achievements:
+• Refactored state management using Zustand and MobX, reducing unnecessary re-renders and improving performance.
+• Implemented table optimizations, significantly improving search and sorting speed.
+• Improved test coverage and stability, reducing post-release bugs.
+• Enhanced UI responsiveness, leading to a better overall user experience.
+• Optimized API requests and caching strategies, reducing data fetching time.
+• Successfully integrated Redis for improved data caching and performance.
+
+Skills Used: Next.js, Tailwind CSS, TypeScript, PostgreSQL, Prisma, Redis, Zustand, MobX`,
           },
           {
             id: "Employment History",
