@@ -31,7 +31,7 @@ export const initialState: ResumeBuilderState = {
       jobTitle: {
         id: "fixedData-3",
         label: "Wanted Job Title",
-        value: "Full-Stack Developer",
+        value: "FrontEnd Developer",
         fieldSize: 8,
         visibility: true,
         visitable: false,
@@ -210,8 +210,14 @@ export const initialState: ResumeBuilderState = {
         type: "Description",
         section: "Secondary",
         draggable: true,
-        value:
-          "With over 4 years of experience as a Fullstack Developer, I specialize in creating dynamic and responsive user interfaces as well as developing robust backend solutions. I work with technologies such as React, Next.js, TypeScript, Node.js, and PostgreSQL, placing a strong emphasis on integrating modern tools like Redux, Zustand, and Redis. Thanks to my expertise in Next.js, I am proficient in both server-side rendering (SSR) and static site generation (SSG) to build high-performance and SEO-optimized applications. I am dedicated to continuous learning and stay up-to-date with the latest trends in both frontend and backend development to deliver end-to-end solutions.",
+        value: `With over 4 years of experience as a Frontend Developer, I specialize in building scalable and high-performance web applications. My expertise lies in developing dynamic, responsive user interfaces and optimizing frontend performance. Additionally, I have experience with backend development, allowing me to create full-stack solutions.
+
+        I work with React, Next.js, TypeScript, Node.js, and PostgreSQL, focusing on delivering clean, maintainable, and efficient code. I manage application state using tools like Redux and Zustand, ensuring smooth data flow and scalability across the application. Additionally, I have experience optimizing data handling and caching with Redis to enhance performance.
+
+        With deep knowledge of Next.js, I effectively utilize server-side rendering (SSR) and static site generation (SSG) to enhance performance and SEO. My experience includes working with RESTful and GraphQL APIs, improving application speed, and implementing best practices for modern web development.
+
+        I am committed to continuous learning and staying up-to-date with the latest trends in both frontend and backend development, ensuring that I deliver robust, scalable, and user-friendly solutions.
+`,
         visibility: true,
       },
       {
@@ -260,7 +266,7 @@ export const initialState: ResumeBuilderState = {
           },
           {
             id: "Prisma",
-            value: "GraphQL",
+            value: "Prisma",
             level: "5",
           },
           {
@@ -339,11 +345,11 @@ export const initialState: ResumeBuilderState = {
             value: "Linkedin",
             link: "https://www.linkedin.com/in/alexander-bryndin-1127a4203/",
           },
-          {
-            id: "gggg",
-            value: "Github",
-            link: "https://github.com/Alexander-026/",
-          },
+          // {
+          //   id: "gggg",
+          //   value: "Github",
+          //   link: "https://github.com/Alexander-026/",
+          // },
         ],
       },
       // {
@@ -384,21 +390,29 @@ export const initialState: ResumeBuilderState = {
             id: "Employment History1",
             value: "Middle Frontend-Developer React Node.js",
             value2: "Level99",
-            value3: "Kharkiv",
+            value3: "Remote",
             startEnd: ["Apr-2023"],
             description: `
-           Responsibilities:  
-          • Integrated Zustand for state management.  
-          • Improved form functionality.  
-          • Added new features to tables, optimized search and sorting.  
-          • Configured routing and modal windows.  
-          • Optimized the user interface to ensure a better user experience.  
-          • Integrated external APIs to enhance application functionality.  
-          • Wrote and optimized unit and end-to-end tests to ensure code quality.  
-          • Improved page load times by implementing partial pre-rendering.  
-          • Added loading skeletons to enhance user experience during data processing.  
-
-          Skills Used: Next.js, Tailwind CSS, TypeScript, PostgreSQL, Prisma, Redis, Zustand`,
+            Responsibilities:  
+            • Integrated Zustand for efficient state management and improved application responsiveness.  
+            • Enhanced form functionality, improving validation and user input handling.  
+            • Added new features to tables, including optimized search, filtering, and sorting.  
+            • Configured routing and modal windows for a seamless user experience.  
+            • Optimized the user interface to ensure better usability and accessibility.  
+            • Integrated external APIs to extend application capabilities.  
+            • Wrote and optimized unit and end-to-end tests to maintain high code quality.  
+            • Improved page load times by implementing partial pre-rendering and code-splitting.  
+            • Added loading skeletons to provide a smoother user experience during data processing.  
+          
+            Achievements:  
+            • Refactored state management using Zustand, reducing unnecessary re-renders and improving performance.  
+            • Implemented table optimizations, significantly improving search and sorting speed.  
+            • Improved test coverage and stability, reducing post-release bugs.  
+            • Enhanced UI responsiveness, leading to a better overall user experience.  
+            • Optimized API requests and caching strategies, reducing data fetching time.  
+            • Successfully integrated Redis for improved data caching and performance.  
+          
+            Skills Used: Next.js, Tailwind CSS, TypeScript, PostgreSQL, Prisma, Redis, Zustand`,
           },
           {
             id: "Employment History",
@@ -407,32 +421,49 @@ export const initialState: ResumeBuilderState = {
             value3: "Kharkiv",
             startEnd: ["Nov-2021", "Mar-2023"],
             description: `Responsibilities:
-            • Plan and implement features from the scratch: create feature implementation design, split into tasks, control process.
-            • Implemented new functional modules (components) for the existing pages and for the new implemented pages (from scratch) using React.
-            • Implemented REST API (from scratch).
-            • Wrote comprehensive tests for React components 
-            to ensure their functionality and performance.
-            • Participation in Code Review processes as a reviewer.
-            • Participation in Refactoring and Performance optimization parties.
-            • Created maintainable, cross browsers and reusing web pages using HTML/CSS features.
-            • Evaluated and became knowledgeable in new standards, technologies and trends in website development.
-            Skills utilized: React, TypeScript, Scss Modules, Webpack, Redux-Toolkit, React-Hook-Form, React-Testing-Library, Jest, Ant-Design, Material UI.`,
+            • Planned and implemented features from scratch: designed feature implementation, split tasks, and controlled the development process.
+            • Developed new functional modules (components) for both existing and newly implemented pages using React.
+            • Designed and integrated REST API endpoints from scratch.
+            • Wrote comprehensive tests for React components to ensure their functionality and performance.
+            • Conducted code reviews as a reviewer to maintain high-quality standards.
+            • Participated in refactoring and performance optimization initiatives.
+            • Created maintainable, cross-browser, and reusable web pages using HTML/CSS features.
+            • Researched and adopted new standards, technologies, and trends in frontend development.
+          
+            Achievements:
+            • Led the development of a critical project feature that significantly improved user experience and reduced customer complaints.
+            • Refactored legacy code, improving application maintainability and reducing technical debt.
+            • Enhanced performance by optimizing component rendering and reducing unnecessary re-renders.
+            • Implemented best practices in testing, improving overall test coverage and reducing post-release bugs.
+            • Developed reusable UI components, accelerating feature development and improving design consistency.
+            • Successfully introduced and integrated new tools and technologies (React-Hook-Form, React-Testing-Library) to improve development efficiency.
+            
+            Skills utilized: React, TypeScript, SCSS Modules, Webpack, Redux-Toolkit, React-Hook-Form, React-Testing-Library, Jest, Ant-Design, Material UI.`,
           },
           {
             id: "Employment History2",
             value: "Junior-Middle Frontend-Developer React",
-            value2: "Kontakt Home",
-            value3: "Baku",
+            value2: "LeverX",
+            value3: "Remote",
             startEnd: ["Jun-2019", "Oct-2021"],
             description: `Responsibilities:
-            • Implementation of new classes (components) for existing pages and for new pages (from scratch).
-            • Implemented REST API.
-            • Created maintainable, cross browsers and reusing webpages
-            using HTML5/CSS3 features.
-            • Participation in Code Review processes.
-            • Participation in Refactoring and Performance optimization
-            parties.
-            Skills utilized: Html, Scss, TypeScript, Webpack, JQuery, Jest, Bootstrap.`,
+            • Developed and maintained reusable React components for both existing and new pages from scratch.
+            • Integrated REST API endpoints and optimized data fetching strategies using Redux.
+            • Ensured cross-browser compatibility and accessibility compliance in web applications.
+            • Refactored legacy code to improve maintainability, performance, and scalability.
+            • Conducted and participated in code reviews to maintain high code quality and best practices.
+            • Collaborated with designers, backend developers, and QA engineers to enhance UI/UX and optimize user workflows.
+            • Implemented unit and integration tests using Jest to improve application stability.
+          
+            Achievements:
+            • Optimized React component rendering, leading to faster page load times and improved performance.
+            • Refactored state management by replacing outdated Redux patterns, resulting in fewer unnecessary re-renders.
+            • Led the development of a reusable UI component library, accelerating feature development.
+            • Improved test coverage, reducing production bugs and increasing app reliability.
+            • Enhanced the user experience by improving UI consistency and accessibility, leading to fewer user complaints.
+            • Successfully migrated a project from JavaScript to TypeScript, improving type safety and maintainability.
+            
+            Skills utilized: React, TypeScript, React-Router-Dom, Redux, Jest, Material-UI, SCSS Modules.`,
           },
         ],
       },

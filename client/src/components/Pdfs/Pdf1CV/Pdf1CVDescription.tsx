@@ -11,7 +11,7 @@ const Pdf1CVDescription: FC<Pdf1DescriptionProps> = ({ form, dataItem }) => {
   const styles = StyleSheet.create({
     heading: {
       marginBottom: "26px",
-      paddingHorizontal: "20px",
+      paddingHorizontal: "10px",
     },
     headingTitle: {
       fontSize: "12px",

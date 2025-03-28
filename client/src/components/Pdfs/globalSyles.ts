@@ -40,7 +40,6 @@ export const globalStyles = (form: IForm) => {
       backgroundColor: form.bgLeftSection,
       paddingHorizontal: "20px",
       color: form.colorLeftSection,
-      border: "1px solid black",
     },
     fullName: {
       fontSize: "26px",

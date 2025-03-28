@@ -12,7 +12,7 @@ const Pdf1CVList: FC<Pdf1CVListPRops> = ({ form, dataItem }) => {
     items: {
       width: "100%",
       marginBottom: "20px",
-      paddingHorizontal: "20px",
+      paddingHorizontal: "10px",
     },
     itemsTitle: {
       fontWeight: "bold",
