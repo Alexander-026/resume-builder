@@ -316,8 +316,8 @@ export const initialState: ResumeBuilderState = {
             level: "3",
           },
           {
-            id: "Germany",
-            value: "Germany",
+            id: "German",
+            value: "German",
             level: "3",
           },
           {

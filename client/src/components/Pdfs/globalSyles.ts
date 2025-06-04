@@ -83,6 +83,7 @@ export const globalStyles = (form: IForm) => {
     items: {
       width: "100%",
       marginBottom: "20px",
+      paddingVertical:  "16px",
     },
     itemsTitle: {
       fontWeight: "bold",
