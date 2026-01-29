@@ -67,11 +67,11 @@ const Pdf1CVSpecification: FC<Pdf1CVHeaderProps> = ({ form, dataItem }) => {
             <Text style={styles.text}>
               {item.startEnd?.[0]
                 ? `${dayjs(item.startEnd?.[0], "MMM-YYYY").format(
-                    "MMM-YYYY",
+                    "MM/YYYY",
                   )} - `
                 : ""}
               {item.startEnd?.[1]
-                ? dayjs(item.startEnd?.[1], "MMM-YYYY").format("MMM-YYYY")
+                ? dayjs(item.startEnd?.[1], "MMM-YYYY").format("MM/YYYY")
                 : `${item.startEnd?.[0] ? "Present" : ""}`}
             </Text>
           </View>

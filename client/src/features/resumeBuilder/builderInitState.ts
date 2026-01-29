@@ -326,32 +326,50 @@ export const initialState: ResumeBuilderState = {
           // },
         ],
       },
-      // {
-      //   id: "Education",
-      //   label: "Bildung",
-      //   type: "Specification",
-      //   section: "Primary",
-      //   draggable: false,
-      //   visibility: false,
-      //   items: [
-      //     {
-      //       id: "Germany",
-      //       value: "Sprachkurs",
-      //       value2: "VHS",
-      //       value3: "Ulm",
-      //       startEnd: ["Feb-2024", "Jul-2024"],
-      //       description: `Abgeschlossener B1-Kurs`,
-      //     },
-      //     {
-      //       id: "Flutter-Dart",
-      //       value: "Active learning",
-      //       value2: "Flutter-Dart",
-      //       value3: "Kharkiv",
-      //       startEnd: ["Mar-2023", "Jul-2023"],
-      //       description: `Learned the basics of Dart and Flutter`,
-      //     },
-      //   ],
-      // },
+      {
+        id: "Education",
+        label: "Bildungsweg",
+        type: "Specification",
+        section: "Primary",
+        draggable: false,
+        visibility: true,
+        items: [
+          // {
+          //   id: "B2",
+          //   value: "Sprachkurs",
+          //   value2: "VHS",
+          //   value3: "Ulm",
+          //   startEnd: ["Oct-2025", "Mar-2026"],
+          //   description: `Abgeschlossener B2-Beruf-Kurs`,
+          // },
+          {
+            id: "B1",
+            value: "Sprachkurs",
+            value2: "VHS",
+            value3: "Ulm",
+            startEnd: ["Feb-2024", "Jul-2024"],
+            description: `Abgeschlossener B2-Beruf-Kurs`,
+          },
+          {
+            id: "STEP IT Academy Azerbaijan",
+            value: "Softwareentwicklung",
+            value2: "STEP IT Academy Azerbaijan",
+            value3: "Baku",
+            startEnd: ["Mar-2018", "Dec-2018"],
+            description: `Absolvent des Studiengangs:
+
+Front-end `,
+          },
+          {
+            id: "Kharkiv",
+            value: "Sportwissenschaft / Körperliche Erziehung",
+            value2: "KhDAFK",
+            value3: "Charkiw",
+            startEnd: ["Sep-2013", "Sep-2015"],
+            description: `Nicht abgeschlossenes.`,
+          },
+        ],
+      },
       {
         id: "employmenthistory",
         label: "Berufserfahrung",
@@ -364,7 +382,7 @@ export const initialState: ResumeBuilderState = {
             id: "Employment History1",
             value: "Mittelstufe Frontend-Entwickler React Node.js",
             value2: "Level99",
-            value3: "Kharkiv",
+            value3: "Kharkiw",
             startEnd: ["Apr-2023"],
             description: `
             Verantwortlichkeiten:
@@ -392,7 +410,7 @@ export const initialState: ResumeBuilderState = {
             id: "Employment History",
             value: "Mittelstufe Frontend-Entwickler React",
             value2: "Lechner Soft",
-            value3: "Kharkiv",
+            value3: "Kharkiw",
             startEnd: ["Nov-2021", "Mar-2023"],
             description: `
             Verantwortlichkeiten:
