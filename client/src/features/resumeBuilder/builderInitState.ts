@@ -176,7 +176,7 @@ export const initialState: ResumeBuilderState = {
       email: {
         id: "email",
         label: "Email",
-        value: "alexanderbrendin@gmail.com",
+        value: "alexanderbrendin@gmail.commm",
         fieldSize: 16,
         type: "text",
       },
