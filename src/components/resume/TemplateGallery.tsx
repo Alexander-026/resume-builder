@@ -92,13 +92,10 @@ export function TemplateGallery() {
   const activeTemplate = useResumeStore((s) => s.activeTemplate)
   const setTemplate = useResumeStore((s) => s.setTemplate)
 
-  const apiRef = React.useRef<CarouselApi>(undefined)
   const [api, setApi] = React.useState<CarouselApi>(undefined)
   const [current, setCurrent] = React.useState(0)
   const [canScrollPrev, setCanScrollPrev] = React.useState(false)
   const [canScrollNext, setCanScrollNext] = React.useState(false)
-
-  void apiRef
 
   React.useEffect(() => {
     if (!api) return

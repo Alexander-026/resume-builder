@@ -242,3 +242,21 @@
   color: #444444;
   line-height: 1.65;
 }
+
+// ─── Date picker ──────────────────────────────────────────────────────────────
+.datePicker {
+  font-size: 9px;
+  color: #666;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 2px 4px;
+  background: #fafafa;
+  cursor: pointer;
+  font-family: inherit;
+  outline: none;
+
+  &:focus {
+    border-color: #999;
+    background: #fff;
+  }
+}
