@@ -1,0 +1,244 @@
+// ─── Template 4: Bronson — dark left column, yellow accent ───────────────────
+
+// ─── Root ─────────────────────────────────────────────────────────────────────
+.resume {
+  width: 794px;
+  min-height: 1123px;
+  display: flex;
+  font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.22);
+  align-self: flex-start;
+  overflow: visible;
+
+  &.editMode {
+    outline: 2px solid rgba(99, 102, 241, 0.3);
+    outline-offset: 3px;
+  }
+}
+
+// ─── Left column ─────────────────────────────────────────────────────────────
+.leftCol {
+  width: 34%;
+  flex-shrink: 0;
+  background-color: #1c1c1c;
+  color: #f0ede8;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.leftBody {
+  flex: 1;
+  padding: 24px 20px;
+}
+
+.leftSection {
+  margin-bottom: 24px;
+}
+
+.leftSectionTitle {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.45;
+  margin: 20px 0 12px;
+  color: inherit;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.aboutText {
+  font-size: 10px;
+  line-height: 1.65;
+  color: inherit;
+  opacity: 0.85;
+}
+
+// ─── Skill bar ────────────────────────────────────────────────────────────────
+.skillItem {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.skillLabel {
+  font-size: 10px;
+  margin-bottom: 4px;
+  color: inherit;
+}
+
+.skillTrack {
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.skillFill {
+  height: 100%;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.65);
+}
+
+// ─── Photo ────────────────────────────────────────────────────────────────────
+.photoWrap {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: pointer;
+
+  &:hover .photoOverlay {
+    opacity: 1;
+  }
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.photoPlaceholder {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.photoPlaceholderIcon {
+  font-size: 36px;
+  opacity: 0.2;
+}
+
+.photoPlaceholderText {
+  font-size: 10px;
+  opacity: 0.4;
+  letter-spacing: 0.5px;
+}
+
+.photoOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  gap: 6px;
+
+  span {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.5px;
+  }
+}
+
+.photoBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-transform: uppercase;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.28);
+  }
+}
+
+// ─── Right column ────────────────────────────────────────────────────────────
+.rightCol {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 36px 40px;
+  box-sizing: border-box;
+  color: #1a1a1a;
+}
+
+.rightHeader {
+  margin-bottom: 20px;
+}
+
+.name {
+  font-size: 48px;
+  font-weight: 900;
+  color: #1a1a1a;
+  letter-spacing: -1px;
+  line-height: 1.0;
+}
+
+.yellowAccent {
+  width: 60px;
+  height: 4px;
+  background-color: #f5c518;
+  margin: 8px 0 16px;
+}
+
+.contactLine {
+  font-size: 10px;
+  color: #888888;
+  margin-bottom: 3px;
+}
+
+// ─── Right section headings ───────────────────────────────────────────────────
+.sectionHeading {
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin: 28px 0 16px;
+}
+
+.rightSection {
+  margin-bottom: 8px;
+}
+
+// ─── Entry blocks ─────────────────────────────────────────────────────────────
+.entryBlock {
+  margin-bottom: 20px;
+}
+
+.entryPosition {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+}
+
+.entrySub {
+  font-size: 10px;
+  color: #888888;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.entryDesc {
+  font-size: 10px;
+  color: #444444;
+  line-height: 1.65;
+}
