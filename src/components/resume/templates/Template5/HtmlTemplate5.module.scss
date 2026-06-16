@@ -1,0 +1,235 @@
+// ─── Template 5: Max Johnson — dark navy left, circular photo, bullet lists ───
+
+// ─── Root ─────────────────────────────────────────────────────────────────────
+.resume {
+  width: 794px;
+  min-height: 1123px;
+  display: flex;
+  font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.22);
+  align-self: flex-start;
+  overflow: visible;
+
+  &.editMode {
+    outline: 2px solid rgba(99, 102, 241, 0.3);
+    outline-offset: 3px;
+  }
+}
+
+// ─── Left column ─────────────────────────────────────────────────────────────
+.leftCol {
+  width: 30%;
+  flex-shrink: 0;
+  background-color: #263447;
+  color: #f0f4f8;
+  padding: 28px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.leftSection {
+  margin-bottom: 4px;
+}
+
+.leftSectionTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 6px;
+  margin: 20px 0 12px;
+}
+
+// ─── Circular photo ───────────────────────────────────────────────────────────
+.photoWrap {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 24px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+  cursor: pointer;
+
+  &:hover .photoOverlay {
+    opacity: 1;
+  }
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.photoPlaceholder {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photoPlaceholderIcon {
+  font-size: 28px;
+  opacity: 0.2;
+}
+
+.photoPlaceholderText {
+  font-size: 8px;
+}
+
+.photoOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  gap: 4px;
+}
+
+.photoBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 8px;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-transform: uppercase;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.28);
+  }
+}
+
+// ─── Contact section ──────────────────────────────────────────────────────────
+.contactItem {
+  margin-bottom: 10px;
+}
+
+.contactLabel {
+  font-size: 8px;
+  opacity: 0.5;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+  color: inherit;
+}
+
+.contactValue {
+  font-size: 10px;
+  color: inherit;
+  opacity: 0.85;
+  word-break: break-word;
+}
+
+// ─── Bullet items (skills, languages, links) ──────────────────────────────────
+.bulletItem {
+  font-size: 10px;
+  opacity: 0.85;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  line-height: 1.5;
+}
+
+.bulletDot {
+  margin-right: 4px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+// ─── Right column ────────────────────────────────────────────────────────────
+.rightCol {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 32px 32px;
+  box-sizing: border-box;
+  color: #1a1a1a;
+}
+
+.rightHeader {
+  margin-bottom: 28px;
+}
+
+.name {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+  line-height: 1.15;
+}
+
+.jobTitle {
+  font-size: 13px;
+  color: #888888;
+  margin-bottom: 0;
+}
+
+// ─── Right section titles ─────────────────────────────────────────────────────
+.rightSectionTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #263447;
+  border-bottom: 2px solid #263447;
+  padding-bottom: 4px;
+  margin: 24px 0 14px;
+}
+
+.rightSection {
+  margin-bottom: 8px;
+}
+
+// ─── About text ───────────────────────────────────────────────────────────────
+.aboutText {
+  font-size: 10px;
+  color: #444444;
+  line-height: 1.65;
+}
+
+// ─── Drag & drop ─────────────────────────────────────────────────────────────
+.sortable {
+  position: relative;
+  padding-left: 16px;
+
+  &:hover .dragHandle {
+    opacity: 1;
+  }
+}
+
+.dragHandle {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  cursor: pointer;
+}
+
+.sortable:hover .dragHandle {
+  opacity: 1;
+}

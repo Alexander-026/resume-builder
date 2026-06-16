@@ -1,0 +1,262 @@
+@use "../../../../styles/resume" as r;
+
+// ─── Root ─────────────────────────────────────────────────────────────────────
+.resume {
+  width: r.$resume-width;
+  min-height: 1123px;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 10px;
+  background: #ffffff;
+  padding: 40px 48px;
+  box-sizing: border-box;
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.22);
+  color: #1a1a1a;
+
+  &.editMode {
+    outline: 2px solid rgba(99, 102, 241, 0.3);
+    outline-offset: 3px;
+  }
+}
+
+// ─── Header ───────────────────────────────────────────────────────────────────
+.header {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.name {
+  font-size: 52px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #000000;
+  line-height: 1;
+  font-family: "Georgia", serif;
+}
+
+.jobTitle {
+  font-size: 13px;
+  color: #888888;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 8px;
+  font-family: "Georgia", serif;
+  font-weight: 400;
+}
+
+.headerRule {
+  border: none;
+  border-bottom: 2px solid #1a1a1a;
+  margin: 16px 0;
+}
+
+// ─── Body: two columns ────────────────────────────────────────────────────────
+.body {
+  display: flex;
+  margin-top: 8px;
+  flex: 1;
+}
+
+.leftCol {
+  width: 33%;
+  flex-shrink: 0;
+  padding-right: 24px;
+  box-sizing: border-box;
+}
+
+.rightCol {
+  flex: 1;
+  padding-left: 24px;
+  border-left: 1px solid #e8e8e8;
+  box-sizing: border-box;
+}
+
+// ─── Left section ─────────────────────────────────────────────────────────────
+.leftSection {
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+.leftSectionTitle {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #333333;
+  text-align: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #cccccc;
+  }
+}
+
+.leftText {
+  font-size: 10px;
+  color: #444444;
+  line-height: 1.6;
+  text-align: center;
+}
+
+// ─── Contact (left col) ───────────────────────────────────────────────────────
+.contactItem {
+  font-size: 10px;
+  color: #444444;
+  line-height: 1.8;
+  text-align: center;
+}
+
+// ─── Education (left col) ─────────────────────────────────────────────────────
+.eduDegree {
+  font-size: 11px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 1px;
+}
+
+.eduSchool {
+  font-size: 10px;
+  font-style: italic;
+  color: #555555;
+  text-align: center;
+}
+
+.eduDates {
+  font-size: 9px;
+  color: #888888;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+// ─── Skills (left col) ────────────────────────────────────────────────────────
+.skillName {
+  font-size: 10px;
+  color: #444444;
+  text-align: center;
+  line-height: 1.8;
+}
+
+// ─── Right section heading ────────────────────────────────────────────────────
+.rightSection {
+  margin-bottom: 22px;
+}
+
+.sectionHeading {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  border-bottom: 1px solid #dddddd;
+  padding-bottom: 4px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// ─── About (right col) ────────────────────────────────────────────────────────
+.aboutText {
+  font-size: 10px;
+  color: #333333;
+  line-height: 1.65;
+  margin: 0;
+}
+
+// ─── Experience (right col) ───────────────────────────────────────────────────
+.entry {
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+.entryPosition {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin-bottom: 1px;
+}
+
+.entrySub {
+  font-size: 10px;
+  color: #666666;
+  font-style: italic;
+  margin-bottom: 5px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.entryDesc {
+  font-size: 10px;
+  color: #333333;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.entryTopRow {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-bottom: 3px;
+}
+
+.entryDates {
+  font-size: 9px;
+  color: #666666;
+  font-style: italic;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+// ─── Sortable wrapper ─────────────────────────────────────────────────────────
+.sortable {
+  position: relative;
+  padding-left: 16px;
+
+  &:hover .dragHandle {
+    opacity: 1;
+  }
+}
+
+.dragHandle {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}

@@ -1,0 +1,89 @@
+// ─── Resume SCSS Variables & Mixins ──────────────────────────────────────────
+// Mirror of resume-tokens.ts — keep in sync manually.
+// Use @use "src/styles/resume" as r in component modules.
+
+// ── Font sizes ────────────────────────────────────────────────────────────────
+$font-name:       26px;
+$font-job-title:  13px;
+$font-section-hd: 12px;
+$font-body:       11px;
+$font-small:       9px;
+$font-micro:       8px;
+
+// ── Spacing ───────────────────────────────────────────────────────────────────
+$left-pad-h:   22px;
+$left-pad-v:   26px;
+$right-pad-h:  34px;
+$right-pad-v:  30px;
+$section-gap:  18px;
+$item-gap:     13px;
+$line-gap:      5px;
+
+// ── Typography ────────────────────────────────────────────────────────────────
+$lh-body:  1.55;
+$lh-about: 1.6;
+$lh-tight: 1.1;
+
+// ── Misc ──────────────────────────────────────────────────────────────────────
+$photo-size:     96px;
+$dot-size:        7px;
+$dot-gap:         3px;
+$resume-width:  794px;
+
+// ── Mixins ────────────────────────────────────────────────────────────────────
+
+// Left column section title (SKILLS, LANGUAGES, etc.)
+@mixin left-section-title($color: #ffffff) {
+  font-size: $font-small;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: $color;
+  opacity: 0.65;
+  margin-bottom: 7px;
+}
+
+// Right column section heading (Employment History, Education, etc.)
+@mixin right-section-heading($color: #6f6b6b) {
+  font-size: $font-section-hd;
+  font-weight: 700;
+  color: $color;
+  border-bottom: 1.5px solid $color;
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Entry block (experience / education item)
+@mixin entry-block($last: false) {
+  margin-bottom: $item-gap;
+  padding-bottom: 10px;
+
+  @if not $last {
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.07);
+  }
+}
+
+// Skill/language level dots row
+@mixin level-dots {
+  display: flex;
+  gap: $dot-gap;
+  margin-top: 3px;
+}
+
+// Drag handle area (invisible by default, shown on group hover)
+@mixin drag-handle {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
