@@ -1,10 +1,11 @@
 import {
-  Document, Page, View, Text, Image,
+  Document, Page, View, Text, Image, Link,
 } from "@react-pdf/renderer"
 import type {
   ResumeData, ExperienceSection, EducationSection,
   SkillsSection, LanguagesSection, LinksSection, AboutSection,
 } from "@/types/resume"
+import { documentMeta, displayUrl, toHref, languageLabel } from "@/components/pdf/ats"
 
 // ─── Template 5: Max Johnson — dark navy left, circular photo ─────────────────
 
@@ -21,7 +22,7 @@ export function Template5({ data }: { data: ResumeData }) {
 
   const leftTitleStyle = {
     fontSize: 9.75,
-    fontFamily: "Helvetica-Bold" as const,
+    fontFamily: "Arimo-Bold" as const,
     color: "#ffffff",
     borderBottomWidth: 1.5,
     borderBottomColor: "rgba(255,255,255,0.3)",
@@ -36,7 +37,6 @@ export function Template5({ data }: { data: ResumeData }) {
     color: "#f0f4f8",
     opacity: 0.5,
     textTransform: "uppercase" as const,
-    letterSpacing: 0.75,
     marginBottom: 1.5,
   }
 
@@ -54,16 +54,125 @@ export function Template5({ data }: { data: ResumeData }) {
   }
 
   return (
-    <Document>
+    <Document {...documentMeta(p, sections)}>
+      {/* Main column is first in the tree so ATS read name/experience before the sidebar; row-reverse keeps it on the right */}
       <Page
         size="A4"
         style={{
-          flexDirection: "row",
-          fontFamily: "Helvetica",
+          flexDirection: "row-reverse",
+          fontFamily: "Arimo",
           fontSize: 8,
           backgroundColor: "#ffffff",
         }}
       >
+
+        {/* ══ RIGHT COLUMN ══ */}
+        <View style={{
+          flex: 1,
+          backgroundColor: "#ffffff",
+          paddingLeft: 24,
+          paddingRight: 24,
+          paddingTop: 24,
+          paddingBottom: 24,
+        }}>
+
+          {/* Header */}
+          <View style={{ marginBottom: 21 }}>
+            <Text style={{
+              fontSize: 24,
+              fontFamily: "Arimo-Bold",
+              color: "#1a1a1a",
+              letterSpacing: -0.375,
+              marginBottom: 3,
+            }}>
+              {p.firstName} {p.lastName}
+            </Text>
+            {p.jobTitle ? (
+              <Text style={{ fontSize: 9.75, color: "#888888" }}>{p.jobTitle}</Text>
+            ) : null}
+          </View>
+
+          {/* Right sections */}
+          {rightSections.map((sec) => {
+
+            const rightTitleStyle = {
+              fontSize: 10.5,
+              fontFamily: "Arimo-Bold" as const,
+              color: "#263447",
+              borderBottomWidth: 1.5,
+              borderBottomColor: "#263447",
+              borderStyle: "solid" as const,
+              paddingBottom: 3,
+              marginTop: 18,
+              marginBottom: 10.5,
+            }
+
+            if (sec.type === "about") {
+              const a = sec as AboutSection
+              if (!a.content) return null
+              return (
+                <View key={sec.id} style={{ marginBottom: 6 }}>
+                  <Text style={rightTitleStyle}>{sec.label}</Text>
+                  <Text style={{ fontSize: 7.5, color: "#444444", lineHeight: 1.65 }}>{a.content}</Text>
+                </View>
+              )
+            }
+
+            if (sec.type === "experience") {
+              const e = sec as ExperienceSection
+              if (!e.items.length) return null
+              return (
+                <View key={sec.id} style={{ marginBottom: 6 }}>
+                  <Text style={rightTitleStyle}>{sec.label}</Text>
+                  {e.items.map((item) => (
+                    <View key={item.id} style={{ marginBottom: 13.5 }}>
+                      <Text style={{ fontSize: 9, fontFamily: "Arimo-Bold", color: "#1a1a1a", marginBottom: 2.25 }}>
+                        {item.position}
+                      </Text>
+                      <Text style={{ fontSize: 7.5, color: "#777777", marginBottom: 6 }}>
+                        {[item.company, item.location].filter(Boolean).join(" · ")}
+                        {(item.company || item.location) && (item.startDate || item.endDate) ? " · " : ""}
+                        {item.startDate}{item.current ? " – Present" : item.endDate ? ` – ${item.endDate}` : ""}
+                      </Text>
+                      {item.description ? item.description.split("\n").filter(Boolean).map((line, i) => (
+                        <Text key={i} style={{ fontSize: 7.5, color: "#444444", lineHeight: 1.5, marginBottom: 1.5 }}>
+                          {`• ${line}`}
+                        </Text>
+                      )) : null}
+                    </View>
+                  ))}
+                </View>
+              )
+            }
+
+            if (sec.type === "education") {
+              const e = sec as EducationSection
+              if (!e.items.length) return null
+              return (
+                <View key={sec.id} style={{ marginBottom: 6 }}>
+                  <Text style={rightTitleStyle}>{sec.label}</Text>
+                  {e.items.map((item) => (
+                    <View key={item.id} style={{ marginBottom: 13.5 }}>
+                      <Text style={{ fontSize: 9, fontFamily: "Arimo-Bold", color: "#1a1a1a", marginBottom: 2.25 }}>
+                        {item.degree}
+                      </Text>
+                      <Text style={{ fontSize: 7.5, color: "#777777", marginBottom: 6 }}>
+                        {[item.school, item.location].filter(Boolean).join(" · ")}
+                        {(item.school || item.location) && (item.startDate || item.endDate) ? " · " : ""}
+                        {item.startDate}{item.endDate ? ` – ${item.endDate}` : ""}
+                      </Text>
+                      {item.description ? (
+                        <Text style={{ fontSize: 7.5, color: "#444444", lineHeight: 1.65 }}>{item.description}</Text>
+                      ) : null}
+                    </View>
+                  ))}
+                </View>
+              )
+            }
+
+            return null
+          })}
+        </View>
 
         {/* ══ LEFT COLUMN ══ */}
         <View style={{
@@ -95,11 +204,7 @@ export function Template5({ data }: { data: ResumeData }) {
               borderRadius: 34,
               backgroundColor: "rgba(255,255,255,0.1)",
               marginBottom: 18,
-              alignItems: "center",
-              justifyContent: "center",
-            }}>
-              <Text style={{ fontSize: 20, color: "rgba(255,255,255,0.15)" }}>◉</Text>
-            </View>
+            }} />
           )}
 
           {/* Content aligned to left within the column */}
@@ -165,7 +270,7 @@ export function Template5({ data }: { data: ResumeData }) {
                   <View key={sec.id} style={{ marginBottom: 4 }}>
                     <Text style={leftTitleStyle}>{sec.label}</Text>
                     {lg.items.map((item) => (
-                      <Text key={item.id} style={bulletStyle}>{`• ${item.language}`}</Text>
+                      <Text key={item.id} style={bulletStyle}>{`• ${languageLabel(item, lg.showLevel)}`}</Text>
                     ))}
                   </View>
                 )
@@ -179,9 +284,9 @@ export function Template5({ data }: { data: ResumeData }) {
                   <View key={sec.id} style={{ marginBottom: 4 }}>
                     <Text style={leftTitleStyle}>{sec.label}</Text>
                     {items.map((item) => (
-                      <Text key={item.id} style={bulletStyle}>
-                        {`• ${item.label || item.url}`}
-                      </Text>
+                      <Link key={item.id} src={toHref(item.url)} style={{ ...bulletStyle, textDecoration: "none" }}>
+                        {`• ${item.label ? `${item.label}: ` : ""}${displayUrl(item.url)}`}
+                      </Link>
                     ))}
                   </View>
                 )
@@ -190,114 +295,6 @@ export function Template5({ data }: { data: ResumeData }) {
               return null
             })}
           </View>
-        </View>
-
-        {/* ══ RIGHT COLUMN ══ */}
-        <View style={{
-          flex: 1,
-          backgroundColor: "#ffffff",
-          paddingLeft: 24,
-          paddingRight: 24,
-          paddingTop: 24,
-          paddingBottom: 24,
-        }}>
-
-          {/* Header */}
-          <View style={{ marginBottom: 21 }}>
-            <Text style={{
-              fontSize: 24,
-              fontFamily: "Helvetica-Bold",
-              color: "#1a1a1a",
-              letterSpacing: -0.375,
-              marginBottom: 3,
-            }}>
-              {p.firstName} {p.lastName}
-            </Text>
-            {p.jobTitle ? (
-              <Text style={{ fontSize: 9.75, color: "#888888" }}>{p.jobTitle}</Text>
-            ) : null}
-          </View>
-
-          {/* Right sections */}
-          {rightSections.map((sec) => {
-
-            const rightTitleStyle = {
-              fontSize: 10.5,
-              fontFamily: "Helvetica-Bold" as const,
-              color: "#263447",
-              borderBottomWidth: 1.5,
-              borderBottomColor: "#263447",
-              borderStyle: "solid" as const,
-              paddingBottom: 3,
-              marginTop: 18,
-              marginBottom: 10.5,
-            }
-
-            if (sec.type === "about") {
-              const a = sec as AboutSection
-              if (!a.content) return null
-              return (
-                <View key={sec.id} style={{ marginBottom: 6 }}>
-                  <Text style={rightTitleStyle}>{sec.label}</Text>
-                  <Text style={{ fontSize: 7.5, color: "#444444", lineHeight: 1.65 }}>{a.content}</Text>
-                </View>
-              )
-            }
-
-            if (sec.type === "experience") {
-              const e = sec as ExperienceSection
-              if (!e.items.length) return null
-              return (
-                <View key={sec.id} style={{ marginBottom: 6 }}>
-                  <Text style={rightTitleStyle}>{sec.label}</Text>
-                  {e.items.map((item) => (
-                    <View key={item.id} style={{ marginBottom: 13.5 }}>
-                      <Text style={{ fontSize: 9, fontFamily: "Helvetica-Bold", color: "#1a1a1a", marginBottom: 2.25 }}>
-                        {item.position}
-                      </Text>
-                      <Text style={{ fontSize: 7.5, color: "#777777", marginBottom: 6 }}>
-                        {[item.company, item.location].filter(Boolean).join(" · ")}
-                        {(item.company || item.location) && (item.startDate || item.endDate) ? " · " : ""}
-                        {item.startDate}{item.current ? " – Present" : item.endDate ? ` – ${item.endDate}` : ""}
-                      </Text>
-                      {item.description ? item.description.split("\n").filter(Boolean).map((line, i) => (
-                        <Text key={i} style={{ fontSize: 7.5, color: "#444444", lineHeight: 1.5, marginBottom: 1.5 }}>
-                          {`• ${line}`}
-                        </Text>
-                      )) : null}
-                    </View>
-                  ))}
-                </View>
-              )
-            }
-
-            if (sec.type === "education") {
-              const e = sec as EducationSection
-              if (!e.items.length) return null
-              return (
-                <View key={sec.id} style={{ marginBottom: 6 }}>
-                  <Text style={rightTitleStyle}>{sec.label}</Text>
-                  {e.items.map((item) => (
-                    <View key={item.id} style={{ marginBottom: 13.5 }}>
-                      <Text style={{ fontSize: 9, fontFamily: "Helvetica-Bold", color: "#1a1a1a", marginBottom: 2.25 }}>
-                        {item.degree}
-                      </Text>
-                      <Text style={{ fontSize: 7.5, color: "#777777", marginBottom: 6 }}>
-                        {[item.school, item.location].filter(Boolean).join(" · ")}
-                        {(item.school || item.location) && (item.startDate || item.endDate) ? " · " : ""}
-                        {item.startDate}{item.endDate ? ` – ${item.endDate}` : ""}
-                      </Text>
-                      {item.description ? (
-                        <Text style={{ fontSize: 7.5, color: "#444444", lineHeight: 1.65 }}>{item.description}</Text>
-                      ) : null}
-                    </View>
-                  ))}
-                </View>
-              )
-            }
-
-            return null
-          })}
         </View>
       </Page>
     </Document>

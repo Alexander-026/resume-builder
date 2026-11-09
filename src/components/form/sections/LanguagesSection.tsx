@@ -2,6 +2,7 @@
 
 import { useResumeStore } from "@/store/resumeStore"
 import type { LanguagesSection as LanguagesSectionType, LanguageItem, SkillLevel } from "@/types/resume"
+import { LANGUAGE_LEVEL_LABELS as levels } from "@/types/resume"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Trash2, Plus } from "lucide-react"
@@ -9,8 +10,6 @@ import { Trash2, Plus } from "lucide-react"
 interface Props {
   section: LanguagesSectionType
 }
-
-const levels = ["No knowledge", "Basic", "Conversational", "Intermediate", "Advanced", "Native"]
 
 export function LanguagesSection({ section }: Props) {
   const { addLanguageItem, updateLanguageItem, removeLanguageItem } = useResumeStore()

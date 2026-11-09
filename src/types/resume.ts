@@ -1,6 +1,8 @@
 // ─── Skill / Language level 0-5 ─────────────────────────────────────────────
 export type SkillLevel = 0 | 1 | 2 | 3 | 4 | 5
 
+export const LANGUAGE_LEVEL_LABELS = ["No knowledge", "Basic", "Conversational", "Intermediate", "Advanced", "Native"] as const
+
 // ─── Personal info ───────────────────────────────────────────────────────────
 export interface PersonalInfo {
   firstName: string

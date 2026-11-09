@@ -28,7 +28,7 @@ function PdfSkeleton() {
   )
 }
 
-function getTemplate(data: ResumeData) {
+export function getTemplate(data: ResumeData) {
   switch (data.activeTemplate) {
     case 2: return <Template2 data={data} />
     case 3: return <Template3 data={data} />

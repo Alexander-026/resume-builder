@@ -1,10 +1,11 @@
 import {
-  Document, Page, View, Text,
+  Document, Page, View, Text, Link,
 } from "@react-pdf/renderer"
 import type {
   ResumeData, ExperienceSection, EducationSection,
   SkillsSection, LanguagesSection, LinksSection, AboutSection,
 } from "@/types/resume"
+import { documentMeta, displayUrl, toHref, languageLabel } from "@/components/pdf/ats"
 
 // Watson — Classic Clean, All-White, No Photo
 // Fixed color palette (ignores theme since Watson is always white)
@@ -21,8 +22,7 @@ export function Template2({ data }: { data: ResumeData }) {
   // ── Shared styles ──────────────────────────────────────────────────────────
   const leftSectionTitle = {
     fontSize: 6.75,
-    fontFamily: "Helvetica-Bold" as const,
-    letterSpacing: 1.5,
+    fontFamily: "Arimo-Bold" as const,
     textTransform: "uppercase" as const,
     color: "#333333",
     textAlign: "center" as const,
@@ -46,8 +46,7 @@ export function Template2({ data }: { data: ResumeData }) {
 
   const rightSectionHeading = {
     fontSize: 7.5,
-    fontFamily: "Helvetica-Bold" as const,
-    letterSpacing: 1,
+    fontFamily: "Arimo-Bold" as const,
     textTransform: "uppercase" as const,
     color: "#1a1a1a",
     borderBottomWidth: 0.75,
@@ -58,11 +57,11 @@ export function Template2({ data }: { data: ResumeData }) {
   }
 
   return (
-    <Document>
+    <Document {...documentMeta(p, sections)}>
       <Page
         size="A4"
         style={{
-          fontFamily: "Helvetica",
+          fontFamily: "Arimo",
           fontSize: 7.5,
           backgroundColor: "#ffffff",
           paddingTop: 30,
@@ -77,7 +76,7 @@ export function Template2({ data }: { data: ResumeData }) {
         <View style={{ alignItems: "center", marginBottom: 4 }}>
           <Text style={{
             fontSize: 30,
-            fontFamily: "Helvetica-Bold",
+            fontFamily: "Arimo-Bold",
             letterSpacing: 2,
             color: "#000000",
             textTransform: "uppercase",
@@ -90,7 +89,6 @@ export function Template2({ data }: { data: ResumeData }) {
             <Text style={{
               fontSize: 9.75,
               color: "#888888",
-              letterSpacing: 2,
               textTransform: "uppercase",
               marginTop: 6,
               textAlign: "center",
@@ -103,99 +101,8 @@ export function Template2({ data }: { data: ResumeData }) {
         {/* Header rule */}
         <View style={{ borderBottomWidth: 1.5, borderBottomColor: "#1a1a1a", marginTop: 12, marginBottom: 6 }} />
 
-        {/* ══ BODY: two columns ══ */}
-        <View style={{ flexDirection: "row", flex: 1, marginTop: 6 }}>
-
-          {/* LEFT COLUMN — 33% */}
-          <View style={{ width: "33%", paddingRight: 18, borderRightWidth: 0.75, borderRightColor: "#e8e8e8" }}>
-
-            {/* Contact */}
-            <View style={{ marginBottom: 14, alignItems: "center" }}>
-              <Text style={leftSectionTitle}>Contact</Text>
-              {p.email ? <Text style={leftText}>{p.email}</Text> : null}
-              {p.phone ? <Text style={leftText}>{p.phone}</Text> : null}
-              {(p.city || p.country) ? (
-                <Text style={leftText}>{[p.city, p.country].filter(Boolean).join(", ")}</Text>
-              ) : null}
-              {p.website ? <Text style={leftText}>{p.website}</Text> : null}
-            </View>
-
-            {leftSections.map((sec) => {
-
-              if (sec.type === "education") {
-                const e = sec as EducationSection
-                if (!e.items.length) return null
-                return (
-                  <View key={sec.id} style={{ marginBottom: 14, alignItems: "center" }}>
-                    <Text style={leftSectionTitle}>{sec.label}</Text>
-                    {e.items.map((item) => (
-                      <View key={item.id} style={{ marginBottom: 8, alignItems: "center" }}>
-                        <Text style={{ fontSize: 8.25, fontFamily: "Helvetica-Bold", color: "#1a1a1a", textAlign: "center" }}>
-                          {item.degree}
-                        </Text>
-                        <Text style={{ fontSize: 7.5, fontFamily: "Helvetica-Oblique" as const, color: "#555555", textAlign: "center" }}>
-                          {item.school}
-                        </Text>
-                        {(item.startDate || item.endDate) ? (
-                          <Text style={{ fontSize: 6.75, color: "#888888", textAlign: "center" }}>
-                            {item.startDate}{item.endDate ? ` – ${item.endDate}` : ""}
-                          </Text>
-                        ) : null}
-                      </View>
-                    ))}
-                  </View>
-                )
-              }
-
-              if (sec.type === "skills") {
-                const sk = sec as SkillsSection
-                if (!sk.items.length) return null
-                return (
-                  <View key={sec.id} style={{ marginBottom: 14, alignItems: "center" }}>
-                    <Text style={leftSectionTitle}>{sec.label}</Text>
-                    {sk.items.map((item) => (
-                      <Text key={item.id} style={{ ...leftText, marginBottom: 3 }}>{item.name}</Text>
-                    ))}
-                  </View>
-                )
-              }
-
-              if (sec.type === "languages") {
-                const lg = sec as LanguagesSection
-                if (!lg.items.length) return null
-                return (
-                  <View key={sec.id} style={{ marginBottom: 14, alignItems: "center" }}>
-                    <Text style={leftSectionTitle}>{sec.label}</Text>
-                    {lg.items.map((item) => (
-                      <Text key={item.id} style={{ ...leftText, marginBottom: 3 }}>{item.language}</Text>
-                    ))}
-                  </View>
-                )
-              }
-
-              if (sec.type === "links") {
-                const lk = sec as LinksSection
-                const items = lk.items.filter((i) => i.url || i.label)
-                if (!items.length) return null
-                return (
-                  <View key={sec.id} style={{ marginBottom: 14, alignItems: "center" }}>
-                    <Text style={leftSectionTitle}>{sec.label}</Text>
-                    {items.map((item) => (
-                      <Text key={item.id} style={{
-                        ...leftText,
-                        fontFamily: "Helvetica-Bold",
-                        marginBottom: 4,
-                      }}>
-                        {item.label || item.url}
-                      </Text>
-                    ))}
-                  </View>
-                )
-              }
-
-              return null
-            })}
-          </View>
+        {/* ══ BODY: two columns — main column first in the tree for ATS reading order, row-reverse keeps it on the right ══ */}
+        <View style={{ flexDirection: "row-reverse", flex: 1, marginTop: 6 }}>
 
           {/* RIGHT COLUMN — flex 1 */}
           <View style={{ flex: 1, paddingLeft: 18 }}>
@@ -229,8 +136,7 @@ export function Template2({ data }: { data: ResumeData }) {
                         <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 1 }}>
                           <Text style={{
                             fontSize: 8.25,
-                            fontFamily: "Helvetica-Bold",
-                            letterSpacing: 0.75,
+                            fontFamily: "Arimo-Bold",
                             textTransform: "uppercase",
                             color: "#1a1a1a",
                             flex: 1,
@@ -238,12 +144,12 @@ export function Template2({ data }: { data: ResumeData }) {
                           }}>
                             {item.position}
                           </Text>
-                          <Text style={{ fontSize: 6.75, color: "#666666", fontFamily: "Helvetica-Oblique" }}>
+                          <Text style={{ fontSize: 6.75, color: "#666666", fontFamily: "Arimo-Oblique" }}>
                             {item.startDate}{item.current ? " – Present" : item.endDate ? ` – ${item.endDate}` : ""}
                           </Text>
                         </View>
                         {(item.company || item.location) ? (
-                          <Text style={{ fontSize: 7.5, color: "#666666", fontFamily: "Helvetica-Oblique", marginBottom: 4 }}>
+                          <Text style={{ fontSize: 7.5, color: "#666666", fontFamily: "Arimo-Oblique", marginBottom: 4 }}>
                             {[item.company, item.location].filter(Boolean).join(" · ")}
                           </Text>
                         ) : null}
@@ -274,8 +180,7 @@ export function Template2({ data }: { data: ResumeData }) {
                         <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 1 }}>
                           <Text style={{
                             fontSize: 8.25,
-                            fontFamily: "Helvetica-Bold",
-                            letterSpacing: 0.75,
+                            fontFamily: "Arimo-Bold",
                             textTransform: "uppercase",
                             color: "#1a1a1a",
                             flex: 1,
@@ -283,16 +188,106 @@ export function Template2({ data }: { data: ResumeData }) {
                           }}>
                             {item.degree}
                           </Text>
-                          <Text style={{ fontSize: 6.75, color: "#666666", fontFamily: "Helvetica-Oblique" }}>
+                          <Text style={{ fontSize: 6.75, color: "#666666", fontFamily: "Arimo-Oblique" }}>
                             {item.startDate}{item.endDate ? ` – ${item.endDate}` : ""}
                           </Text>
                         </View>
                         {(item.school || item.location) ? (
-                          <Text style={{ fontSize: 7.5, color: "#666666", fontFamily: "Helvetica-Oblique" }}>
+                          <Text style={{ fontSize: 7.5, color: "#666666", fontFamily: "Arimo-Oblique" }}>
                             {[item.school, item.location].filter(Boolean).join(" · ")}
                           </Text>
                         ) : null}
                       </View>
+                    ))}
+                  </View>
+                )
+              }
+
+              return null
+            })}
+          </View>
+
+          {/* LEFT COLUMN — 33% */}
+          <View style={{ width: "33%", paddingRight: 18, borderRightWidth: 0.75, borderRightColor: "#e8e8e8" }}>
+
+            {/* Contact */}
+            <View style={{ marginBottom: 14, alignItems: "center" }}>
+              <Text style={leftSectionTitle}>Contact</Text>
+              {p.email ? <Text style={leftText}>{p.email}</Text> : null}
+              {p.phone ? <Text style={leftText}>{p.phone}</Text> : null}
+              {(p.city || p.country) ? (
+                <Text style={leftText}>{[p.city, p.country].filter(Boolean).join(", ")}</Text>
+              ) : null}
+              {p.website ? <Text style={leftText}>{p.website}</Text> : null}
+            </View>
+
+            {leftSections.map((sec) => {
+
+              if (sec.type === "education") {
+                const e = sec as EducationSection
+                if (!e.items.length) return null
+                return (
+                  <View key={sec.id} style={{ marginBottom: 14, alignItems: "center" }}>
+                    <Text style={leftSectionTitle}>{sec.label}</Text>
+                    {e.items.map((item) => (
+                      <View key={item.id} style={{ marginBottom: 8, alignItems: "center" }}>
+                        <Text style={{ fontSize: 8.25, fontFamily: "Arimo-Bold", color: "#1a1a1a", textAlign: "center" }}>
+                          {item.degree}
+                        </Text>
+                        <Text style={{ fontSize: 7.5, fontFamily: "Arimo-Oblique" as const, color: "#555555", textAlign: "center" }}>
+                          {item.school}
+                        </Text>
+                        {(item.startDate || item.endDate) ? (
+                          <Text style={{ fontSize: 6.75, color: "#888888", textAlign: "center" }}>
+                            {item.startDate}{item.endDate ? ` – ${item.endDate}` : ""}
+                          </Text>
+                        ) : null}
+                      </View>
+                    ))}
+                  </View>
+                )
+              }
+
+              if (sec.type === "skills") {
+                const sk = sec as SkillsSection
+                if (!sk.items.length) return null
+                return (
+                  <View key={sec.id} style={{ marginBottom: 14, alignItems: "center" }}>
+                    <Text style={leftSectionTitle}>{sec.label}</Text>
+                    {sk.items.map((item) => (
+                      <Text key={item.id} style={{ ...leftText, marginBottom: 3 }}>{item.name}</Text>
+                    ))}
+                  </View>
+                )
+              }
+
+              if (sec.type === "languages") {
+                const lg = sec as LanguagesSection
+                if (!lg.items.length) return null
+                return (
+                  <View key={sec.id} style={{ marginBottom: 14, alignItems: "center" }}>
+                    <Text style={leftSectionTitle}>{sec.label}</Text>
+                    {lg.items.map((item) => (
+                      <Text key={item.id} style={{ ...leftText, marginBottom: 3 }}>{languageLabel(item, lg.showLevel)}</Text>
+                    ))}
+                  </View>
+                )
+              }
+
+              if (sec.type === "links") {
+                const lk = sec as LinksSection
+                const items = lk.items.filter((i) => i.url)
+                if (!items.length) return null
+                return (
+                  <View key={sec.id} style={{ marginBottom: 14, alignItems: "center" }}>
+                    <Text style={leftSectionTitle}>{sec.label}</Text>
+                    {items.map((item) => (
+                      <Link key={item.id} src={toHref(item.url)} style={{ marginBottom: 4, alignItems: "center", textDecoration: "none" }}>
+                        {item.label ? (
+                          <Text style={{ ...leftText, fontFamily: "Arimo-Bold", marginBottom: 0 }}>{item.label}</Text>
+                        ) : null}
+                        <Text style={{ ...leftText, marginBottom: 0 }}>{displayUrl(item.url)}</Text>
+                      </Link>
                     ))}
                   </View>
                 )

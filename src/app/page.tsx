@@ -11,6 +11,7 @@ import { HtmlTemplate5 } from "@/components/resume/templates/Template5/HtmlTempl
 import { HtmlTemplate6 } from "@/components/resume/templates/Template6/HtmlTemplate6"
 import { TemplateGallery } from "@/components/resume/TemplateGallery"
 import { SectionManager } from "@/components/resume/SectionManager"
+import { AtsCheckButton } from "@/components/ats/AtsCheck"
 import {
   Pencil, Eye, FileText, LayoutTemplate,
   Moon, Sun, ChevronRight, ChevronLeft,
@@ -130,6 +131,7 @@ export default function HomePage() {
               View
             </TabBtn>
           </div>
+          <AtsCheckButton />
           <ThemeToggle />
         </div>
       </header>
