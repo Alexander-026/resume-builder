@@ -1,10 +1,11 @@
 import {
-  Document, Page, View, Text, Image, Svg, Path, Circle,
+  Document, Page, View, Text, Image, Link, Svg, Path, Circle,
 } from "@react-pdf/renderer"
 import type {
   ResumeData, ExperienceSection, EducationSection,
   SkillsSection, LanguagesSection, LinksSection, AboutSection, SkillLevel,
 } from "@/types/resume"
+import { documentMeta, displayUrl, toHref, languageLabel } from "@/components/pdf/ats"
 
 // Sherlock — Dark gray left, circular photo, timeline experience
 
@@ -71,8 +72,7 @@ export function Template3({ data }: { data: ResumeData }) {
 
   const leftSectionTitle = {
     fontSize: 6,
-    fontFamily: "Helvetica-Bold" as const,
-    letterSpacing: 1.5,
+    fontFamily: "Arimo-Bold" as const,
     textTransform: "uppercase" as const,
     color: "#a3a3a3",
     borderBottomWidth: 0.5,
@@ -84,8 +84,7 @@ export function Template3({ data }: { data: ResumeData }) {
   const leftBodyText = { fontSize: 7.5, color: "#d8d8d8", lineHeight: 1.6 }
   const rightSectionTitle = {
     fontSize: 8.25,
-    fontFamily: "Helvetica-Bold" as const,
-    letterSpacing: 1.5,
+    fontFamily: "Arimo-Bold" as const,
     textTransform: "uppercase" as const,
     color: "#333333",
     borderBottomWidth: 1.5,
@@ -97,8 +96,8 @@ export function Template3({ data }: { data: ResumeData }) {
   const location = [p.city, p.country].filter(Boolean).join(", ")
 
   return (
-    <Document>
-      <Page size="A4" style={{ flexDirection: "row", fontFamily: "Helvetica", fontSize: 7.5, backgroundColor: "#ffffff" }}>
+    <Document {...documentMeta(p, sections)}>
+      <Page size="A4" style={{ flexDirection: "row", fontFamily: "Arimo", fontSize: 7.5, backgroundColor: "#ffffff" }}>
 
         {/* LEFT COLUMN */}
         <View style={{ width: "28%", backgroundColor: "#4a4a4a", paddingLeft: 14, paddingRight: 14, paddingTop: 21, paddingBottom: 21 }}>
@@ -107,11 +106,9 @@ export function Template3({ data }: { data: ResumeData }) {
               <Image src={p.photo} style={{ width: 75, height: 75, objectFit: "cover" }} />
             </View>
           ) : (
-            <View style={{ width: 75, height: 75, borderRadius: 37.5, backgroundColor: "#575757", alignSelf: "center", marginBottom: 12, alignItems: "center", justifyContent: "center", borderWidth: 1.5, borderColor: "#7a7a7a" }}>
-              <Text style={{ fontSize: 18, color: "#6d6d6d" }}>O</Text>
-            </View>
+            <View style={{ width: 75, height: 75, borderRadius: 37.5, backgroundColor: "#575757", alignSelf: "center", marginBottom: 12, borderWidth: 1.5, borderColor: "#7a7a7a" }} />
           )}
-          <Text style={{ fontSize: 13.5, fontFamily: "Helvetica-Bold", color: "#ffffff", textAlign: "center", marginBottom: 3, lineHeight: 1.2 }}>
+          <Text style={{ fontSize: 13.5, fontFamily: "Arimo-Bold", color: "#ffffff", textAlign: "center", marginBottom: 3, lineHeight: 1.2 }}>
             {p.firstName} {p.lastName}
           </Text>
           {p.jobTitle ? (
@@ -130,15 +127,16 @@ export function Template3({ data }: { data: ResumeData }) {
             }
             if (sec.type === "links") {
               const lk = sec as LinksSection
-              const items = lk.items.filter((i) => i.url || i.label)
+              const items = lk.items.filter((i) => i.url)
               if (!items.length) return null
               return (
                 <View key={sec.id}>
                   <Text style={leftSectionTitle}>{sec.label}</Text>
                   {items.map((item) => (
-                    <Text key={item.id} style={{ ...leftBodyText, fontFamily: "Helvetica-Bold", marginBottom: 3 }}>
-                      {item.label || item.url}
-                    </Text>
+                    <Link key={item.id} src={toHref(item.url)} style={{ marginBottom: 3, textDecoration: "none" }}>
+                      {item.label ? <Text style={{ ...leftBodyText, fontFamily: "Arimo-Bold" }}>{item.label}</Text> : null}
+                      <Text style={{ ...leftBodyText, fontSize: 6.75 }}>{displayUrl(item.url)}</Text>
+                    </Link>
                   ))}
                 </View>
               )
@@ -192,14 +190,14 @@ export function Template3({ data }: { data: ResumeData }) {
                     return (
                       <View key={item.id} style={{ flexDirection: "row", marginBottom: TL_GAP }}>
                         <View style={{ width: 82, flexShrink: 0, paddingRight: 9, alignItems: "flex-end" }}>
-                          <Text style={{ fontSize: 8.25, fontFamily: "Helvetica-Bold", color: "#1a1a1a", textAlign: "right" }}>{item.company}</Text>
+                          <Text style={{ fontSize: 8.25, fontFamily: "Arimo-Bold", color: "#1a1a1a", textAlign: "right" }}>{item.company}</Text>
                           {item.location ? <Text style={{ fontSize: 6.75, color: "#666666", textAlign: "right" }}>{item.location}</Text> : null}
-                          {dateStr ? <Text style={{ fontSize: 6.75, color: "#666666", fontFamily: "Helvetica-Oblique" as const, textAlign: "right" }}>{dateStr}</Text> : null}
+                          {dateStr ? <Text style={{ fontSize: 6.75, color: "#666666", fontFamily: "Arimo-Oblique" as const, textAlign: "right" }}>{dateStr}</Text> : null}
                         </View>
                         <View style={{ flex: 1, paddingLeft: TL_DOT_LEFT + TL_DOT_SIZE + 9, position: "relative" }}>
                           <View style={{ position: "absolute", top: TL_DOT_TOP, left: TL_DOT_LEFT, width: TL_DOT_SIZE, height: TL_DOT_SIZE, borderRadius: TL_DOT_SIZE / 2, backgroundColor: "#4a4a4a", zIndex: 1 }} />
                           {!isLast && <View style={{ position: "absolute", top: TL_LINE_TOP, left: TL_LINE_LEFT, bottom: TL_LINE_BOT, width: TL_LINE_W, backgroundColor: "#d2d2d2" }} />}
-                          <Text style={{ fontSize: 8.25, fontFamily: "Helvetica-Bold", color: "#1a1a1a", marginBottom: 3 }}>{item.position}</Text>
+                          <Text style={{ fontSize: 8.25, fontFamily: "Arimo-Bold", color: "#1a1a1a", marginBottom: 3 }}>{item.position}</Text>
                           {bullets.length > 0
                             ? bullets.map((line, i) => (
                                 <View key={i} style={{ flexDirection: "row", marginBottom: 1.5 }}>
@@ -228,14 +226,14 @@ export function Template3({ data }: { data: ResumeData }) {
                     return (
                       <View key={item.id} style={{ flexDirection: "row", marginBottom: TL_GAP }}>
                         <View style={{ width: 82, flexShrink: 0, paddingRight: 9, alignItems: "flex-end" }}>
-                          <Text style={{ fontSize: 8.25, fontFamily: "Helvetica-Bold", color: "#1a1a1a", textAlign: "right" }}>{item.school}</Text>
+                          <Text style={{ fontSize: 8.25, fontFamily: "Arimo-Bold", color: "#1a1a1a", textAlign: "right" }}>{item.school}</Text>
                           {item.location ? <Text style={{ fontSize: 6.75, color: "#666666", textAlign: "right" }}>{item.location}</Text> : null}
-                          {dateStr ? <Text style={{ fontSize: 6.75, color: "#666666", fontFamily: "Helvetica-Oblique" as const, textAlign: "right" }}>{dateStr}</Text> : null}
+                          {dateStr ? <Text style={{ fontSize: 6.75, color: "#666666", fontFamily: "Arimo-Oblique" as const, textAlign: "right" }}>{dateStr}</Text> : null}
                         </View>
                         <View style={{ flex: 1, paddingLeft: TL_DOT_LEFT + TL_DOT_SIZE + 9, position: "relative" }}>
                           <View style={{ position: "absolute", top: TL_DOT_TOP, left: TL_DOT_LEFT, width: TL_DOT_SIZE, height: TL_DOT_SIZE, borderRadius: TL_DOT_SIZE / 2, backgroundColor: "#4a4a4a", zIndex: 1 }} />
                           {!isLast && <View style={{ position: "absolute", top: TL_LINE_TOP, left: TL_LINE_LEFT, bottom: TL_LINE_BOT, width: TL_LINE_W, backgroundColor: "#d2d2d2" }} />}
-                          <Text style={{ fontSize: 8.25, fontFamily: "Helvetica-Bold", color: "#1a1a1a", marginBottom: 3 }}>{item.degree}</Text>
+                          <Text style={{ fontSize: 8.25, fontFamily: "Arimo-Bold", color: "#1a1a1a", marginBottom: 3 }}>{item.degree}</Text>
                           {item.description ? <Text style={{ fontSize: 7.5, color: "#444444", lineHeight: 1.5 }}>{item.description}</Text> : null}
                         </View>
                       </View>
@@ -278,7 +276,7 @@ export function Template3({ data }: { data: ResumeData }) {
                     <View key={ri} style={{ flexDirection: "row", marginBottom: 6 }}>
                       {row.map((item) => (
                         <View key={item.id} style={{ flex: 1, marginRight: 12 }}>
-                          <Text style={{ fontSize: 7.5, color: "#1a1a1a", marginBottom: 2 }}>{item.language}</Text>
+                          <Text style={{ fontSize: 7.5, color: "#1a1a1a", marginBottom: 2 }}>{languageLabel(item, lg.showLevel)}</Text>
                           {lg.showLevel && <SkillBar level={item.level} />}
                         </View>
                       ))}

@@ -1,11 +1,12 @@
 import {
-  Document, Page, View, Text, Image, Svg, Path, Circle,
+  Document, Page, View, Text, Image, Link, Svg, Path, Circle,
 } from "@react-pdf/renderer"
 import type {
   ResumeData, ExperienceSection, EducationSection,
   SkillsSection, LanguagesSection, LinksSection, AboutSection, SkillLevel,
 } from "@/types/resume"
 import { fontSize as fs, spacing as sp, lineHeight as lh, misc } from "@/styles/resume-tokens"
+import { documentMeta, displayUrl, toHref, languageLabel } from "@/components/pdf/ats"
 
 
 // ─── PDF Icon components (Svg paths, works in react-pdf) ─────────────────────
@@ -83,8 +84,7 @@ export function Template1({ data }: { data: ResumeData }) {
   // Shared style builders
   const leftTitle = {
     fontSize: fs.pdf.small,
-    fontFamily: "Helvetica-Bold" as const,
-    letterSpacing: 0.75,
+    fontFamily: "Arimo-Bold" as const,
     color: leftText,
     opacity: 0.65,
     textTransform: "uppercase" as const,
@@ -93,7 +93,7 @@ export function Template1({ data }: { data: ResumeData }) {
 
   const sectionHeading = {
     fontSize: fs.pdf.sectionHd,
-    fontFamily: "Helvetica-Bold" as const,
+    fontFamily: "Arimo-Bold" as const,
     color: primary,
     borderBottomWidth: 1.5,
     borderBottomColor: primary,
@@ -106,20 +106,163 @@ export function Template1({ data }: { data: ResumeData }) {
     { key: "email",   icon: <IconMail  color={leftText} />, value: p.email,   href: p.email ? `mailto:${p.email}` : undefined },
     { key: "phone",   icon: <IconPhone color={leftText} />, value: p.phone },
     { key: "loc",     icon: <IconMapPin color={leftText} />, value: [p.city, p.country].filter(Boolean).join(", ") },
-    { key: "website", icon: <IconGlobe color={leftText} />, value: p.website, href: p.website ? (p.website.startsWith("http") ? p.website : `https://${p.website}`) : undefined },
+    { key: "website", icon: <IconGlobe color={leftText} />, value: p.website, href: p.website ? toHref(p.website) : undefined },
   ].filter((f) => f.value)
 
   return (
-    <Document>
+    <Document {...documentMeta(p, sections)}>
+      {/* Main column is first in the tree so ATS read name/experience before the sidebar; row-reverse keeps it on the right */}
       <Page
         size="A4"
         style={{
-          flexDirection: "row",
-          fontFamily: "Helvetica",
+          flexDirection: "row-reverse",
+          fontFamily: "Arimo",
           fontSize: fs.pdf.body,
           backgroundColor: rightBg,
         }}
       >
+
+        {/* ══ RIGHT COLUMN ══ */}
+        <View style={{
+          flex: 1,
+          backgroundColor: rightBg,
+          paddingBottom: sp.pdf.rightPadV,
+        }}>
+
+          {/* Header — dark bg, same height as photo (150pt) */}
+          <View style={{
+            flexDirection: "row",
+            alignItems: "center",
+            backgroundColor: leftBg,
+            height: 150,
+            paddingLeft: sp.pdf.rightPadH,
+            paddingRight: sp.pdf.rightPadH,
+            marginBottom: sp.pdf.rightPadV,
+          }}>
+
+            {/* Name + job title */}
+            <View style={{ flex: 1, marginRight: 12 }}>
+              <Text style={{
+                fontFamily: "Arimo-Bold",
+                fontSize: fs.pdf.name + 3,
+                color: leftText,
+                lineHeight: lh.tight,
+              }}>
+                {p.firstName}
+              </Text>
+              <Text style={{
+                fontFamily: "Arimo-Bold",
+                fontSize: fs.pdf.name + 3,
+                color: leftText,
+                lineHeight: lh.tight,
+                marginBottom: 3,
+              }}>
+                {p.lastName}
+              </Text>
+              {p.jobTitle ? (
+                <Text style={{ fontSize: fs.pdf.jobTitle + 2, color: leftText, opacity: 0.65 }}>
+                  {p.jobTitle}
+                </Text>
+              ) : null}
+            </View>
+
+            {/* Contact fields */}
+            <View style={{ flexShrink: 0, alignItems: "flex-start" }}>
+              {contactFields.map(({ key, icon, value, href }) => (
+                <View key={key} style={{ flexDirection: "row", alignItems: "center", marginBottom: 4 }}>
+                  <View style={{ opacity: 0.4, marginRight: 5, justifyContent: "center" }}>
+                    {icon}
+                  </View>
+                  {href ? (
+                    <Link src={href} style={{ fontSize: fs.pdf.small, color: leftText, opacity: 0.8, textDecoration: "none" }}>{value}</Link>
+                  ) : (
+                    <Text style={{ fontSize: fs.pdf.small, color: leftText, opacity: 0.8 }}>{value}</Text>
+                  )}
+                </View>
+              ))}
+            </View>
+          </View>
+
+          {/* Right sections */}
+          <View style={{ paddingLeft: sp.pdf.rightPadH, paddingRight: sp.pdf.rightPadH }}>
+          {rightSections.map((sec) => {
+
+            if (sec.type === "experience") {
+              const e = sec as ExperienceSection
+              if (!e.items.length) return null
+              return (
+                <View key={sec.id} style={{ marginBottom: sp.pdf.sectionGap }}>
+                  <Text style={sectionHeading}>{sec.label}</Text>
+                  {e.items.map((item, idx) => (
+                    <View key={item.id} style={{
+                      marginBottom: sp.pdf.itemGap,
+                      paddingBottom: 7,
+                      borderBottomWidth: idx < e.items.length - 1 ? 0.75 : 0,
+                      borderBottomColor: "rgba(0,0,0,0.07)",
+                      borderStyle: "dashed",
+                    }}>
+                      <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 2 }}>
+                        <Text style={{ fontFamily: "Arimo-Bold", fontSize: fs.pdf.sectionHd, color: rightText, flex: 1, marginRight: 6 }}>
+                          {item.position}
+                        </Text>
+                        <Text style={{ fontSize: fs.pdf.small, color: "#888888" }}>
+                          {item.startDate}{item.current ? " – Present" : item.endDate ? ` – ${item.endDate}` : ""}
+                        </Text>
+                      </View>
+                      {(item.company || item.location) ? (
+                        <Text style={{ fontSize: fs.pdf.body, color: "#666666", marginBottom: 3 }}>
+                          {[item.company, item.location].filter(Boolean).join(" · ")}
+                        </Text>
+                      ) : null}
+                      {item.description ? (
+                        <Text style={{ fontSize: fs.pdf.body, color: "#444444", lineHeight: lh.body }}>{item.description}</Text>
+                      ) : null}
+                    </View>
+                  ))}
+                </View>
+              )
+            }
+
+            if (sec.type === "education") {
+              const e = sec as EducationSection
+              if (!e.items.length) return null
+              return (
+                <View key={sec.id} style={{ marginBottom: sp.pdf.sectionGap }}>
+                  <Text style={sectionHeading}>{sec.label}</Text>
+                  {e.items.map((item, idx) => (
+                    <View key={item.id} style={{
+                      marginBottom: sp.pdf.itemGap,
+                      paddingBottom: 7,
+                      borderBottomWidth: idx < e.items.length - 1 ? 0.75 : 0,
+                      borderBottomColor: "rgba(0,0,0,0.07)",
+                      borderStyle: "dashed",
+                    }}>
+                      <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 2 }}>
+                        <Text style={{ fontFamily: "Arimo-Bold", fontSize: fs.pdf.sectionHd, color: rightText, flex: 1, marginRight: 6 }}>
+                          {item.degree}
+                        </Text>
+                        <Text style={{ fontSize: fs.pdf.small, color: "#888888" }}>
+                          {item.startDate}{item.endDate ? ` – ${item.endDate}` : ""}
+                        </Text>
+                      </View>
+                      {(item.school || item.location) ? (
+                        <Text style={{ fontSize: fs.pdf.body, color: "#666666", marginBottom: 3 }}>
+                          {[item.school, item.location].filter(Boolean).join(" · ")}
+                        </Text>
+                      ) : null}
+                      {item.description ? (
+                        <Text style={{ fontSize: fs.pdf.body, color: "#444444", lineHeight: lh.body }}>{item.description}</Text>
+                      ) : null}
+                    </View>
+                  ))}
+                </View>
+              )
+            }
+
+            return null
+          })}
+          </View>{/* end sections padding */}
+        </View>
 
         {/* ══ LEFT COLUMN ══ */}
         <View style={{
@@ -133,13 +276,7 @@ export function Template1({ data }: { data: ResumeData }) {
             {p.photo ? (
               <Image src={p.photo} style={{ width: "100%", height: 150, objectFit: "cover", objectPosition: "center top" }} />
             ) : (
-              <View style={{
-                width: "100%", height: 150,
-                backgroundColor: "rgba(255,255,255,0.08)",
-                alignItems: "center", justifyContent: "center",
-              }}>
-                <Text style={{ fontSize: 22, color: "rgba(255,255,255,0.2)" }}>◉</Text>
-              </View>
+              <View style={{ width: "100%", height: 150, backgroundColor: "rgba(255,255,255,0.08)" }} />
             )}
           </View>
 
@@ -184,7 +321,7 @@ export function Template1({ data }: { data: ResumeData }) {
                   <Text style={leftTitle}>{sec.label}</Text>
                   {lg.items.map((item) => (
                     <View key={item.id} style={{ marginBottom: sp.pdf.lineGap }}>
-                      <Text style={{ fontSize: fs.pdf.body, color: leftText }}>{item.language}</Text>
+                      <Text style={{ fontSize: fs.pdf.body, color: leftText }}>{languageLabel(item, lg.showLevel)}</Text>
                       {lg.showLevel && <LevelDots level={item.level} color={leftText} />}
                     </View>
                   ))}
@@ -200,12 +337,12 @@ export function Template1({ data }: { data: ResumeData }) {
                 <View key={sec.id} style={{ marginBottom: sp.pdf.sectionGap }}>
                   <Text style={leftTitle}>{sec.label}</Text>
                   {items.map((item) => (
-                    <View key={item.id} style={{ flexDirection: "row", alignItems: "center", marginBottom: sp.pdf.lineGap + 2 }}>
-                      <View style={{ width: 3, height: 3, borderRadius: 1.5, backgroundColor: leftText, opacity: 0.4, marginRight: 6 }} />
-                      <Text style={{ fontSize: fs.pdf.body, color: leftText, fontFamily: "Helvetica-Bold" }}>
-                        {item.label || item.url.replace(/^https?:\/\/(www\.)?/, "")}
-                      </Text>
-                    </View>
+                    <Link key={item.id} src={toHref(item.url)} style={{ marginBottom: sp.pdf.lineGap + 2, textDecoration: "none" }}>
+                      {item.label ? (
+                        <Text style={{ fontSize: fs.pdf.body, color: leftText, fontFamily: "Arimo-Bold" }}>{item.label}</Text>
+                      ) : null}
+                      <Text style={{ fontSize: fs.pdf.small, color: leftText, opacity: 0.8 }}>{displayUrl(item.url)}</Text>
+                    </Link>
                   ))}
                 </View>
               )
@@ -214,144 +351,6 @@ export function Template1({ data }: { data: ResumeData }) {
             return null
           })}
           </View>{/* end content padding wrapper */}
-        </View>
-
-        {/* ══ RIGHT COLUMN ══ */}
-        <View style={{
-          flex: 1,
-          backgroundColor: rightBg,
-          paddingBottom: sp.pdf.rightPadV,
-        }}>
-
-          {/* Header — dark bg, same height as photo (150pt) */}
-          <View style={{
-            flexDirection: "row",
-            alignItems: "center",
-            backgroundColor: leftBg,
-            height: 150,
-            paddingLeft: sp.pdf.rightPadH,
-            paddingRight: sp.pdf.rightPadH,
-            marginBottom: sp.pdf.rightPadV,
-          }}>
-
-            {/* Name + job title */}
-            <View style={{ flex: 1, marginRight: 12 }}>
-              <Text style={{
-                fontFamily: "Helvetica-Bold",
-                fontSize: fs.pdf.name + 3,
-                color: leftText,
-                lineHeight: lh.tight,
-              }}>
-                {p.firstName}
-              </Text>
-              <Text style={{
-                fontFamily: "Helvetica-Bold",
-                fontSize: fs.pdf.name + 3,
-                color: leftText,
-                lineHeight: lh.tight,
-                marginBottom: 3,
-              }}>
-                {p.lastName}
-              </Text>
-              {p.jobTitle ? (
-                <Text style={{ fontSize: fs.pdf.jobTitle + 2, color: leftText, opacity: 0.65 }}>
-                  {p.jobTitle}
-                </Text>
-              ) : null}
-            </View>
-
-            {/* Contact fields */}
-            <View style={{ flexShrink: 0, alignItems: "flex-start" }}>
-              {contactFields.map(({ key, icon, value }) => (
-                <View key={key} style={{ flexDirection: "row", alignItems: "center", marginBottom: 4 }}>
-                  <View style={{ opacity: 0.4, marginRight: 5, justifyContent: "center" }}>
-                    {icon}
-                  </View>
-                  <Text style={{ fontSize: fs.pdf.small, color: leftText, opacity: 0.8 }}>{value}</Text>
-                </View>
-              ))}
-            </View>
-          </View>
-
-          {/* Right sections */}
-          <View style={{ paddingLeft: sp.pdf.rightPadH, paddingRight: sp.pdf.rightPadH }}>
-          {rightSections.map((sec) => {
-
-            if (sec.type === "experience") {
-              const e = sec as ExperienceSection
-              if (!e.items.length) return null
-              return (
-                <View key={sec.id} style={{ marginBottom: sp.pdf.sectionGap }}>
-                  <Text style={sectionHeading}>{sec.label}</Text>
-                  {e.items.map((item, idx) => (
-                    <View key={item.id} style={{
-                      marginBottom: sp.pdf.itemGap,
-                      paddingBottom: 7,
-                      borderBottomWidth: idx < e.items.length - 1 ? 0.75 : 0,
-                      borderBottomColor: "rgba(0,0,0,0.07)",
-                      borderStyle: "dashed",
-                    }}>
-                      <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 2 }}>
-                        <Text style={{ fontFamily: "Helvetica-Bold", fontSize: fs.pdf.sectionHd, color: rightText, flex: 1, marginRight: 6 }}>
-                          {item.position}
-                        </Text>
-                        <Text style={{ fontSize: fs.pdf.small, color: "#888888" }}>
-                          {item.startDate}{item.current ? " – Present" : item.endDate ? ` – ${item.endDate}` : ""}
-                        </Text>
-                      </View>
-                      {(item.company || item.location) ? (
-                        <Text style={{ fontSize: fs.pdf.body, color: "#666666", marginBottom: 3 }}>
-                          {[item.company, item.location].filter(Boolean).join(" · ")}
-                        </Text>
-                      ) : null}
-                      {item.description ? (
-                        <Text style={{ fontSize: fs.pdf.body, color: "#444444", lineHeight: lh.body }}>{item.description}</Text>
-                      ) : null}
-                    </View>
-                  ))}
-                </View>
-              )
-            }
-
-            if (sec.type === "education") {
-              const e = sec as EducationSection
-              if (!e.items.length) return null
-              return (
-                <View key={sec.id} style={{ marginBottom: sp.pdf.sectionGap }}>
-                  <Text style={sectionHeading}>{sec.label}</Text>
-                  {e.items.map((item, idx) => (
-                    <View key={item.id} style={{
-                      marginBottom: sp.pdf.itemGap,
-                      paddingBottom: 7,
-                      borderBottomWidth: idx < e.items.length - 1 ? 0.75 : 0,
-                      borderBottomColor: "rgba(0,0,0,0.07)",
-                      borderStyle: "dashed",
-                    }}>
-                      <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 2 }}>
-                        <Text style={{ fontFamily: "Helvetica-Bold", fontSize: fs.pdf.sectionHd, color: rightText, flex: 1, marginRight: 6 }}>
-                          {item.degree}
-                        </Text>
-                        <Text style={{ fontSize: fs.pdf.small, color: "#888888" }}>
-                          {item.startDate}{item.endDate ? ` – ${item.endDate}` : ""}
-                        </Text>
-                      </View>
-                      {(item.school || item.location) ? (
-                        <Text style={{ fontSize: fs.pdf.body, color: "#666666", marginBottom: 3 }}>
-                          {[item.school, item.location].filter(Boolean).join(" · ")}
-                        </Text>
-                      ) : null}
-                      {item.description ? (
-                        <Text style={{ fontSize: fs.pdf.body, color: "#444444", lineHeight: lh.body }}>{item.description}</Text>
-                      ) : null}
-                    </View>
-                  ))}
-                </View>
-              )
-            }
-
-            return null
-          })}
-          </View>{/* end sections padding */}
         </View>
       </Page>
     </Document>

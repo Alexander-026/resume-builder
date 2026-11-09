@@ -1,10 +1,11 @@
 import {
-  Document, Page, View, Text, Image,
+  Document, Page, View, Text, Image, Link,
 } from "@react-pdf/renderer"
 import type {
   ResumeData, ExperienceSection, EducationSection,
   SkillsSection, LanguagesSection, LinksSection, AboutSection,
 } from "@/types/resume"
+import { documentMeta, displayUrl, toHref, languageLabel } from "@/components/pdf/ats"
 
 // ─── Template 6: Thomas — Elegant All-White PDF ───────────────────────────────
 // All sizes in pt (PDF units). No dark column — everything white.
@@ -47,8 +48,7 @@ function SectionTitle({ label, first = false }: { label: string; first?: boolean
     }}>
       <Text style={{
         fontSize: 6.75,
-        fontFamily: "Helvetica-Bold",
-        letterSpacing: 1.5,
+        fontFamily: "Arimo-Bold",
         textTransform: "uppercase",
         color: COLOR.dark,
       }}>
@@ -77,11 +77,11 @@ export function Template6({ data }: { data: ResumeData }) {
   ].filter((f) => f.label)
 
   return (
-    <Document>
+    <Document {...documentMeta(p, sections)}>
       <Page
         size="A4"
         style={{
-          fontFamily: "Helvetica",
+          fontFamily: "Arimo",
           fontSize: 7.5,
           backgroundColor: COLOR.bg,
           paddingTop: 30,
@@ -94,13 +94,21 @@ export function Template6({ data }: { data: ResumeData }) {
         {/* ══ HEADER ══ */}
         <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 15 }}>
 
-          {/* Left: job title + name */}
-          <View style={{ flex: 1, marginRight: 18 }}>
+          {/* Left: job title above name — column-reverse keeps the name first in text order for ATS */}
+          <View style={{ flex: 1, marginRight: 18, flexDirection: "column-reverse", justifyContent: "flex-end" }}>
+            <Text style={{
+              fontSize: 31.5,
+              fontFamily: "Arimo-Bold",
+              color: COLOR.black,
+              letterSpacing: -0.75,
+              lineHeight: 1.05,
+            }}>
+              {fullName}
+            </Text>
             {p.jobTitle ? (
               <Text style={{
                 fontSize: 7.5,
-                fontFamily: "Helvetica-Bold",
-                letterSpacing: 2.25,
+                fontFamily: "Arimo-Bold",
                 textTransform: "uppercase",
                 color: COLOR.lighter,
                 marginBottom: 6,
@@ -108,15 +116,6 @@ export function Template6({ data }: { data: ResumeData }) {
                 {p.jobTitle}
               </Text>
             ) : null}
-            <Text style={{
-              fontSize: 31.5,
-              fontFamily: "Helvetica-Bold",
-              color: COLOR.black,
-              letterSpacing: -0.75,
-              lineHeight: 1.05,
-            }}>
-              {fullName}
-            </Text>
           </View>
 
           {/* Right: circular photo */}
@@ -141,11 +140,7 @@ export function Template6({ data }: { data: ResumeData }) {
               flexShrink: 0,
               borderWidth: 1.5,
               borderColor: "#e8e8e8",
-              alignItems: "center",
-              justifyContent: "center",
-            }}>
-              <Text style={{ fontSize: 18, color: "#cccccc" }}>◉</Text>
-            </View>
+            }} />
           )}
         </View>
 
@@ -156,8 +151,81 @@ export function Template6({ data }: { data: ResumeData }) {
           marginBottom: 18,
         }} />
 
-        {/* ══ TWO-COLUMN BODY ══ */}
-        <View style={{ flexDirection: "row" }}>
+        {/* ══ TWO-COLUMN BODY — main column first in the tree for ATS reading order, row-reverse keeps it on the right ══ */}
+        <View style={{ flexDirection: "row-reverse" }}>
+
+          {/* RIGHT COLUMN — ~70% (flex: 1) */}
+          <View style={{ flex: 1 }}>
+            {rightSections.map((sec, secIdx) => {
+
+              if (sec.type === "about") {
+                const a = sec as AboutSection
+                if (!a.content) return null
+                return (
+                  <View key={sec.id} style={{ marginBottom: 14 }}>
+                    <SectionTitle label={sec.label} first={secIdx === 0} />
+                    <Text style={{ fontSize: 7.5, color: "#444444", lineHeight: 1.7 }}>{a.content}</Text>
+                  </View>
+                )
+              }
+
+              if (sec.type === "experience") {
+                const e = sec as ExperienceSection
+                if (!e.items.length) return null
+                return (
+                  <View key={sec.id} style={{ marginBottom: 14 }}>
+                    <SectionTitle label={sec.label} first={secIdx === 0} />
+                    {e.items.map((item) => (
+                      <View key={item.id} style={{ marginBottom: 12 }}>
+                        <Text style={{ fontSize: 9, fontFamily: "Arimo-Bold", color: COLOR.black, marginBottom: 2.25 }}>
+                          {item.position}
+                        </Text>
+                        <Text style={{ fontSize: 7.5, color: COLOR.light, marginBottom: 5.25 }}>
+                          {[item.company, item.location].filter(Boolean).join(" · ")}
+                          {(item.startDate || item.endDate || item.current) && (
+                            "  " + item.startDate + (item.current ? " – Present" : item.endDate ? ` – ${item.endDate}` : "")
+                          )}
+                        </Text>
+                        {item.description ? (
+                          item.description.split("\n").map((line, i) => (
+                            <Text key={i} style={{ fontSize: 7.5, color: "#444444", lineHeight: 1.65 }}>{line}</Text>
+                          ))
+                        ) : null}
+                      </View>
+                    ))}
+                  </View>
+                )
+              }
+
+              if (sec.type === "education") {
+                const e = sec as EducationSection
+                if (!e.items.length) return null
+                return (
+                  <View key={sec.id} style={{ marginBottom: 14 }}>
+                    <SectionTitle label={sec.label} first={secIdx === 0} />
+                    {e.items.map((item) => (
+                      <View key={item.id} style={{ marginBottom: 12 }}>
+                        <Text style={{ fontSize: 9, fontFamily: "Arimo-Bold", color: COLOR.black, marginBottom: 2.25 }}>
+                          {item.degree}
+                        </Text>
+                        <Text style={{ fontSize: 7.5, color: COLOR.light, marginBottom: 5.25 }}>
+                          {[item.school, item.location].filter(Boolean).join(" · ")}
+                          {(item.startDate || item.endDate) && (
+                            "  " + item.startDate + (item.endDate ? ` – ${item.endDate}` : "")
+                          )}
+                        </Text>
+                        {item.description ? (
+                          <Text style={{ fontSize: 7.5, color: "#444444", lineHeight: 1.65 }}>{item.description}</Text>
+                        ) : null}
+                      </View>
+                    ))}
+                  </View>
+                )
+              }
+
+              return null
+            })}
+          </View>
 
           {/* LEFT COLUMN — ~30% width */}
           <View style={{ width: "30%", marginRight: 24 }}>
@@ -203,7 +271,7 @@ export function Template6({ data }: { data: ResumeData }) {
                     {lg.items.map((item) => (
                       <View key={item.id} style={{ flexDirection: "row", alignItems: "center", marginBottom: 4.5 }}>
                         <SquareBullet />
-                        <Text style={{ fontSize: 7.5, color: "#444444" }}>{item.language}</Text>
+                        <Text style={{ fontSize: 7.5, color: "#444444" }}>{languageLabel(item, lg.showLevel)}</Text>
                       </View>
                     ))}
                   </View>
@@ -212,90 +280,20 @@ export function Template6({ data }: { data: ResumeData }) {
 
               if (sec.type === "links") {
                 const lk = sec as LinksSection
-                const items = lk.items.filter((i) => i.label || i.url)
+                const items = lk.items.filter((i) => i.url)
                 if (!items.length) return null
                 return (
                   <View key={sec.id} style={{ marginBottom: 14 }}>
                     <SectionTitle label={sec.label} />
                     {items.map((item) => (
-                      <View key={item.id} style={{ flexDirection: "row", alignItems: "center", marginBottom: 4.5 }}>
+                      <View key={item.id} style={{ flexDirection: "row", alignItems: "flex-start", marginBottom: 4.5 }}>
                         <SquareBullet />
-                        <Text style={{ fontSize: 7.5, color: "#444444", fontFamily: "Helvetica-Bold" }}>
-                          {item.label || item.url}
-                        </Text>
-                      </View>
-                    ))}
-                  </View>
-                )
-              }
-
-              return null
-            })}
-          </View>
-
-          {/* RIGHT COLUMN — ~70% (flex: 1) */}
-          <View style={{ flex: 1 }}>
-            {rightSections.map((sec, secIdx) => {
-
-              if (sec.type === "about") {
-                const a = sec as AboutSection
-                if (!a.content) return null
-                return (
-                  <View key={sec.id} style={{ marginBottom: 14 }}>
-                    <SectionTitle label={sec.label} first={secIdx === 0} />
-                    <Text style={{ fontSize: 7.5, color: "#444444", lineHeight: 1.7 }}>{a.content}</Text>
-                  </View>
-                )
-              }
-
-              if (sec.type === "experience") {
-                const e = sec as ExperienceSection
-                if (!e.items.length) return null
-                return (
-                  <View key={sec.id} style={{ marginBottom: 14 }}>
-                    <SectionTitle label={sec.label} first={secIdx === 0} />
-                    {e.items.map((item) => (
-                      <View key={item.id} style={{ marginBottom: 12 }}>
-                        <Text style={{ fontSize: 9, fontFamily: "Helvetica-Bold", color: COLOR.black, marginBottom: 2.25 }}>
-                          {item.position}
-                        </Text>
-                        <Text style={{ fontSize: 7.5, color: COLOR.light, marginBottom: 5.25 }}>
-                          {[item.company, item.location].filter(Boolean).join(" · ")}
-                          {(item.startDate || item.endDate || item.current) && (
-                            "  " + item.startDate + (item.current ? " – Present" : item.endDate ? ` – ${item.endDate}` : "")
-                          )}
-                        </Text>
-                        {item.description ? (
-                          item.description.split("\n").map((line, i) => (
-                            <Text key={i} style={{ fontSize: 7.5, color: "#444444", lineHeight: 1.65 }}>{line}</Text>
-                          ))
-                        ) : null}
-                      </View>
-                    ))}
-                  </View>
-                )
-              }
-
-              if (sec.type === "education") {
-                const e = sec as EducationSection
-                if (!e.items.length) return null
-                return (
-                  <View key={sec.id} style={{ marginBottom: 14 }}>
-                    <SectionTitle label={sec.label} first={secIdx === 0} />
-                    {e.items.map((item) => (
-                      <View key={item.id} style={{ marginBottom: 12 }}>
-                        <Text style={{ fontSize: 9, fontFamily: "Helvetica-Bold", color: COLOR.black, marginBottom: 2.25 }}>
-                          {item.degree}
-                        </Text>
-                        <Text style={{ fontSize: 7.5, color: COLOR.light, marginBottom: 5.25 }}>
-                          {[item.school, item.location].filter(Boolean).join(" · ")}
-                          {(item.startDate || item.endDate) && (
-                            "  " + item.startDate + (item.endDate ? ` – ${item.endDate}` : "")
-                          )}
-                        </Text>
-                        {item.description ? (
-                          <Text style={{ fontSize: 7.5, color: "#444444", lineHeight: 1.65 }}>{item.description}</Text>
-                        ) : null}
+                        <Link src={toHref(item.url)} style={{ flex: 1, textDecoration: "none" }}>
+                          {item.label ? (
+                            <Text style={{ fontSize: 7.5, color: "#444444", fontFamily: "Arimo-Bold" }}>{item.label}</Text>
+                          ) : null}
+                          <Text style={{ fontSize: 7.5, color: COLOR.mid }}>{displayUrl(item.url)}</Text>
+                        </Link>
                       </View>
                     ))}
                   </View>
