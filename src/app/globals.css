@@ -80,6 +80,16 @@ body {
   color: var(--foreground);
 }
 
+/* Tailwind v4 resets buttons to cursor: default — restore the pointer.
+   In the base layer so utilities like cursor-not-allowed still win. */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  select:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
 /* ── Minimal scrollbars ─────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
